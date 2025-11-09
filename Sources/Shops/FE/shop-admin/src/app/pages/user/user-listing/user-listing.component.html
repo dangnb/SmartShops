@@ -1,0 +1,100 @@
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+        <input type="text" [(ngModel)]="searchTerm" class="form-control form-control-solid w-250px ps-12"
+          placeholder="Nhập mã và tên" (change)="changeSearTerm()">
+      </div>
+      <!--end::Search-->
+    </div>
+    <!--begin::Card title-->
+
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar">
+      <!--begin::Toolbar-->
+      <div class="d-flex justify-content-end">
+        <!--begin::Add user-->
+        <button type="button" class="btn btn-primary" (click)="create()">
+          Tạo mới
+        </button>
+        <!--end::Add user-->
+      </div>
+      <!--end::Toolbar-->
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+
+  <div class="card-body pt-0">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th class="w-25px">
+              <div class="
+                  form-check form-check-sm form-check-custom form-check-solid
+                ">
+                <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
+                  data-kt-check-target=".widget-9-check" />
+              </div>
+            </th>
+            <th class="min-w-150px">Họ và tên</th>
+            <th class="min-w-140px">Tên đăng nhập</th>
+            <th class="min-w-140px">Mã số thuế</th>
+            <th class="min-w-140px">Email</th>
+            <th class="min-w-100px text-center">Thao tác</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody>
+          <tr
+            *ngFor="let item of items$ | async |  paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: total }; let i = index ">
+            <td> {{ i + pageSize * (pageIndex - 1) + 1 }}</td>
+            <td> {{item.fullName}}</td>
+            <td> {{item.userName}}</td>
+            <td> {{item.taxCode}}</td>
+            <td> {{item.email}}</td>
+            <td class="text-center">
+              <a (click)="addDistrictForUser(item.id)" title="Cập nhật dữ liệu"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"><i class="fa fa-list"></i></a>
+              <a (click)="edit(item.id)" title="Cập nhật dữ liệu"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"><app-keenicon name="pencil" class="fs-3"
+                  ng-reflect-name="pencil" style="display: contents;"><span class="fs-3 ki-duotone ki-pencil"><span
+                      class="path1"></span><span class="path2"></span>
+                  </span>
+                </app-keenicon></a>
+            
+              <a (click)="delete(item.id)" title="Xóa dữ liệu"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"><app-keenicon name="trash" class="fs-3"
+                  ng-reflect-name="trash" style="display: contents;"><span class="fs-3 ki-duotone ki-trash"><span
+                      class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span
+                      class="path5"></span>
+                  </span></app-keenicon></a>
+            </td>
+          </tr>
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+      <pagination-controls previousLabel="Về trang trước" nextLabel="Về trang sau"
+        (pageChange)="changePage($event)"></pagination-controls>
+    </div>
+    <!-- end::Table container -->
+  </div>
+</div>
+
+
+<swal #deleteSwal [swalOptions]="swalOptions" title="Bạn có muốn xóa người dùng đã chọn không?"
+  text="Dữ liệu sau khi xóa sẽ không thể phục hồi" icon="warning" [showCancelButton]="true" [focusCancel]="true"
+  [confirmButtonText]="'Đồng ý'" [cancelButtonText]="'Đóng'"
+  [customClass]="{confirmButton: 'btn btn-danger', cancelButton: 'btn btn-active-light'}">
+</swal>
+<swal #successSwal [swalOptions]="swalOptions" title="Xóa thành công!" text="" icon="success"
+  [customClass]="{confirmButton: 'btn btn-success'}">
+</swal>

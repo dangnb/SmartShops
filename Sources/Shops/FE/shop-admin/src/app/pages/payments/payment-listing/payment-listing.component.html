@@ -1,0 +1,95 @@
+<div class="card">
+  <div class="card-header border-0 pt-6">
+    <!--begin::Card title-->
+    <div class="card-title">
+      <!--begin::Search-->
+      <div class="d-flex align-items-center position-relative my-1">
+        <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
+        <input type="text" [(ngModel)]="searchTerm" class="form-control form-control-solid w-250px ps-12"
+          placeholder="Nhập mã và tên" (change)="changeSearTerm()">
+      </div>
+      <!--end::Search-->
+    </div>
+    <!--begin::Card title-->
+
+    <!--begin::Card toolbar-->
+    <div class="card-toolbar">
+      <!--begin::Toolbar-->
+      <div class="d-flex justify-content-end">
+        <!--begin::Add user-->
+        <button  type="button" class="btn btn-light" (click)="openModalFilter()"><i class="fa fa-filter pr-2"></i>&nbsp;Lọc</button>
+        <!--end::Add user-->
+      </div>
+      <!--end::Toolbar-->
+    </div>
+    <!--end::Card toolbar-->
+  </div>
+
+  <div class="card-body pt-0">
+    <!-- begin::Table container -->
+    <div class="table-responsive">
+      <!-- begin::Table -->
+      <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+        <!-- begin::Table head -->
+        <thead>
+          <tr class="fw-bolder text-muted">
+            <th class="w-25px">
+              <div class="
+                  form-check form-check-sm form-check-custom form-check-solid
+                ">
+                <input class="form-check-input" type="checkbox" value="1" data-kt-check="true"
+                  data-kt-check-target=".widget-9-check" />
+              </div>
+            </th>
+            <th class="min-w-150px">Tên khách hàng</th>
+            <th class="min-w-140px">Địa chỉ</th>
+            <th class="min-w-140px">Số lượng</th>
+            <th class="min-w-140px">Đơn giá</th>
+            <th class="min-w-140px">Số tháng đóng</th>
+            <th class="min-w-140px">Tổng tiền thanh toán</th>
+            <th class="min-w-140px">Ngày thanh toán</th>
+            <th class="min-w-140px">Trạng thái</th>
+            <th class="min-w-140px">Ghi chú</th>
+            <th rowspan="2" class="min-w-100px text-center">Thao tác</th>
+          </tr>
+        </thead>
+        <!-- end::Table head -->
+        <!-- begin::Table body -->
+        <tbody>
+          <tr
+            *ngFor="let item of items$ | async |  paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: total }; let i = index ">
+            <td> {{ i + pageSize * (pageIndex - 1) + 1 }}</td>
+            <td> {{item.customerName}}</td>
+            <td> {{item.customerAddress}}</td>
+            <td> {{item.quantity}}</td>
+            <td> {{item.price | number}}</td>
+            <td> {{item.totalOfMonth}}</td>
+            <td> {{item.amount | number}}</td>
+            <td> {{item.createdDate | date:'dd/MM/yyyy HH:mm:ss'}}</td>
+            <td>
+              <span *ngIf="item.status==0" class="badge badge-light-success fs-8 fw-bolder">Thanh toán</span>
+            </td>
+            <td> {{item.note}}</td>
+            <td> <a title="In lại thanh toán"><i class="fa fa-print  text-success"></i></a></td>
+            <td ><a title="Chuyển đổi trạng thái thanh toán"><i class="fa fa-exchange text-danger"></i></a></td>
+          </tr>
+        </tbody>
+        <!-- end::Table body -->
+      </table>
+      <!-- end::Table -->
+      <pagination-controls previousLabel="Về trang trước" nextLabel="Về trang sau"
+        (pageChange)="changePage($event)"></pagination-controls>
+    </div>
+    <!-- end::Table container -->
+  </div>
+</div>
+
+
+<swal #deleteSwal [swalOptions]="swalOptions" title="Bạn có muốn xóa thành phố đã không?"
+  text="Dữ liệu sau khi xóa sẽ không thể phục hồi" icon="warning" [showCancelButton]="true" [focusCancel]="true"
+  [confirmButtonText]="'Đồng ý'" [cancelButtonText]="'Đóng'"
+  [customClass]="{confirmButton: 'btn btn-danger', cancelButton: 'btn btn-active-light'}">
+</swal>
+<swal #successSwal [swalOptions]="swalOptions" title="Xóa thành công!" text="" icon="success"
+  [customClass]="{confirmButton: 'btn btn-success'}">
+</swal>

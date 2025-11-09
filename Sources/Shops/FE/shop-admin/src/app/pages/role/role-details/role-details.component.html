@@ -1,0 +1,136 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
+    <div class="d-flex flex-column flex-lg-row">
+        <!--begin::Sidebar-->
+        <div class="flex-column flex-lg-row-auto w-100 w-lg-200px w-xl-300px mb-10">
+            <!--begin::Card-->
+            <div class="card card-flush">
+                <!--begin::Card header-->
+                <div class="card-header">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+                        <h2 class="mb-0">
+                            {{ (role$ | async)?.name }}
+                        </h2>
+                    </div>
+                    <!--end::Card title-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Permissions-->
+                    <div class="d-flex flex-column text-gray-600">
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Mã nhóm quyền</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" name="name"
+                                [(ngModel)]="roleModel.name" #name="ngModel" required
+                                minlength="4" />
+                            <div *ngIf="myForm.submitted && myForm.invalid"
+                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                <div *ngIf="name.errors?.['required']">Mã nhóm quyền không được để trống</div>
+                                <div *ngIf="name.errors?.['minlength']">Mã nhóm quyền phải lớn hơn 4 ks tự</div>
+                            </div>
+                            <!--end::Input-->
+                        </div>
+                        <div class="fv-row mb-7">
+                            <!--begin::Label-->
+                            <label class="required fw-semibold fs-6 mb-2">Diễn giải nhóm quyền</label>
+                            <!--end::Label-->
+                            <!--begin::Input-->
+                            <input type="text" class="form-control form-control-solid" name="description"
+                                [(ngModel)]="roleModel.description" #description="ngModel" required
+                                minlength="4" />
+                            <div *ngIf="myForm.submitted && myForm.invalid"
+                                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                                <div *ngIf="description.errors?.['required']">Diễn giải nhóm quyền không được để trống</div>
+                                <div *ngIf="description.errors?.['minlength']">Diễn giải nhóm quyền phải lớn hơn 4 ký tự</div>
+                            </div>
+                            <!--end::Input-->
+                        </div>
+                    </div>
+                    <!--end::Permissions-->
+                </div>
+                <!--end::Card body-->
+                <!--begin::Card footer-->
+                <div class="card-footer pt-0">
+                    <button type="submit" class="btn btn-primary btn-active-primary mr-2" data-role-id="developer"
+                        data-bs-toggle="modal" data-bs-target="#kt_modal_update_role"><i class="fa fa-save"></i>Lưu</button>&nbsp;
+                        <button type="button" class="btn btn-light " [routerLink]="['/apps/roles']" 
+                        data-bs-toggle="modal" data-bs-target="#kt_modal_update_role"><i class="fa fa-times"></i>Đóng</button>
+                </div>
+                <!--end::Card footer-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Sidebar-->
+        <!--begin::Content-->
+        <div class="flex-lg-row-fluid ms-lg-10">
+            <!--begin::Card-->
+            <div class="card card-flush mb-6 mb-xl-9">
+                <!--begin::Card header-->
+                <div class="card-header pt-5">
+                    <!--begin::Card title-->
+                    <div class="card-title">
+
+                    </div>
+                    <!--end::Card title-->
+                    <!--begin::Card toolbar-->
+                    <div class="card-toolbar">
+                    </div>
+                    <!--end::Card toolbar-->
+                </div>
+                <!--end::Card header-->
+                <!--begin::Card body-->
+                <div class="card-body pt-0">
+                    <!--begin::Table-->
+                    <div class="table-responsive">
+                        <!-- begin::Table -->
+                        <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
+                            <!-- begin::Table head -->
+                            <thead>
+                                <tr class="fw-bolder text-muted">
+                                    <th class="w-25px">
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1"
+                                                data-kt-check="true" data-kt-check-target=".widget-9-check" />
+                                        </div>
+                                    </th>
+                                    <th class="min-w-150px">Mã quyền</th>
+                                    <th class="min-w-140px">Tên quyền</th>
+                                    <th class="min-w-150px">Mã nhóm quyền</th>
+                                    <th class="min-w-140px">Tên nhóm quyền</th>
+                         
+                                </tr>
+                            </thead>
+                            <!-- end::Table head -->
+                            <!-- begin::Table body -->
+                            <tbody>
+                                <tr *ngFor="let item of permissions$ | async ">
+                                    <td> 
+                                        <div class="form-check form-check-sm form-check-custom form-check-solid">
+                                            <input class="form-check-input" type="checkbox" value="1" [checked]="checkSelectId(item.code)" (change)="selectPermision(item.code)"
+                                                data-kt-check="true" data-kt-check-target=".widget-9-check" />
+                                        </div>
+                                    </td>
+                                    <td> {{item.description}}</td>
+                                    <td> {{item.code}}</td>
+                                    <td> {{item.groupCode}}</td>
+                                    <td> {{item.groupName}}</td>
+                                </tr>
+                            </tbody>
+                            <!-- end::Table body -->
+                        </table>
+                    </div>
+                    <!--end::Table-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card-->
+        </div>
+        <!--end::Content-->
+    </div>
+</form>
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>

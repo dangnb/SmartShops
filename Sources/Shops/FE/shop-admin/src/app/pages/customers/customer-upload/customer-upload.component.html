@@ -1,0 +1,144 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Tải danh sách khách hàng</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <!-- begin::Sidebar -->
+    <div class="tab-pane mt-10">
+      <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_customer_scroll" data-kt-scroll="true"
+        data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+        data-kt-scroll-dependencies="#kt_modal_update_customer_header"
+        data-kt-scroll-wrappers="#kt_modal_update_customer_scroll" data-kt-scroll-offset="300px">
+        <!--begin::User form-->
+        <div class="collapse show">
+
+          <!--begin::Input group-->
+          <div class="row">
+            <div class="col-lg-6">
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fw-semibold fs-6 mb-2">Chọn tỉnh thành</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select type="text" class="form-control" name="cityId" [(ngModel)]="customerModel.cityId"
+                  #cityId="ngModel" (change)="changeCity()" required>
+                  <option value="0">--Chọn tỉnh thành--</option>
+                  <option [value]="item.id" *ngFor="let item of city$ | async">{{item.name}}</option>
+                </select>
+                <div *ngIf="myForm.submitted && myForm.invalid"
+                  class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                  <div *ngIf="cityId.errors?.['required']">Name is required</div>
+                </div>
+                <!--end::Input-->
+              </div>
+
+            </div>
+            <div class="col-lg-6">
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fw-semibold fs-6 mb-2">Chọn quận huyện</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select type="text" class="form-control" name="districtId" [(ngModel)]="customerModel.districtId"
+                  (change)="changeDistrict()" #districtId="ngModel" required>
+                  <option value="0">--Chọn quận huyện--</option>
+                  <option [value]="item.id" [selected]=" item.id == customerModel.districtId"
+                    *ngFor="let item of district$ | async">{{item.name}}</option>
+                </select>
+                <div *ngIf="myForm.submitted && myForm.invalid"
+                  class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                  <div *ngIf="districtId.errors?.['required']">Quận huyện is required</div>
+                </div>
+                <!--end::Input-->
+              </div>
+              <!--end::Input group-->
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-lg-6">
+              <!--begin::Input group-->
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fw-semibold fs-6 mb-2">Chọn phường xã</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select type="text" class="form-control" name="wardId" (change)="changeWard()"
+                  [(ngModel)]="customerModel.wardId" #wardId="ngModel" required>
+                  <option value="0">--Chọn quận huyện--</option>
+                  <option [value]="item.id" *ngFor="let item of ward$ | async">{{item.name}}</option>
+                </select>
+                <div *ngIf="myForm.submitted && myForm.invalid"
+                  class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                  <div *ngIf="wardId.errors?.['required']">Quận huyện is required</div>
+                </div>
+                <!--end::Input-->
+              </div>
+            </div>
+
+            <div class="col-lg-6">
+              <div class="fv-row mb-7">
+                <!--begin::Label-->
+                <label class="required fw-semibold fs-6 mb-2">Chọn tổ</label>
+                <!--end::Label-->
+                <!--begin::Input-->
+                <select type="text" class="form-control" name="districtId" [(ngModel)]="customerModel.villageId"
+                  #villageId="ngModel" required>
+                  <option value="0">--Chọn tổ--</option>
+                  <option [value]="item.id" *ngFor="let item of village$ | async">{{item.name}}</option>
+                </select>
+                <div *ngIf="myForm.submitted && myForm.invalid"
+                  class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+                  <div *ngIf="districtId.errors?.['required']">Tổ is required</div>
+                </div>
+                <!--end::Input-->
+              </div>
+            </div>
+          </div>
+          <div class="fv-row mb-7">
+            <!--begin::Label-->
+            <label class="fw-semibold fs-6 mb-2">
+              <span>Chọn file</span>
+              <span class="ms-1" placement="end" ngbTooltip="Số điện thoại đang hoạt động">
+                <app-keenicon name="information" class="fs-7"></app-keenicon>
+              </span>
+            </label>
+            <!--end::Label-->
+            <!--begin::Input-->
+            <input type="file" class="form-control" (change)="onFileSelected($event)" accept=".xlsx,.xls"
+               />
+            <!--end::Input-->
+          </div>
+          <!--end::Input group-->
+        </div>
+      </div>
+    </div>
+    <!--end::User form-->
+  </div>
+
+
+  <div class="modal-footer flex-center">
+    <!--begin::Button-->
+    <button type="reset" id="kt_modal_update_customer_cancel" class="btn btn-light me-3 btn-sm"
+      (click)="modal.dismiss('cancel')">
+      <i class="fa fa-times"></i> Đóng
+    </button>
+    <!--end::Button-->
+
+    <!--begin::Button-->
+    <button type="submit" id="kt_modal_update_customer_submit" class="btn btn-primary  btn-sm"
+      [attr.data-kt-indicator]="isLoading ? 'on' : 'off'">
+      <i class="fa fa-save"></i><span class="indicator-label">
+        Tải lên
+      </span>
+      <span class="indicator-progress">
+        Đang xử lý... <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+      </span>
+    </button>
+    <!--end::Button-->
+  </div>
+</form>
+
+<swal #noticeSwal [swalOptions]="swalOptions">
+</swal>
