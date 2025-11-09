@@ -2,6 +2,6 @@
 public interface IUserProvider
 {
     string GetUserName();
-    int GetComID();
+    Guid GetComID();
     string GetTaxCode();
 }

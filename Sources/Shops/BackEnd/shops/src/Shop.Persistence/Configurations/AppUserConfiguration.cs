@@ -16,19 +16,6 @@ public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
             .WithOne()
             .HasForeignKey(uc => uc.UserId)
             .IsRequired(true);
-        builder.HasMany(x => x.Districts)
-          .WithOne()
-          .HasForeignKey(uc => uc.UserId)
-          .IsRequired(true);
     }
 }
 
-public class AppUserDistrictConfiguration : IEntityTypeConfiguration<AppUserDistrict>
-{
-    public void Configure(EntityTypeBuilder<AppUserDistrict> builder)
-    {
-        builder.ToTable(TableNames.AppUserDistricts);
-
-        builder.HasKey(x => new { x.DistrictId, x.UserId });
-    }
-}

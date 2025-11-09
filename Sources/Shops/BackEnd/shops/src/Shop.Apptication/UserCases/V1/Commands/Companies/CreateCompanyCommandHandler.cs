@@ -8,9 +8,9 @@ using Shop.Domain.Entities;
 namespace Shop.Apptication.UserCases.V1.Commands.Companies;
 public class CreateCompanyCommandHandler : ICommandHandler<Command.CreateCompanyCommand>
 {
-    private readonly IRepositoryBase<Company, int> _repositoryBase;
+    private readonly IRepositoryBase<Company, Guid> _repositoryBase;
     private readonly IPublisher _publisher;
-    public CreateCompanyCommandHandler(IRepositoryBase<Company, int> repositoryBase, IPublisher publisher)
+    public CreateCompanyCommandHandler(IRepositoryBase<Company, Guid> repositoryBase, IPublisher publisher)
     {
         _repositoryBase = repositoryBase;
         _publisher = publisher;

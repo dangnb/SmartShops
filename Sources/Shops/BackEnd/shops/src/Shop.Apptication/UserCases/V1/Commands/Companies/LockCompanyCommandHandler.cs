@@ -8,8 +8,8 @@ using Shop.Domain.Entities;
 namespace Shop.Apptication.UserCases.V1.Commands.Companies;
 public class LockCompanyCommandHandler : ICommandHandler<Command.LockCompanyCommandHandler>
 {
-    private readonly IRepositoryBase<Company, int> _repositoryBase;
-    public LockCompanyCommandHandler(IRepositoryBase<Company, int> repositoryBase)
+    private readonly IRepositoryBase<Company, Guid> _repositoryBase;
+    public LockCompanyCommandHandler(IRepositoryBase<Company, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

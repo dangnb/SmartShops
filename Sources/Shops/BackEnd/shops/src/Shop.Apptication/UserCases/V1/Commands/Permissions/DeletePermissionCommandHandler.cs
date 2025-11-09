@@ -3,7 +3,6 @@ using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Permissions;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Identity;
-using Shop.Domain.Entities.Metadata;
 using Shop.Domain.Exceptions;
 using static Shop.Domain.Exceptions.PermissionsException;
 

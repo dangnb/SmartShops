@@ -1,7 +1,6 @@
 ﻿using System.Text.Json.Serialization;
 using System.Xml.Linq;
-using Shop.Domain.Abstractions.Entities;
-using Shop.Domain.Entities.Metadata;
+using Shop.Domain.Abstractions;
 
 namespace Shop.Domain.Entities.Identity;
 public class Permission : DomainEntity<Guid>

@@ -1,7 +1,7 @@
 ﻿using System.Linq.Expressions;
-using Shop.Domain.Abstractions.Entities;
 using Shop.Domain.Abstractions.Repositories;
 using Microsoft.EntityFrameworkCore;
+using Shop.Domain.Abstractions;
 
 namespace Shop.Persistence.Repositoty;
 public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDisposable

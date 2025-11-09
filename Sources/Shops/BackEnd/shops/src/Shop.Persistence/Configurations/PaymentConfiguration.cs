@@ -10,7 +10,5 @@ public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
     {
         builder.ToTable(TableNames.Payments);
         builder.HasKey(x => x.Id);
-        builder.Property(x => x.Code).IsRequired();
-        builder.HasMany(x => x.InvoiceDetails);
     }
 }

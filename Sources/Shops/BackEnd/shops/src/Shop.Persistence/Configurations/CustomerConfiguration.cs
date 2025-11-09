@@ -17,7 +17,6 @@ internal class CustomerConfiguration : IEntityTypeConfiguration<Customer>
         builder.HasKey(x => x.Id);
         builder.Property(t => t.Name).HasMaxLength(200).IsRequired(true);
         builder.Property(t => t.Code).HasMaxLength(50).IsRequired(true);
-        builder.HasMany(x => x.PaymentHistories).WithOne();
 
     }
 }

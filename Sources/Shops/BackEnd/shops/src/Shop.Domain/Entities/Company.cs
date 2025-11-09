@@ -1,8 +1,8 @@
-﻿using Shop.Domain.Abstractions.Entities;
+﻿using Shop.Domain.Abstractions;
 
 namespace Shop.Domain.Entities;
 
-public class Company : DomainEntity<int>
+public class Company : DomainEntity<Guid>
 {
     public string Code { get; set; } = string.Empty;
     public string Name { get; set; } = string.Empty;
@@ -36,5 +36,4 @@ public class Company : DomainEntity<int>
         Phone = phone;
         Mail = mail;
     }
-
 }

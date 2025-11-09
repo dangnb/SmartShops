@@ -4,7 +4,6 @@ using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Configs;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
-using Shop.Domain.Entities.Metadata;
 
 namespace Shop.Apptication.UserCases.V1.Commands.Configs;
 public class CreateConfigCommandHandler : ICommandHandler<Command.CreateConfigCommand>

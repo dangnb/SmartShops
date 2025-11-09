@@ -16,7 +16,6 @@ public static class ServiceCollectionExtensions
                .AddTransient<IProductRepository, ProductRepository>()
                .AddTransient<IPaymentRepository, PaymentRepository>()
                .AddTransient<IUserRepository, UserRepository>()
-               .AddTransient<IDistrictRepository, DistrictRepository>()
                .AddTransient<ICustomerRepository, CustomerRepository>()
                
                .AddTransient<IUnitOfWork, UnitOfWork>();

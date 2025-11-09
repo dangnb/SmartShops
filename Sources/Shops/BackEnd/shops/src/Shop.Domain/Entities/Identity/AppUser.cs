@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using Shop.Domain.Abstractions.Entities;
 
 namespace Shop.Domain.Entities.Identity;
-public class AppUser : IdentityUser<Guid>
+public class AppUser : IdentityUser<Guid>, ICompanyScopedEntity
 {
-    public int ComId { get; set; }
+    public Guid ComId { get; set; }
     public string? Address { get; set; } = string.Empty;
     public string FirstName { get; set; } = string.Empty;
     public string LastName { get; set; } = string.Empty;
@@ -13,7 +14,7 @@ public class AppUser : IdentityUser<Guid>
     protected AppUser() { }
 
     private AppUser(
-        int comId,
+        Guid comId,
         string userName,
         string taxCode
     )
@@ -23,7 +24,7 @@ public class AppUser : IdentityUser<Guid>
         TaxCode = taxCode;
     }
     private AppUser(
-        int comId,
+        Guid comId,
         string userName,
         string fullName,
         string passWord,
@@ -45,12 +46,12 @@ public class AppUser : IdentityUser<Guid>
         Address = address;
     }
 
-    public static AppUser CreateUser(int comId, string userName, string taxCode)
+    public static AppUser CreateUser(Guid comId, string userName, string taxCode)
     {
         return new AppUser(comId, userName, taxCode);
     }
 
-    public static AppUser CreateEntity(int comId, string userName, string fullName, string fistName, string passWord, string lastName, string email, string taxCode, string address)
+    public static AppUser CreateEntity(Guid comId, string userName, string fullName, string fistName, string passWord, string lastName, string email, string taxCode, string address)
     {
         return new AppUser(comId, userName, fullName, passWord, fistName, lastName, email, taxCode, address);
     }
@@ -66,5 +67,4 @@ public class AppUser : IdentityUser<Guid>
     public virtual ICollection<IdentityUserLogin<Guid>> Logins { get; set; }
     public virtual ICollection<IdentityUserToken<Guid>> Tokens { get; set; }
     public virtual ICollection<IdentityUserRole<Guid>> Roles { get; set; }
-    public virtual ICollection<AppUserDistrict> Districts { get; set; }
 }

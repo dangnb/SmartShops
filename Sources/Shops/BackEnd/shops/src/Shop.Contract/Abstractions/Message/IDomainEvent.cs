@@ -1,7 +1,7 @@
 ﻿using MediatR;
 
 namespace Shop.Contract.Abstractions.Message;
-public interface IDomainEvent : INotification
+public interface ICompanyScopedEntity : INotification
 {
-    int Id { get; init; }
+    Guid Id { get; init; }
 }

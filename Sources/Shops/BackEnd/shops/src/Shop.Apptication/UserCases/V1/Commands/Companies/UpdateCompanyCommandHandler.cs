@@ -1,5 +1,4 @@
-﻿using MediatR;
-using Shop.Contract.Abstractions.Message;
+﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Companies;
 using Shop.Domain.Abstractions.Repositories;
@@ -8,8 +7,8 @@ using Shop.Domain.Entities;
 namespace Shop.Apptication.UserCases.V1.Commands.Companies;
 public class UpdateCompanyCommandHandler : ICommandHandler<Command.UpdateCompanyCommand>
 {
-    private readonly IRepositoryBase<Company, int> _repositoryBase;
-    public UpdateCompanyCommandHandler(IRepositoryBase<Company, int> repositoryBase)
+    private readonly IRepositoryBase<Company, Guid> _repositoryBase;
+    public UpdateCompanyCommandHandler(IRepositoryBase<Company, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

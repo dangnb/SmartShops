@@ -15,10 +15,10 @@ public class UserProvider : IUserProvider
     }
 
 
-    public int GetComID()
+    public Guid GetComID()
     {
-        int.TryParse(_context.HttpContext.User.Claims
-                    .First(i => i.Type == ClaimTypes.GroupSid).Value, out int _comId);
+        Guid.TryParse(_context.HttpContext.User.Claims
+                    .First(i => i.Type == ClaimTypes.GroupSid).Value, out Guid _comId);
         return _comId;
     }
 
