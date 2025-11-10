@@ -6,11 +6,11 @@ using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 
 namespace Shop.Apptication.UserCases.V1.Commands.Companies;
-public class CreateCompanyCommandHandler : ICommandHandler<Command.CreateCompanyCommand>
+public class CreateCustomerCommandHandler : ICommandHandler<Command.CreateCompanyCommand>
 {
     private readonly IRepositoryBase<Company, Guid> _repositoryBase;
     private readonly IPublisher _publisher;
-    public CreateCompanyCommandHandler(IRepositoryBase<Company, Guid> repositoryBase, IPublisher publisher)
+    public CreateCustomerCommandHandler(IRepositoryBase<Company, Guid> repositoryBase, IPublisher publisher)
     {
         _repositoryBase = repositoryBase;
         _publisher = publisher;

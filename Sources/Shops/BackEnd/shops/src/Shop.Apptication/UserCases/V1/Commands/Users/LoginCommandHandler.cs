@@ -1,21 +1,20 @@
 ﻿
-using AutoMapper;
-using Shop.Contract.Abstractions.Message;
-using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Users;
-using Shop.Domain.Abstractions;
-using Shop.Domain.Abstractions.Repositories;
-using Shop.Domain.Entities.Identity;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using Shop.Contract.Abstractions.Message;
+using Shop.Contract.Abstractions.Shared;
+using Shop.Contract.Extensions;
+using Shop.Contract.Services.V1.Users;
+using Shop.Domain.Entities.Identity;
 
 namespace Shop.Application.UserCases.V1.Commands.Users;
+
 public sealed class LoginCommandHandler : ICommandHandler<Command.LoginCommand>
 {
     private readonly UserManager<AppUser> _userManager;
@@ -45,8 +44,8 @@ public sealed class LoginCommandHandler : ICommandHandler<Command.LoginCommand>
             var authClaims = new List<Claim>
                 {
                     new(ClaimTypes.Name, user.UserName!),
-                    new(ClaimTypes.GroupSid, user.ComId.ToString()),
-                     new(ClaimTypes.Sid, user.TaxCode),
+                    new(CustomClaimTypes.ComId, user.ComId.ToString()),
+                    new(ClaimTypes.Sid, user.TaxCode),
                     new(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                 };
             foreach (var userRole in userRoles)

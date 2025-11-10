@@ -5,6 +5,7 @@ using Shop.Persistence.DependencyInjection.Extentions;
 using Shop.Application.DependencyInjection.Extensions;
 using Serilog;
 using Shop.Apptication.Exceptions;
+using Shop.Infrastructure.Extensions;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Shop.Persistence.Dapper.DependencyInjection.Extensions;
 
@@ -37,6 +38,10 @@ builder.Services.ConfigureMySqlRetryOptions(builder.Configuration.GetSection(nam
 builder.Services.AddSqlConfiguration();
 builder.Services.AddRepositoryBaseConfiguration();
 builder.Services.AddInfrastructureDapper(builder.Configuration);
+
+//Add Infrastructure
+builder.Services.AddConfigureInfrastructure();
+
 
 
 

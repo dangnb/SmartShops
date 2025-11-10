@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.9.34728.123
+# Visual Studio Version 18
+VisualStudioVersion = 18.0.11123.170 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution items", "Solution items", "{9A818803-0048-4B86-AA39-F3ACC37EB3BE}"
 	ProjectSection(SolutionItems) = preProject
@@ -24,6 +24,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Persistence", "src\Shop.Persistence\Shop.Persistence.csproj", "{2B36FBF2-CE2F-EDB7-9A46-594EE1590D78}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Persistence.Dapper", "src\Shop.Persistence.Dapper\Shop.Persistence.Dapper.csproj", "{0AF39333-2159-67D8-0384-F13EEEDAFF0E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Shop.Infrastructure", "src\Shop.Infrastructure\Shop.Infrastructure.csproj", "{80E56E72-A22C-4574-A40F-942FA1B88C9B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -59,6 +61,10 @@ Global
 		{0AF39333-2159-67D8-0384-F13EEEDAFF0E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0AF39333-2159-67D8-0384-F13EEEDAFF0E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0AF39333-2159-67D8-0384-F13EEEDAFF0E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{80E56E72-A22C-4574-A40F-942FA1B88C9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{80E56E72-A22C-4574-A40F-942FA1B88C9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{80E56E72-A22C-4574-A40F-942FA1B88C9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{80E56E72-A22C-4574-A40F-942FA1B88C9B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -71,6 +77,7 @@ Global
 		{3F9B2F38-4CEB-84C9-2512-F88D2804DCA1} = {0E26C621-4398-4453-AD94-D974D9F01A1C}
 		{2B36FBF2-CE2F-EDB7-9A46-594EE1590D78} = {0E26C621-4398-4453-AD94-D974D9F01A1C}
 		{0AF39333-2159-67D8-0384-F13EEEDAFF0E} = {0E26C621-4398-4453-AD94-D974D9F01A1C}
+		{80E56E72-A22C-4574-A40F-942FA1B88C9B} = {0E26C621-4398-4453-AD94-D974D9F01A1C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {F0663917-702C-4FA9-82B9-2844589F4C9E}

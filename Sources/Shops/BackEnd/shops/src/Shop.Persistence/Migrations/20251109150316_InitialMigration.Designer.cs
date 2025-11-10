@@ -12,7 +12,7 @@ using Shop.Persistence;
 namespace Shop.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250914134856_InitialMigration")]
+    [Migration("20251109150316_InitialMigration")]
     partial class InitialMigration
     {
         /// <inheritdoc />

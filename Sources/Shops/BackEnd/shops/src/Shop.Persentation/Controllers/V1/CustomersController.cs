@@ -81,7 +81,7 @@ public class CustomersController : ApiController
     public async Task<IActionResult> Update([FromBody] Command.UpdateCustomerCommand request, Guid id)
     {
         var result = await sender.Send(new Command.UpdateCustomerCommand(id, request.Code, request.Name, request
-            .Address, request.Email, request.PhoneNumber, request.VillageId, request.payments));
+            .Address, request.Email, request.PhoneNumber, request.CitizenIdNumber, request.PassportNumber));
         if (result.IsFailure)
         {
             return HandlerFailure(result);
