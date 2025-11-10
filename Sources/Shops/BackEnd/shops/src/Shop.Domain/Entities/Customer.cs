@@ -17,19 +17,20 @@ public class Customer : DomainEntity<Guid>, ICompanyScopedEntity
 
     protected Customer() { }
 
-    private Customer(string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
+    private Customer(Guid comId, string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
     {
         Code = code;
         Name = name;
+        ComId = comId;
         Address = address;
         Email = email;
         PhoneNumber = phoneNumber;
         CitizenIdNumber = citizenIdNumber;
         PassportNumber = passportNumber;
     }
-    public static Customer CreateEntity(string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
+    public static Customer CreateEntity(Guid comId, string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
     {
-        return new Customer(code, name, address, email, phoneNumber, citizenIdNumber, passportNumber);
+        return new Customer(comId,code, name, address, email, phoneNumber, citizenIdNumber, passportNumber);
     }
 
     public void Update(string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
