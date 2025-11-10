@@ -33,9 +33,8 @@ public class Customer : DomainEntity<Guid>, ICompanyScopedEntity
         return new Customer(comId,code, name, address, email, phoneNumber, citizenIdNumber, passportNumber);
     }
 
-    public void Update(string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
+    public void Update(string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)
     {
-        Code = code;
         Name = name;
         Address = address;
         Email = email;
