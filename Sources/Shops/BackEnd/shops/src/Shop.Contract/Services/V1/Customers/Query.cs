@@ -16,5 +16,5 @@ public static class Query
     /// <param name="PageSize"></param>
     public record GetCustomersPaidQuery(string? SearchTerm, int Year, int? CityId, int PageIndex, int PageSize) : IQuery<PagedResult<Response.CustomerResponse>>;
 
-    public record GetCustomerByIdQuery(Guid Id) : IQuery<Response.CustomerDataEditResponse>;
+    public record GetCustomerByIdQuery(Guid Id) : IQuery<Response.CustomerResponse>;
 }
