@@ -30,7 +30,7 @@ import {
   ICustomerModel,
 } from 'src/app/_services/customer.service';
 
-type Tabs = 'Customer' | 'Payment' ;
+type Tabs = 'Customer' | 'Payment';
 
 @Component({
   selector: 'app-customer-save',
@@ -48,30 +48,14 @@ export class CustomerSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     address: '',
     email: '',
     phoneNumber: '',
-    cityId: 0,
-    districtId: 0,
-    wardId: 0,
-    villageId: 0,
-    payments: [],
+    citizenIdNumber: '',
+    passportNumber: ''
   };
 
   @ViewChild('noticeSwal')
   noticeSwal!: SwalComponent;
   swalOptions: SweetAlertOptions = {};
-  private _district$ = new BehaviorSubject<any>([]);
-  public district$ = this._district$.asObservable();
-  // @ViewChild('form', { static: true }) form: NgForm;
 
-  private _city$ = new BehaviorSubject<any>([]);
-  public city$ = this._city$.asObservable();
-
-  private _ward$ = new BehaviorSubject<any>([]);
-  public ward$ = this._ward$.asObservable();
-
-  private _village$ = new BehaviorSubject<any>([]);
-  public village$ = this._village$.asObservable();
-
-  public activeTab: Tabs = 'Customer';
 
   constructor(
     private apiService: CustomerService,
@@ -81,16 +65,12 @@ export class CustomerSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     private apiWardService: WardService,
     private cdr: ChangeDetectorRef,
     public modal: NgbActiveModal
-  ) {}
+  ) { }
 
-  setActiveTab(tab: Tabs) {
-    this.activeTab = tab;
-  }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void {
-    this.getCities();
     if (this.id != '') {
       this.getData(this.id);
     } else {
@@ -98,54 +78,14 @@ export class CustomerSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
-  getCities() {
-    this.apiCityService.getAll().subscribe((val) => {
-      this._city$.next(val.value);
-    });
-  }
 
-  getVillages(wardId: number) {
-    this.apiVillageService.getByWard(wardId).subscribe((val) => {
-      this._village$.next(val.value);
-    });
-  }
 
-  getWards(districtId: number) {
-    this.apiWardService.getByDistrict(districtId).subscribe((val) => {
-      this._ward$.next(val.value);
-    });
-  }
 
-  changeCity() {
-    this.getDistrict(this.customerModel.cityId);
-  }
 
-  changeWard() {
-    this.getVillages(this.customerModel.wardId);
-  }
 
-  changeDistrict() {
-    this.getWards(this.customerModel.districtId);
-  }
-
-  getDistrict(cityId: number) {
-    this.apiDistricyService.getByCity(cityId).subscribe((val) => {
-      this._district$.next(val.value);
-    });
-  }
-
-   getData(id: string) {
-    this.apiService.getCustomer(id).subscribe( (value: any) => {
-      this.getWards(value.value.districtId);
-      this.getVillages(value.value.wardId);
-      this.getDistrict(value.value.cityId);
+  getData(id: string) {
+    this.apiService.getCustomer(id).subscribe((value: any) => {
       this.customerModel = value.value;
-      if (!this.customerModel.payments.find((x) => x.type == 0)) {
-        this.customerModel.payments.push({ type: 0, quantity: 0, price: 0 });
-      }
-      if (!this.customerModel.payments.find((x) => x.type == 1)) {
-        this.customerModel.payments.push({ type: 1, quantity: 0, price: 0 });
-      }
     });
   }
 
@@ -157,14 +97,8 @@ export class CustomerSaveComponent implements OnInit, AfterViewInit, OnDestroy {
       address: '',
       email: '',
       phoneNumber: '',
-      districtId: 0,
-      cityId: 0,
-      wardId: 0,
-      villageId: 0,
-      payments: [
-        { type: 0, quantity: 0, price: 0 },
-        { type: 1, quantity: 0, price: 0 },
-      ],
+      citizenIdNumber: '',
+      passportNumber: ''
     };
   }
 
@@ -272,5 +206,5 @@ export class CustomerSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 }

@@ -1,263 +1,155 @@
 <form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
-  <div class="modal-header">
+  <div class="modal-header py-4">
     <h4 class="modal-title" id="modal-basic-title">Tạo khách hàng</h4>
     <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
   </div>
   <div class="modal-body">
-    <ul class="
-    nav nav-stretch nav-line-tabs
-    fw-bold
-    border-transparent
-    flex-nowrap
-  " role="tablist">
-      <li class="nav-item">
-        <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'Customer' }"
-          (click)="setActiveTab('Customer')" role="tab">
-          Thông tin khách hàng
-        </a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link cursor-pointer" [ngClass]="{ active: activeTab === 'Payment' }"
-          (click)="setActiveTab('Payment')" role="tab">
-          Thông tin thanh toán
-        </a>
-      </li>
-    </ul>
-    <div class="tab-content pt-3">
-      <!-- begin::Sidebar -->
-      <div class="tab-pane mt-10" [ngClass]="{ active: activeTab === 'Customer' }">
-        <div class="d-flex flex-column scroll-y me-n7 pe-7" id="kt_modal_update_customer_scroll" data-kt-scroll="true"
-          data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
-          data-kt-scroll-dependencies="#kt_modal_update_customer_header"
-          data-kt-scroll-wrappers="#kt_modal_update_customer_scroll" data-kt-scroll-offset="300px">
-          <!--begin::User form-->
-          <div class="collapse show">
-
-            <!--begin::Input group-->
-            <div class="row">
-              <div class="col-lg-6">
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="required fw-semibold fs-6 mb-2">Chọn tỉnh thành</label>
-                  <!--end::Label-->
-                  <!--begin::Input-->
-                  <select type="text" class="form-control" name="cityId" [(ngModel)]="customerModel.cityId"
-                    #cityId="ngModel" (change)="changeCity()" required>
-                    <option value="0">--Chọn tỉnh thành--</option>
-                    <option [value]="item.id" *ngFor="let item of city$ | async">{{item.name}}</option>
-                  </select>
-                  <div *ngIf="myForm.submitted && myForm.invalid"
-                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                    <div *ngIf="cityId.errors?.['required']">Name is required</div>
-                  </div>
-                  <!--end::Input-->
-                </div>
-
-              </div>
-              <div class="col-lg-6">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="required fw-semibold fs-6 mb-2">Chọn quận huyện</label>
-                  <!--end::Label-->
-                  <!--begin::Input-->
-                  <select type="text" class="form-control" name="districtId" [(ngModel)]="customerModel.districtId"
-                    (change)="changeDistrict()" #districtId="ngModel" required>
-                    <option value="0">--Chọn quận huyện--</option>
-                    <option [value]="item.id" [selected]=" item.id == customerModel.districtId"
-                      *ngFor="let item of district$ | async">{{item.name}}</option>
-                  </select>
-                  <div *ngIf="myForm.submitted && myForm.invalid"
-                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                    <div *ngIf="districtId.errors?.['required']">Quận huyện is required</div>
-                  </div>
-                  <!--end::Input-->
-                </div>
-                <!--end::Input group-->
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-lg-6">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="required fw-semibold fs-6 mb-2">Chọn phường xã</label>
-                  <!--end::Label-->
-                  <!--begin::Input-->
-                  <select type="text" class="form-control" name="wardId" (change)="changeWard()"
-                    [(ngModel)]="customerModel.wardId" #wardId="ngModel" required>
-                    <option value="0">--Chọn quận huyện--</option>
-                    <option [value]="item.id" *ngFor="let item of ward$ | async">{{item.name}}</option>
-                  </select>
-                  <div *ngIf="myForm.submitted && myForm.invalid"
-                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                    <div *ngIf="wardId.errors?.['required']">Quận huyện is required</div>
-                  </div>
-                  <!--end::Input-->
-                </div>
-              </div>
-
-              <div class="col-lg-6">
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="required fw-semibold fs-6 mb-2">Chọn tổ</label>
-                  <!--end::Label-->
-                  <!--begin::Input-->
-                  <select type="text" class="form-control" name="districtId" [(ngModel)]="customerModel.villageId"
-                    #villageId="ngModel" required>
-                    <option value="0">--Chọn tổ--</option>
-                    <option [value]="item.id" *ngFor="let item of village$ | async">{{item.name}}</option>
-                  </select>
-                  <div *ngIf="myForm.submitted && myForm.invalid"
-                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                    <div *ngIf="districtId.errors?.['required']">Tổ is required</div>
-                  </div>
-                  <!--end::Input-->
-                </div>
-              </div>
-            </div>
-
-            <!--begin::Input group-->
-            <div class="fv-row mb-7">
-              <!--begin::Label-->
-              <label class="required fw-semibold fs-6 mb-2">Tên khách hàng</label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <input type="text" class="form-control" name="name" [(ngModel)]="customerModel.name" #name="ngModel"
-                required minlength="4" />
-              <div *ngIf="myForm.submitted && myForm.invalid"
-                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                <div *ngIf="name.errors?.['required']">Name is required</div>
-                <div *ngIf="name.errors?.['minlength']">Name must be at least 4 characters long</div>
-              </div>
-              <!--end::Input-->
-            </div>
-            <!--end::Input group-->
-            <!--begin::Input group-->
-            <div class="fv-row mb-7">
-              <!--begin::Label-->
-              <label class="required fw-semibold fs-6 mb-2">
-                <span>Mã khách hàng</span>
-                <span class="ms-1" placement="end" ngbTooltip="Email address must be active">
-                  <app-keenicon name="information" class="fs-7"></app-keenicon>
-                </span>
-              </label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <input type="code" class="form-control" name="code" [(ngModel)]="customerModel.code" #code="ngModel"
-                required />
-              <div *ngIf="myForm.submitted && myForm.invalid"
-                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                <div *ngIf="code.errors?.['required']">Code is required</div>
-                <div *ngIf="code.errors?.['pattern']">Code is not valid</div>
-              </div>
-              <!--end::Input-->
-            </div>
-            <!--end::Input group-->
-
-            <!--begin::Input group-->
-            <div class="fv-row mb-7">
-              <!--begin::Label-->
-              <label class="fw-semibold fs-6 mb-2">
-                <span>Địa chỉ</span>
-                <span class="ms-1" placement="end" ngbTooltip="Email address must be active">
-                  <app-keenicon name="information" class="fs-7"></app-keenicon>
-                </span>
-              </label>
-              <!--end::Label-->
-              <!--begin::Input-->
-              <input type="code" class="form-control" name="address" [(ngModel)]="customerModel.address"
-                #address="ngModel" />
-              <div *ngIf="myForm.submitted && myForm.invalid"
-                class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-              </div>
-              <!--end::Input-->
-            </div>
-            <!--end::Input group-->
-
-            <div class="row">
-              <div class="col-lg 6">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fw-semibold fs-6 mb-2">
-                    <span>Email</span>
-                    <span class="ms-1" placement="end" ngbTooltip="Email address must be active">
-                      <app-keenicon name="information" class="fs-7"></app-keenicon>
-                    </span>
-                  </label>
-                  <!--end::Label-->
-                  <!--begin::Input-->
-                  <input type="text" class="form-control" name="email" [(ngModel)]="customerModel.email"
-                    #email="ngModel" />
-                  <div *ngIf="myForm.submitted && myForm.invalid"
-                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                  </div>
-                  <!--end::Input-->
-                </div>
-                <!--end::Input group-->
-              </div>
-              <div class="col-lg 6">
-                <!--begin::Input group-->
-                <div class="fv-row mb-7">
-                  <!--begin::Label-->
-                  <label class="fw-semibold fs-6 mb-2">
-                    <span>Số điện thoại</span>
-                    <span class="ms-1" placement="end" ngbTooltip="Số điện thoại đang hoạt động">
-                      <app-keenicon name="information" class="fs-7"></app-keenicon>
-                    </span>
-                  </label>
-                  <!--end::Label-->
-                  <!--begin::Input-->
-                  <input type="text" class="form-control" name="phoneNumber" [(ngModel)]="customerModel.phoneNumber"
-                    #phoneNumber="ngModel" />
-                  <div *ngIf="myForm.submitted && myForm.invalid"
-                    class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
-                  </div>
-                  <!--end::Input-->
-                </div>
-                <!--end::Input group-->
-              </div>
-            </div>
-          </div>
-          <!--end::User form-->
-        </div>
+    <!--begin::Input group-->
+    <div class="fv-row mb-7">
+      <!--begin::Label-->
+      <label class="required fw-semibold fs-6 mb-2">Tên khách hàng</label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <input type="text" class="form-control form-control-sm" name="name" [(ngModel)]="customerModel.name"
+        #name="ngModel" required minlength="4" />
+      <div *ngIf="myForm.submitted && myForm.invalid"
+        class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+        <div *ngIf="name.errors?.['required']">Name is required</div>
+        <div *ngIf="name.errors?.['minlength']">Name must be at least 4 characters long</div>
       </div>
-      <div class="tab-pane" [ngClass]="{ active: activeTab === 'Payment' }">
-        <div class="table-responsive">
-          <!-- begin::Table -->
-          <table class="table table-row-dashed table-row-gray-300 align-middle gs-0 gy-4">
-            <!-- begin::Table head -->
-            <thead>
-              <tr>
-                <td>Loại</td>
-                <td>Số hộ</td>
-                <td>Đơn giá</td>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let item of customerModel.payments">
-                <td *ngIf="item.type==0"> Hộ gia đình</td>
-                <td *ngIf="item.type==1"> Hộ kinh doanh</td>
-                <td><input type="text" [(ngModel)]="item.quantity" [ngModelOptions]="{standalone: true}"
-                    class="form-control"></td>
-                <td><input type="text" [(ngModel)]="item.price" [ngModelOptions]="{standalone: true}"
-                    class="form-control"></td>
-              </tr>
+      <!--end::Input-->
+    </div>
+    <!--end::Input group-->
+    <!--begin::Input group-->
+    <div class="fv-row mb-7">
+      <!--begin::Label-->
+      <label class="required fw-semibold fs-6 mb-2">
+        <span>Mã khách hàng</span>
+        <span class="ms-1" placement="end" ngbTooltip="Email address must be active">
+          <app-keenicon name="information" class="fs-7"></app-keenicon>
+        </span>
+      </label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <input type="code" class="form-control form-control-sm" name="code" [(ngModel)]="customerModel.code"
+        #code="ngModel" required />
+      <div *ngIf="myForm.submitted && myForm.invalid"
+        class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+        <div *ngIf="code.errors?.['required']">Code is required</div>
+        <div *ngIf="code.errors?.['pattern']">Code is not valid</div>
+      </div>
+      <!--end::Input-->
+    </div>
+    <!--end::Input group-->
 
-            </tbody>
-          </table>
+    <!--begin::Input group-->
+    <div class="fv-row mb-7">
+      <!--begin::Label-->
+      <label class="fw-semibold fs-6 mb-2">
+        <span>Địa chỉ</span>
+        <span class="ms-1" placement="end" ngbTooltip="Email address must be active">
+          <app-keenicon name="information" class="fs-7"></app-keenicon>
+        </span>
+      </label>
+      <!--end::Label-->
+      <!--begin::Input-->
+      <input type="code" class="form-control form-control-sm" name="address" [(ngModel)]="customerModel.address"
+        #address="ngModel" />
+      <div *ngIf="myForm.submitted && myForm.invalid"
+        class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+      </div>
+      <!--end::Input-->
+    </div>
+    <!--end::Input group-->
+
+    <div class="row">
+      <div class="col-lg 6">
+        <!--begin::Input group-->
+        <div class="fv-row mb-7">
+          <!--begin::Label-->
+          <label class="fw-semibold fs-6 mb-2">
+            <span>Email</span>
+            <span class="ms-1" placement="end" ngbTooltip="Email address must be active">
+              <app-keenicon name="information" class="fs-7"></app-keenicon>
+            </span>
+          </label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input type="text" class="form-control form-control-sm" name="email" [(ngModel)]="customerModel.email"
+            #email="ngModel" />
+          <div *ngIf="myForm.submitted && myForm.invalid"
+            class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+          </div>
+          <!--end::Input-->
         </div>
+        <!--end::Input group-->
+      </div>
+      <div class="col-lg 6">
+        <!--begin::Input group-->
+        <div class="fv-row mb-7">
+          <!--begin::Label-->
+          <label class="fw-semibold fs-6 mb-2">
+            <span>Số điện thoại</span>
+            <span class="ms-1" placement="end" ngbTooltip="Số điện thoại đang hoạt động">
+              <app-keenicon name="information" class="fs-7"></app-keenicon>
+            </span>
+          </label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input type="text" class="form-control form-control-sm" name="phoneNumber"
+            [(ngModel)]="customerModel.phoneNumber" #phoneNumber="ngModel" />
+          <div *ngIf="myForm.submitted && myForm.invalid"
+            class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+          </div>
+          <!--end::Input-->
+        </div>
+        <!--end::Input group-->
       </div>
     </div>
-
+    <div class="row">
+      <div class="col-lg 6">
+        <!--begin::Input group-->
+        <div class="fv-row mb-7">
+          <!--begin::Label-->
+          <label class="fw-semibold fs-6 mb-2">
+            <span>Số căn cước công dân</span>
+          </label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input type="text" class="form-control form-control-sm" name="citizenIdNumber"
+            [(ngModel)]="customerModel.citizenIdNumber" #email="ngModel" />
+          <div *ngIf="myForm.submitted && myForm.invalid"
+            class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+          </div>
+          <!--end::Input-->
+        </div>
+        <!--end::Input group-->
+      </div>
+      <div class="col-lg 6">
+        <!--begin::Input group-->
+        <div class="fv-row mb-7">
+          <!--begin::Label-->
+          <label class="fw-semibold fs-6 mb-2">
+            <span>Số hộ chiếu</span>
+          </label>
+          <!--end::Label-->
+          <!--begin::Input-->
+          <input type="text" class="form-control form-control-sm" name="passportNumber"
+            [(ngModel)]="customerModel.passportNumber" #passportNumber="ngModel" />
+          <div *ngIf="myForm.submitted && myForm.invalid"
+            class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+          </div>
+          <!--end::Input-->
+        </div>
+        <!--end::Input group-->
+      </div>
+    </div>
   </div>
-
-  <div class="modal-footer flex-center">
+  <div class="modal-footer flex-center py-4">
     <!--begin::Button-->
     <button type="reset" id="kt_modal_update_customer_cancel" class="btn btn-light me-3 btn-sm"
       (click)="modal.dismiss('cancel')">
-     <i class="fa fa-times"></i> Đóng
+      <i class="fa fa-times"></i> Đóng
     </button>
     <!--end::Button-->
 

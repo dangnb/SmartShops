@@ -10,26 +10,21 @@ export interface DataTablesResponse {
     data: any[];
 }
 
-export interface ICustomerModel 
-{
-    id:0|number;
-    code:string;
-    name:string;
+export interface ICustomerModel {
+    id: 0 | number;
+    code: string;
+    name: string;
     address: string;
     email?: string;
     phoneNumber: string;
-    cityId:0|number;
-    districtId:0|number;
-    wardId:0|number;
-    villageId:0|number;
-    payments: PaymentHistory[]
+    citizenIdNumber: string;
+    passportNumber: string;
 }
 
-export interface PaymentHistory 
-{
-   type:number
-   quantity:number;
-   price:number
+export interface PaymentHistory {
+    type: number
+    quantity: number;
+    price: number
 }
 
 @Injectable({

@@ -7,6 +7,7 @@ using Shop.Contract.Services.V1.Customers;
 using Shop.Persentation.Abtractions;
 
 namespace Shop.Persentation.Controllers.V1;
+
 [ApiVersion(1)]
 public class CustomersController : ApiController
 {
@@ -24,7 +25,8 @@ public class CustomersController : ApiController
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -40,24 +42,11 @@ public class CustomersController : ApiController
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
-
-    [Authorize]
-    [HttpPost("getcustomerbypaid")]
-    [ProducesResponseType(StatusCodes.Status200OK)]
-    [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetCustomerByPaid([FromBody] Query.GetCustomersPaidQuery query)
-    {
-        var result = await sender.Send(query);
-        if (result.IsFailure)
-        {
-            return HandlerFailure(result);
-        };
-        return Ok(result);
-    }
 
 
     [Authorize]
@@ -70,7 +59,8 @@ public class CustomersController : ApiController
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -85,7 +75,8 @@ public class CustomersController : ApiController
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -99,7 +90,8 @@ public class CustomersController : ApiController
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -109,7 +101,7 @@ public class CustomersController : ApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> Upload([FromForm] Command.UploadCustomerCommand request)
     {
-        var result = await sender.Send(new Command.UploadCustomerCommand(request.File, request.VillageId));
+        var result = await sender.Send(new Command.UploadCustomerCommand(request.File));
         if (result.IsFailure)
         {
             return HandlerFailure(result);

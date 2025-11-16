@@ -42,7 +42,9 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDi
     public async Task<TEntity> FindByIdAsync(TKey id, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includeProperties) => await FindAll(null, includeProperties).AsTracking().SingleOrDefaultAsync(x => x.Id.Equals(id), cancellationToken);
 
     public async Task<TEntity> FindSingleAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includeProperties)
-        => await FindAll(null, includeProperties).AsTracking().SingleOrDefaultAsync(predicate, cancellationToken);
+    {
+        return await FindAll(null, includeProperties).AsTracking().SingleOrDefaultAsync(predicate, cancellationToken);
+    }
 
     public void Add(TEntity entity)
         => _context.Add(entity);
@@ -59,5 +61,27 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDi
     public void Attach(TEntity entity)
     {
          _context.Attach(entity);
+    }
+
+    public Task<bool> AnyAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includeProperties)
+    {
+        IQueryable<TEntity> query = _context.Set<TEntity>().AsNoTracking();
+
+        // Apply Include nếu có truyền vào
+        if (includeProperties is { Length: > 0 })
+        {
+            foreach (var includeProperty in includeProperties)
+            {
+                query = query.Include(includeProperty);
+            }
+        }
+
+        // Nếu có predicate thì Where, không thì check toàn bộ
+        if (predicate is not null)
+        {
+            query = query.Where(predicate);
+        }
+
+        return query.AnyAsync(cancellationToken);
     }
 }

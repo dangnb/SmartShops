@@ -8,5 +8,5 @@ public static class Command
     public record CreateCustomerCommand(string Code, string Name, string Address, string Email, string PhoneNumber, string CitizenIdNumber, string PassportNumber) : ICommand;
     public record UpdateCustomerCommand(Guid Id, string Code, string Name, string Address, string Email, string PhoneNumber, string CitizenIdNumber, string PassportNumber) : ICommand;
     public record DeleteCustomerCommand(Guid Id) : ICommand;
-    public record UploadCustomerCommand(IFormFile File, int VillageId) : ICommand;
+    public record UploadCustomerCommand(IFormFile File) : ICommand;
 }
