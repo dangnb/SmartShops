@@ -14,6 +14,6 @@ public class Category : DomainEntity<Guid>, ICompanyScopedEntity
     public bool IsActive { get; set; } = true;
 
     // Many-to-many
-    public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
+    //public ICollection<ProductCategory> ProductCategories { get; set; } = new List<ProductCategory>();
     public Guid ComId { get; set; }
 }

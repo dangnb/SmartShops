@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
-using Microsoft.AspNetCore.Identity;
-using Shop.Contract;
+﻿using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Suppliers;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
-using Shop.Domain.Entities.Identity;
-using Shop.Persistence.Repositoty;
 
 namespace Shop.Apptication.UserCases.V1.Commands.Suppliers;
 
@@ -44,8 +35,6 @@ public class UpdateSupplierCommandHandler : ICommandHandler<Command.UpdateSuppli
             // supplier.ChangeCode(request.Code, _currentUser.UserId);
         }
 
-        var userId = _currentUser.UserId;
-
         supplier.UpdateBasicInfo(
             name: request.Name,
             shortName: request.ShortName,
@@ -66,31 +55,28 @@ public class UpdateSupplierCommandHandler : ICommandHandler<Command.UpdateSuppli
             provinceId: request.ProvinceId,
             wardId: request.WardId,
             addressLine: request.AddressLine,
-            fullAddress: request.FullAddress,
-            updatedBy: userId
+            fullAddress: request.FullAddress
         );
 
         supplier.UpdateBankInfo(
             bankName: request.BankName,
             bankAccountNo: request.BankAccountNo,
-            bankAccountName: request.BankAccountName,
-            updatedBy: userId
+            bankAccountName: request.BankAccountName
         );
 
-        supplier.ChangePaymentTerm(request.PaymentTermDays, userId);
+        supplier.ChangePaymentTerm(request.PaymentTermDays);
 
         if (request.Rating.HasValue)
         {
-            supplier.Rate(request.Rating.Value, userId);
+            supplier.Rate(request.Rating.Value);
         }
 
         if (request.IsActive)
-            supplier.Activate(userId);
+            supplier.Activate();
         else
-            supplier.Deactivate(userId);
+            supplier.Deactivate();
 
-        await _context.SaveChangesAsync(cancellationToken);
-
-        return Unit.Value;
+        _repositoryBase.Update(supplier);
+        return Result.Success();
     }
 }

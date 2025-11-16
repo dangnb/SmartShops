@@ -17,7 +17,7 @@ public class Product : DomainEntity<Guid>, ICompanyScopedEntity
     public int StockQuantity { get; private set; } // Tổng tồn kho
     public string ImageUrl { get; private set; } = string.Empty; // Đường dẫn hình ảnh
     public ProductStatus Status { get; private set; } = ProductStatus.New; // Trạng thái sản phẩm
-    public Guid ComId { get; private set; }
+    public Guid ComId { get;  set; }
 
     protected Product() { }
 

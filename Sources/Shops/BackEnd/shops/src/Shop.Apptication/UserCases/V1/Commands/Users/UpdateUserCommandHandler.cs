@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Users;
@@ -12,14 +12,14 @@ public sealed class UpdateUserCommandHandler : ICommandHandler<Command.UpdateUse
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<AppRole> _roleManager;
-    private readonly IUserProvider _userProvider;
+    private readonly ICurrentUser _userProvider;
     private readonly IPublisher _publisher;
 
 
     public UpdateUserCommandHandler(IPublisher publisher,
         UserManager<AppUser> userManager,
         RoleManager<AppRole> roleManager,
-        IUserProvider userProvider
+        ICurrentUser userProvider
         )
     {
         _userManager = userManager;

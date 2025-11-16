@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Users;
@@ -12,14 +12,14 @@ public sealed class CreateUserCommandHandler : ICommandHandler<Command.CreateUse
 {
     private readonly UserManager<AppUser> _userManager;
     private readonly RoleManager<AppRole> _roleManager;
-    private readonly IUserProvider _userProvider;
+    private readonly ICurrentUser _userProvider;
     private readonly IPublisher _publisher;
 
 
     public CreateUserCommandHandler(IPublisher publisher,
         UserManager<AppUser> userManager,
         RoleManager<AppRole> roleManager,
-        IUserProvider userProvider
+        ICurrentUser userProvider
         )
     {
         _userManager = userManager;
@@ -30,8 +30,7 @@ public sealed class CreateUserCommandHandler : ICommandHandler<Command.CreateUse
     public async Task<Result> Handle(Command.CreateUserCommand request, CancellationToken cancellationToken)
     {
         var passDefault = "Abcd@123456a";
-        var comId = _userProvider.GetComID();
-        var taxCode = _userProvider.GetTaxCode();
+        var comId = _userProvider.GetRequiredCompanyId();
         var userExists = await _userManager.FindByNameAsync(request.UserName);
         if (userExists != null)
         {
@@ -41,7 +40,7 @@ public sealed class CreateUserCommandHandler : ICommandHandler<Command.CreateUse
         var roles = await _roleManager.Roles.Where(x => request.RoleCodes.Contains(x.Name)).ToListAsync();
 
         var user = AppUser.CreateEntity(comId, request.UserName, request.FullName,
-          passDefault, request.FirstName, request.LastName, request.Email, taxCode, request.Address);
+          passDefault, request.FirstName, request.LastName, request.Email, "", request.Address);
 
         var result = await _userManager.CreateAsync(user, passDefault);
         if (!result.Succeeded)

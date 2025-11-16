@@ -6,11 +6,13 @@ using Shop.Domain.Entities.Identity;
 namespace Shop.Persistence;
 public sealed class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, Guid>
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    public ApplicationDbContext(
+        DbContextOptions<ApplicationDbContext> options)
+        : base(options)
     {
-
     }
 
+ 
     protected override void OnModelCreating(ModelBuilder builder)
      => builder.ApplyConfigurationsFromAssembly(AssemblyReference.assembly);
 
@@ -22,4 +24,7 @@ public sealed class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, G
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Product> Products { get; set; }
+    public DbSet<Supplier> Suppliers { get; set; }
+    public DbSet<Provincy> Provincies { get; set; }
+    public DbSet<Ward> Wards { get; set; }
 }

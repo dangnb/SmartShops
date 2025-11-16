@@ -1,4 +1,4 @@
-﻿using Shop.Apptication.Exceptions;
+﻿using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Configs;
@@ -10,8 +10,8 @@ namespace Shop.Apptication.UserCases.V1.Commands.Configs;
 public class UpdateCityCommandHandler : ICommandHandler<Command.UpdateConfigCommand>
 {
     private readonly IRepositoryBase<Config, int> _repositoryBase;
-    private readonly IUserProvider _userProvider;
-    public UpdateCityCommandHandler(IRepositoryBase<Config, int> repositoryBase, IUserProvider userProvider)
+    private readonly ICurrentUser _userProvider;
+    public UpdateCityCommandHandler(IRepositoryBase<Config, int> repositoryBase, ICurrentUser userProvider)
     {
         _repositoryBase = repositoryBase;
         _userProvider = userProvider;

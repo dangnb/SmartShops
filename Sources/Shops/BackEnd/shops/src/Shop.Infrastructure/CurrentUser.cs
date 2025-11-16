@@ -9,8 +9,8 @@ public class CurrentUser(IHttpContextAccessor accessor) : ICurrentUser
 {
     private readonly ClaimsPrincipal? _user = accessor.HttpContext?.User;
 
-    public Guid? UserId =>
-        Guid.TryParse(_user?.FindFirst(ClaimTypes.NameIdentifier)?.Value, out var id) ? id : null;
+    public string? UserId =>
+        _user?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "";
 
     public Guid? ComId =>
         Guid.TryParse(_user?.FindFirst(CustomClaimTypes.ComId)?.Value, out var id) ? id : null;

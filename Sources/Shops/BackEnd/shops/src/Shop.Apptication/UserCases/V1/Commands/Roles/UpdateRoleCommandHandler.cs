@@ -1,14 +1,8 @@
 ﻿using System.Data;
-using System.Linq;
-using System.Net.Http;
-using System.Security;
-using System.Security.Claims;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Roles;
@@ -20,7 +14,7 @@ public sealed class UpdateRoleCommandHandler : ICommandHandler<Command.UpdateRol
 {
     private readonly RoleManager<AppRole> _roleManager;
     private readonly IPublisher _publisher;
-    private readonly IUserProvider _userProvider;
+    private readonly ICurrentUser _userProvider;
     private readonly IRepositoryBase<Permission, Guid> _permissionRepository;
 
 
@@ -28,7 +22,7 @@ public sealed class UpdateRoleCommandHandler : ICommandHandler<Command.UpdateRol
         IPublisher publisher,
         RoleManager<AppRole> roleManager,
         IRepositoryBase<Permission, Guid> permissionRepository,
-        IUserProvider userProvider
+        ICurrentUser userProvider
         )
     {
         _userProvider = userProvider;
@@ -38,8 +32,8 @@ public sealed class UpdateRoleCommandHandler : ICommandHandler<Command.UpdateRol
     }
     public async Task<Result> Handle(Command.UpdateRoleCommand request, CancellationToken cancellationToken)
     {
-        var userame = _userProvider.GetUserName();
-        var comId = _userProvider.GetComID();
+        var userame = _userProvider.UserId;
+        var comId = _userProvider.GetRequiredCompanyId();
         var role = await _roleManager.Roles.FirstAsync(x => x.Id == request.ID);
         if (role == null)
         {

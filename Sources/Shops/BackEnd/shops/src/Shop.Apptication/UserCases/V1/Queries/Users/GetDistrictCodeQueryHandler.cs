@@ -1,13 +1,11 @@
 ﻿using System.Text;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Users;
 using Shop.Domain.Dappers.Repositories;
-using Shop.Domain.Entities;
 using Shop.Domain.Entities.Identity;
 
 namespace Shop.Apptication.UserCases.V1.Queries.Users;
@@ -17,8 +15,8 @@ public class GetDistrictCodeQueryHandler : IQueryHandler<Query.GetDistrictCodeQu
     private readonly IMapper _mapper;
     private readonly UserManager<AppUser> _userManager;
     private readonly IUserRepository _userRepository;
-    private readonly IUserProvider _userProvider;
-    public GetDistrictCodeQueryHandler(IMapper mapper, UserManager<AppUser> userManager, IUserRepository userRepository, IUserProvider userProvider)
+    private readonly ICurrentUser _userProvider;
+    public GetDistrictCodeQueryHandler(IMapper mapper, UserManager<AppUser> userManager, IUserRepository userRepository, ICurrentUser userProvider)
     {
         _mapper = mapper;
         _userManager = userManager;
@@ -27,7 +25,7 @@ public class GetDistrictCodeQueryHandler : IQueryHandler<Query.GetDistrictCodeQu
     }
     public async Task<Result<string[]>> Handle(Query.GetDistrictCodeQuery request, CancellationToken cancellationToken)
     {
-        var comId = _userProvider.GetComID();
+        var comId = _userProvider.GetRequiredCompanyId();
         StringBuilder stringBuilder = new StringBuilder("SELECT d.Code  FROM  appusers as us ");
         stringBuilder.Append("JOIN appuserdistricts as ud ON us.Id = ud.UserId  ");
         stringBuilder.Append("JOIN districts AS d ON ud.DistrictId = d.Id ");

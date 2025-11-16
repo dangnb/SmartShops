@@ -20,10 +20,6 @@ internal static class TableNames
     internal const string Companies = nameof(Companies);
 
     internal const string Customers = nameof(Customers);
-    internal const string Cities = nameof(Cities);
-    internal const string Districts = nameof(Districts);
-    internal const string Villages = nameof(Villages);
-    internal const string Wards = nameof(Wards);
 
     internal const string Configs = nameof(Configs);
 
@@ -34,4 +30,7 @@ internal static class TableNames
     internal const string PaymentSummaries = nameof(PaymentSummaries);
     internal const string Payments = nameof(Payments);
     internal const string PaymentDetails = nameof(PaymentDetails);
+    internal const string Provincies = nameof(Provincies);
+    internal const string Wards = nameof(Wards);
+    
 }

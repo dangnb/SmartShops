@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Shop.Contract.Abstractions.Message;
-using Shop.Domain.Abstractions;
+﻿using Shop.Domain.Abstractions;
 
 namespace Shop.Domain.Entities;
 
@@ -46,11 +40,6 @@ public class Supplier : EntityAuditBase<Guid>
 
     public bool IsActive { get; private set; }
     public bool IsDeleted { get; private set; }
-
-    public DateTime CreatedAt { get; private set; }
-    public string? CreatedBy { get; private set; }
-    public DateTime? UpdatedAt { get; private set; }
-    public string? UpdatedBy { get; private set; }
 
     // ===== ctor cho EF =====
     private Supplier() { }
@@ -170,8 +159,7 @@ public class Supplier : EntityAuditBase<Guid>
         string? email,
         string? website,
         string? taxCode,
-        string? note,
-        string? updatedBy)
+        string? note)
     {
         if (string.IsNullOrWhiteSpace(name))
             throw new ArgumentException("Supplier name is required.", nameof(name));
@@ -183,98 +171,78 @@ public class Supplier : EntityAuditBase<Guid>
         Website = website?.Trim();
         TaxCode = taxCode?.Trim();
         Note = note;
-
-        Touch(updatedBy);
     }
 
     public void UpdateContact(
         string? contactName,
         string? contactPhone,
-        string? contactEmail,
-        string? updatedBy)
+        string? contactEmail)
     {
         ContactName = contactName?.Trim();
         ContactPhone = contactPhone?.Trim();
         ContactEmail = contactEmail?.Trim();
 
-        Touch(updatedBy);
     }
 
     public void UpdateAddress(
         int? provinceId,
         int? wardId,
         string? addressLine,
-        string? fullAddress,
-        string? updatedBy)
+        string? fullAddress)
     {
         ProvinceId = provinceId;
         WardId = wardId;
         AddressLine = addressLine?.Trim();
         FullAddress = fullAddress?.Trim();
 
-        Touch(updatedBy);
     }
 
     public void UpdateBankInfo(
         string? bankName,
         string? bankAccountNo,
-        string? bankAccountName,
-        string? updatedBy)
+        string? bankAccountName)
     {
         BankName = bankName?.Trim();
         BankAccountNo = bankAccountNo?.Trim();
         BankAccountName = bankAccountName?.Trim();
-
-        Touch(updatedBy);
     }
 
-    public void ChangePaymentTerm(int paymentTermDays, string? updatedBy)
+    public void ChangePaymentTerm(int paymentTermDays)
     {
         PaymentTermDays = paymentTermDays < 0 ? 0 : paymentTermDays;
-        Touch(updatedBy);
     }
 
-    public void Rate(byte rating, string? updatedBy)
+    public void Rate(byte rating)
     {
         if (rating < 1 || rating > 5)
             throw new ArgumentOutOfRangeException(nameof(rating), "Rating must be between 1 and 5.");
 
         Rating = rating;
-        Touch(updatedBy);
     }
 
-    public void Activate(string? updatedBy)
+    public void Activate()
     {
         if (!IsActive)
         {
             IsActive = true;
-            Touch(updatedBy);
         }
     }
 
-    public void Deactivate(string? updatedBy)
+    public void Deactivate()
     {
         if (IsActive)
         {
             IsActive = false;
-            Touch(updatedBy);
         }
     }
 
-    public void SoftDelete(string? updatedBy)
+    public void SoftDelete()
     {
         if (!IsDeleted)
         {
             IsDeleted = true;
             IsActive = false;
-            Touch(updatedBy);
         }
-    }
-
-    private void Touch(string? updatedBy)
-    {
-        UpdatedAt = DateTime.UtcNow;
-        UpdatedBy = updatedBy;
     }
 }
 

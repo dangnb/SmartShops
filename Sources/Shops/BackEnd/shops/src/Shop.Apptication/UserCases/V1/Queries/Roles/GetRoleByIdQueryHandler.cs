@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Roles;
@@ -12,8 +12,8 @@ public class GetRoleByIdQueryHandler : IQueryHandler<Query.GetRoleByIdQuery, Res
 {
     private readonly RoleManager<AppRole> _roleManager;
     private readonly IMapper _mapper;
-    private readonly IUserProvider _userProvider;
-    public GetRoleByIdQueryHandler(RoleManager<AppRole> roleManager, IMapper mapper, IUserProvider userProvider)
+    private readonly ICurrentUser _userProvider;
+    public GetRoleByIdQueryHandler(RoleManager<AppRole> roleManager, IMapper mapper, ICurrentUser userProvider)
     {
         _roleManager = roleManager;
         _mapper = mapper;

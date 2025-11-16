@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Shop.Apptication.Exceptions;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Customers;
@@ -12,12 +11,10 @@ public class GetCustomerByIdQueryHandler : IQueryHandler<Query.GetCustomerByIdQu
 {
     private readonly IRepositoryBase<Customer, Guid> _repositoryBase;
     private readonly IMapper _mapper;
-    private readonly IUserProvider _userProvider;
-    public GetCustomerByIdQueryHandler(IRepositoryBase<Customer, Guid> repositoryBase,IMapper mapper, IUserProvider userProvider)
+    public GetCustomerByIdQueryHandler(IRepositoryBase<Customer, Guid> repositoryBase,IMapper mapper)
     {
         _repositoryBase = repositoryBase;
         _mapper = mapper;
-        _userProvider = userProvider;
     }
     public async Task<Result<Response.CustomerResponse>> Handle(Query.GetCustomerByIdQuery request, CancellationToken cancellationToken)
     {

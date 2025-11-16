@@ -2,9 +2,9 @@
 
 public interface ICurrentUser
 {
-    Guid? UserId { get; }
-    Guid? ComId { get; }            // NEW
+    string? UserId { get; }
+    Guid? ComId { get; }            
     // Helpers tuỳ thích
     bool TryGet(string claimType, out string? value);
-    Guid GetRequiredCompanyId();        // né
+    Guid GetRequiredCompanyId();       
 }

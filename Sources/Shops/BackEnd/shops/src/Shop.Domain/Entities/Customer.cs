@@ -1,9 +1,7 @@
 ﻿using Shop.Domain.Abstractions;
-using Shop.Domain.Abstractions.Entities;
-
 namespace Shop.Domain.Entities;
 
-public class Customer : DomainEntity<Guid>, ICompanyScopedEntity
+public class Customer : EntityAuditBase<Guid>
 {
     public string Code { get; private set; } = string.Empty;
     public string Name { get; private set; } = string.Empty;
@@ -13,8 +11,6 @@ public class Customer : DomainEntity<Guid>, ICompanyScopedEntity
     public string CitizenIdNumber { get; private set; } = string.Empty;
     public string PassportNumber { get; private set; } = string.Empty;
     public bool IsLock { get; private set; }
-    public Guid ComId { get; private set; }
-
     protected Customer() { }
 
     private Customer(Guid comId, string code, string name, string address, string email, string phoneNumber, string citizenIdNumber, string passportNumber)

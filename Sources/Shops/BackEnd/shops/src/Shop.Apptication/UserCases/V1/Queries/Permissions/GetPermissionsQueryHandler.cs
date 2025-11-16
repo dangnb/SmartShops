@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Permissions;
@@ -11,9 +11,9 @@ public class GetPermissionsQueryHandler : IQueryHandler<Query.GetPermissionsQuer
 {
     private readonly IRepositoryBase<Permission, Guid> _repositoryBase;
     private readonly IMapper _mapper;
-    private readonly IUserProvider _userProvider;
+    private readonly ICurrentUser _userProvider;
 
-    public GetPermissionsQueryHandler(IRepositoryBase<Permission, Guid> repositoryBase, IMapper mapper, IUserProvider userProvider)
+    public GetPermissionsQueryHandler(IRepositoryBase<Permission, Guid> repositoryBase, IMapper mapper, ICurrentUser userProvider)
     {
         _repositoryBase = repositoryBase;
         _mapper = mapper;

@@ -2,7 +2,6 @@
 using Shop.Persistence.Constants;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shop.Domain.Entities;
 
 namespace Shop.Persistence.Configurations;
 public class AppUserConfiguration : IEntityTypeConfiguration<AppUser>

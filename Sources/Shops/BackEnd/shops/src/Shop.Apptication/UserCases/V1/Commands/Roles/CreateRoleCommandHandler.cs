@@ -1,12 +1,8 @@
-﻿using System.Net.Http;
-using System.Security;
-using System.Security.Claims;
+﻿using System.Security.Claims;
 using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Roles;
@@ -18,7 +14,7 @@ public sealed class CreateRoleCommandHandler : ICommandHandler<Command.CreateRol
 {
     private readonly RoleManager<AppRole> _roleManager;
     private readonly IPublisher _publisher;
-    private readonly IUserProvider _userProvider;
+    private readonly ICurrentUser _userProvider;
     private readonly IRepositoryBase<Permission, Guid> _permissionRepository;
 
 
@@ -26,7 +22,7 @@ public sealed class CreateRoleCommandHandler : ICommandHandler<Command.CreateRol
         IPublisher publisher,
         RoleManager<AppRole> roleManager,
         IRepositoryBase<Permission, Guid> permissionRepository,
-        IUserProvider userProvider
+        ICurrentUser userProvider
         )
     {
         _userProvider = userProvider;
@@ -36,8 +32,8 @@ public sealed class CreateRoleCommandHandler : ICommandHandler<Command.CreateRol
     }
     public async Task<Result> Handle(Command.CreateRoleCommand request, CancellationToken cancellationToken)
     {
-        var userame = _userProvider.GetUserName();
-        var comId = _userProvider.GetComID();
+        var userame = _userProvider.UserId;
+        var comId = _userProvider.GetRequiredCompanyId();
         var userExists = await _roleManager.Roles.AnyAsync(x => x.Name == request.Name);
         if (userExists)
         {

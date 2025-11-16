@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using Shop.Apptication.Exceptions;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;

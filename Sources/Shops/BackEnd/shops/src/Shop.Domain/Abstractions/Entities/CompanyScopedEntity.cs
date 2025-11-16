@@ -1,5 +1,5 @@
 ﻿namespace Shop.Domain.Abstractions.Entities;
 public interface ICompanyScopedEntity
 {
-    Guid ComId { get;  }
+    Guid ComId { get; set; }
 }

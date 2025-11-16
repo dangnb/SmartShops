@@ -3,7 +3,6 @@ using Shop.Application.Mapper;
 using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Shop.Apptication.Exceptions;
 
 namespace Shop.Application.DependencyInjection.Extensions;
 public static class ServiceCollectionExtensions

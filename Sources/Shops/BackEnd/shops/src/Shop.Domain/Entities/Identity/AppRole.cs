@@ -2,6 +2,7 @@
 using Shop.Domain.Abstractions.Entities;
 
 namespace Shop.Domain.Entities.Identity;
+
 public class AppRole : IdentityRole<Guid>, ICompanyScopedEntity
 {
     public string Description { get; private set; } = string.Empty;
@@ -9,7 +10,7 @@ public class AppRole : IdentityRole<Guid>, ICompanyScopedEntity
     public virtual ICollection<AppRoleClaim> Claims { get; set; }
     public virtual ICollection<Permission> Permissions { get; set; }
 
-    public Guid ComId { get; private set; }
+    public Guid ComId { get; set; }
 
     protected AppRole() { }
     public AppRole(Guid id) { Id = id; }

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Shop.Apptication.Exceptions;
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Roles;
@@ -12,9 +12,9 @@ public class GetRolesQueryHandler : IQueryHandler<Query.GetRolesQuery, List<Resp
 {
     private readonly RoleManager<AppRole> _roleManager;
     private readonly IMapper _mapper;
-    private readonly IUserProvider _userProvider;
+    private readonly ICurrentUser _userProvider;
 
-    public GetRolesQueryHandler(RoleManager<AppRole> roleManager, IMapper mapper, IUserProvider userProvider)
+    public GetRolesQueryHandler(RoleManager<AppRole> roleManager, IMapper mapper, ICurrentUser userProvider)
     {
         _roleManager = roleManager;
         _mapper = mapper;
@@ -25,7 +25,7 @@ public class GetRolesQueryHandler : IQueryHandler<Query.GetRolesQuery, List<Resp
 
     public async Task<Result<List<Response.RoleResponse>>> Handle(Query.GetRolesQuery request, CancellationToken cancellationToken)
     {
-        var roles = await _roleManager.Roles.Where(x => x.ComId == _userProvider.GetComID()).ToListAsync();
+        var roles = await _roleManager.Roles.Where(x => x.ComId == _userProvider.GetRequiredCompanyId()).ToListAsync();
         var result = roles.Select(x => new Response.RoleResponse(x.Id, x.Name, x.Description, x.Permissions.Select(c => c.Code).ToArray())).ToList();
         return Result.Success(result);
     }

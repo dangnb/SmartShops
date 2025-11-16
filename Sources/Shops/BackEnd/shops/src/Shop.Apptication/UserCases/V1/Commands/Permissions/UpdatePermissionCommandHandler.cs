@@ -1,4 +1,5 @@
-﻿using Shop.Apptication.Exceptions;
+﻿
+using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Permissions;
@@ -10,8 +11,8 @@ namespace Shop.Apptication.UserCases.V1.Commands.Permissions;
 public class UpdatePermissionCommandHandler : ICommandHandler<Command.UpdatePermissionCommand>
 {
     private readonly IRepositoryBase<Permission, Guid> _repositoryBase;
-    private readonly IUserProvider _userProvider;
-    public UpdatePermissionCommandHandler(IRepositoryBase<Permission, Guid> repositoryBase, IUserProvider userProvider)
+    private readonly ICurrentUser _userProvider;
+    public UpdatePermissionCommandHandler(IRepositoryBase<Permission, Guid> repositoryBase, ICurrentUser userProvider)
     {
         _repositoryBase = repositoryBase;
         _userProvider = userProvider;
