@@ -21,5 +21,6 @@ internal class WardConfiguration : IEntityTypeConfiguration<Ward>
         builder.ToTable(TableNames.Wards);
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
+        builder.HasOne(t => t.Provincy);
     }
 }

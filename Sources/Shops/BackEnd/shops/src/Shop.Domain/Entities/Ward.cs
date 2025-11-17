@@ -7,7 +7,7 @@ public class Ward : EntityAuditBase<Guid>
     public Guid ProvincyId { get; set; }
     public string Code { get; set; } = default!;
     public string Name { get; set; } = default!;
-    public Provincy Provincy { get; set; } = default!;
+    public virtual Provincy Provincy { get; set; } = default!;
 
     protected Ward() { }
     private Ward(string code, string name, Guid provincyId)
