@@ -33,11 +33,12 @@ public sealed class TransactionPipelineBehavior<TRequest, TResponse>
 
         return await strategy.ExecuteAsync(async () =>
         {
-            await using var transaction = await _context.Database.BeginTransactionAsync(cancellationToken);
+            await using var transaction =
+                await _context.Database.BeginTransactionAsync(cancellationToken);
 
             var response = await next();
 
-            ApplyAuditInfo(); // <-- audit ở đây
+            ApplyAuditInfo(); // <-- xử lý audit ở đây
 
             await _context.SaveChangesAsync(cancellationToken);
             await transaction.CommitAsync(cancellationToken);
@@ -51,23 +52,25 @@ public sealed class TransactionPipelineBehavior<TRequest, TResponse>
 
     private void ApplyAuditInfo()
     {
+        var now = DateTime.UtcNow;
 
+        // Có thể có những trường hợp không có HttpContext (background job, test)
+        // => ComId nullable, đừng dùng GetRequiredCompanyId() nếu không chắc
 
         foreach (var entry in _context.ChangeTracker.Entries())
         {
             if (entry.Entity is not IAuditable auditEntity)
                 continue;
 
+            var comId = _currentUser.ComId;
             var userId = _currentUser.UserId ?? "system";
-            var now = DateTime.UtcNow;
-            var comId = _currentUser.GetRequiredCompanyId();
 
-            // Set ComId nếu entity có scope theo company
             if (entry.Entity is ICompanyScopedEntity companyScoped &&
                 entry.State == EntityState.Added &&
+                comId.HasValue &&
                 companyScoped.ComId == Guid.Empty)
             {
-                companyScoped.ComId = comId;
+                companyScoped.ComId = comId.Value;
             }
 
             switch (entry.State)
@@ -85,7 +88,6 @@ public sealed class TransactionPipelineBehavior<TRequest, TResponse>
                     break;
 
                 case EntityState.Deleted:
-                    // Soft delete
                     entry.State = EntityState.Modified;
                     auditEntity.IsDeleted = true;
                     auditEntity.DeletedAt = now;

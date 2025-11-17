@@ -3,7 +3,7 @@ public static class WardsException
 {
     public class WardNotFoundException : NotFoundException
     {
-        public WardNotFoundException(int id)
+        public WardNotFoundException(Guid id)
             : base($"The ward with the id {id} was not found.") { }
     }
 }

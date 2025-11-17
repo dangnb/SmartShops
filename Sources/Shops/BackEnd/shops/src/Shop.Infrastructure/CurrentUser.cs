@@ -5,24 +5,29 @@ using Shop.Contract.Extensions;
 
 namespace Shop.Infrastructure;
 
-public class CurrentUser(IHttpContextAccessor accessor) : ICurrentUser
+public class CurrentUser : ICurrentUser
 {
-    private readonly ClaimsPrincipal? _user = accessor.HttpContext?.User;
+    private readonly IHttpContextAccessor _accessor;
+
+    public CurrentUser(IHttpContextAccessor accessor)
+    {
+        _accessor = accessor;
+    }
+
+    private ClaimsPrincipal? User => _accessor.HttpContext?.User;
 
     public string? UserId =>
-        _user?.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "";
+        User?.FindFirst(ClaimTypes.Name)?.Value;
 
     public Guid? ComId =>
-        Guid.TryParse(_user?.FindFirst(CustomClaimTypes.ComId)?.Value, out var id) ? id : null;
-
+        Guid.TryParse(User?.FindFirst(CustomClaimTypes.ComId)?.Value, out var id) ? id : null;
 
     public bool TryGet(string claimType, out string? value)
     {
-        value = _user?.FindFirst(claimType)?.Value;
+        value = User?.FindFirst(claimType)?.Value;
         return value is not null;
     }
 
     public Guid GetRequiredCompanyId()
         => ComId ?? throw new InvalidOperationException("Missing company context (comid claim).");
 }
-

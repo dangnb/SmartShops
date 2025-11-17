@@ -1,9 +1,11 @@
 ﻿using System.Linq.Expressions;
-using Shop.Domain.Abstractions.Repositories;
+using System.Threading;
 using Microsoft.EntityFrameworkCore;
 using Shop.Domain.Abstractions;
+using Shop.Domain.Abstractions.Repositories;
 
 namespace Shop.Persistence.Repositoty;
+
 public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDisposable
         where TEntity : DomainEntity<TKey>
 {
@@ -60,7 +62,7 @@ public class RepositoryBase<TEntity, TKey> : IRepositoryBase<TEntity, TKey>, IDi
 
     public void Attach(TEntity entity)
     {
-         _context.Attach(entity);
+        _context.Attach(entity);
     }
 
     public Task<bool> AnyAsync(Expression<Func<TEntity, bool>>? predicate = null, CancellationToken cancellationToken = default, params Expression<Func<TEntity, object>>[] includeProperties)

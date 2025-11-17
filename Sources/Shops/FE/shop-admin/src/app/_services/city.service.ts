@@ -21,7 +21,7 @@ export interface ICityModel {
 })
 export class CityService {
 
-    private apiUrl = `${environment.apiUrlV1}/cities`;
+    private apiUrl = `${environment.apiUrlV1}/provincies`;
 
     constructor(private http: HttpClient) { }
 
