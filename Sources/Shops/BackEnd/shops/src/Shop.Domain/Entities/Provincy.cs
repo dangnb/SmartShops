@@ -1,13 +1,11 @@
 ﻿using Shop.Domain.Abstractions;
-using Shop.Domain.Abstractions.Entities;
 
 namespace Shop.Domain.Entities;
 
-public class Provincy : DomainEntity<Guid>, ICompanyScopedEntity
+public class Provincy : EntityAuditBase<Guid>
 {
     public string Code { get; set; } = default!;
     public string Name { get; set; } = default!;
-    public Guid ComId { get; set; } = default!;
     protected Provincy() { }
     private Provincy(string code, string name)
     {

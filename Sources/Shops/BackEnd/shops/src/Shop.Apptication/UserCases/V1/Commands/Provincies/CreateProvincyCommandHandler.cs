@@ -7,8 +7,8 @@ using Shop.Domain.Entities;
 namespace TP.Apptication.UserCases.V1.Commands.Provincies;
 public class CreateProvincyCommandHandler : ICommandHandler<Command.CreateProvincyCommand>
 {
-    private readonly IRepositoryBase<Provincy, int> _repositoryBase;
-    public CreateProvincyCommandHandler(IRepositoryBase<Provincy, int> repositoryBase)
+    private readonly IRepositoryBase<Provincy, Guid> _repositoryBase;
+    public CreateProvincyCommandHandler(IRepositoryBase<Provincy, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

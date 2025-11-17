@@ -9,8 +9,8 @@ namespace TP.Apptication.UserCases.V1.Commands.Provincies;
 
 public class DeleteProvincyCommandHandler : ICommandHandler<Command.DeleteProvincyCommand>
 {
-    private readonly IRepositoryBase<Provincy, int> _repositoryBase;
-    public DeleteProvincyCommandHandler(IRepositoryBase<Provincy, int> repositoryBase)
+    private readonly IRepositoryBase<Provincy, Guid> _repositoryBase;
+    public DeleteProvincyCommandHandler(IRepositoryBase<Provincy, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

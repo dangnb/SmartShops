@@ -9,7 +9,7 @@ public static class CitiesException
 {
     public class CityNotFoundException : NotFoundException
     {
-        public CityNotFoundException(int id)
+        public CityNotFoundException(Guid id)
             : base($"The City with the id {id} was not found.") { }
     }
 }

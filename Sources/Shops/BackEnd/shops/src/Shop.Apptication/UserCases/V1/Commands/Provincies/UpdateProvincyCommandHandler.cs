@@ -8,8 +8,8 @@ using static Shop.Domain.Exceptions.CitiesException;
 namespace TP.Apptication.UserCases.V1.Commands.Provincies;
 public class UpdateProvincyCommandHandler : ICommandHandler<Command.UpdateProvincyCommand>
 {
-    private readonly IRepositoryBase<Provincy, int> _repositoryBase;
-    public UpdateProvincyCommandHandler(IRepositoryBase<Provincy, int> repositoryBase)
+    private readonly IRepositoryBase<Provincy, Guid> _repositoryBase;
+    public UpdateProvincyCommandHandler(IRepositoryBase<Provincy, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

@@ -33,7 +33,7 @@ public class WardsController : ApiController
     [HttpGet("provincy/{provincyId}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetByProvincyId(int provincyId)
+    public async Task<IActionResult> GetByProvincyId(Guid provincyId)
     {
         var result = await sender.Send(new GetWardsByProvincyQuery(provincyId));
         if (result.IsFailure)
@@ -47,7 +47,7 @@ public class WardsController : ApiController
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var result = await sender.Send(new Query.GetWardByIdQuery(id));
         if (result.IsFailure)

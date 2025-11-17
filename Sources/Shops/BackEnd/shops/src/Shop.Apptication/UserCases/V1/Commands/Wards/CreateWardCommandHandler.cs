@@ -7,8 +7,8 @@ using Shop.Domain.Entities;
 namespace Shop.Apptication.UserCases.V1.Commands.Wards;
 public class CreateWardCommandHandler : ICommandHandler<Command.CreateWardCommand>
 {
-    private readonly IRepositoryBase<Ward, int> _repositoryBase;
-    public CreateWardCommandHandler(IRepositoryBase<Ward, int> repositoryBase)
+    private readonly IRepositoryBase<Ward, Guid> _repositoryBase;
+    public CreateWardCommandHandler(IRepositoryBase<Ward, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

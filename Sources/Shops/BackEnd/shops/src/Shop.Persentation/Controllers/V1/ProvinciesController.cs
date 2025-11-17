@@ -44,7 +44,7 @@ public class ProvinciesController(ISender sender) : ApiController(sender)
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var result = await sender.Send(new Query.GetProvincyByIdQuery(id));
         if (result.IsFailure)
@@ -72,7 +72,7 @@ public class ProvinciesController(ISender sender) : ApiController(sender)
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update([FromBody] Command.UpdateProvincyCommand request, int id)
+    public async Task<IActionResult> Update([FromBody] Command.UpdateProvincyCommand request, Guid id)
     {
         var result = await sender.Send(new Command.UpdateProvincyCommand(id, request.Code, request.Name));
         if (result.IsFailure)
@@ -86,7 +86,7 @@ public class ProvinciesController(ISender sender) : ApiController(sender)
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         var result = await sender.Send(new Command.DeleteProvincyCommand(id));
         if (result.IsFailure)
