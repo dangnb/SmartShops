@@ -518,7 +518,7 @@ namespace Shop.Persistence.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("Shop.Domain.Entities.Provincy", b =>
+            modelBuilder.Entity("Shop.Domain.Entities.Province", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -555,7 +555,7 @@ namespace Shop.Persistence.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Provincies", (string)null);
+                    b.ToTable("Provinces", (string)null);
                 });
 
             modelBuilder.Entity("Shop.Domain.Entities.Supplier", b =>
@@ -713,10 +713,12 @@ namespace Shop.Persistence.Migrations
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("ProvincyId")
+                    b.Property<Guid>("ProvinceId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Wards", (string)null);
                 });
@@ -782,6 +784,17 @@ namespace Shop.Persistence.Migrations
                     b.HasOne("Shop.Domain.Entities.Identity.AppUser", null)
                         .WithMany("Tokens")
                         .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("Shop.Domain.Entities.Ward", b =>
+                {
+                    b.HasOne("Shop.Domain.Entities.Province", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Province");
                 });
 
             modelBuilder.Entity("Shop.Domain.Entities.Identity.AppRoleClaim", b =>

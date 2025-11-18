@@ -25,6 +25,6 @@ public sealed class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, G
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Product> Products { get; set; }
     public DbSet<Supplier> Suppliers { get; set; }
-    public DbSet<Provincy> Provincies { get; set; }
+    public DbSet<Province> Provinces { get; set; }
     public DbSet<Ward> Wards { get; set; }
 }

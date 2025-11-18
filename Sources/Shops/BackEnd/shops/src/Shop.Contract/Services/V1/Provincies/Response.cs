@@ -1,5 +1,5 @@
-﻿namespace Shop.Contract.Services.V1.Provincies;
+﻿namespace Shop.Contract.Services.V1.Provinces;
 public class Response
 {
-    public record ProvincyResponse(int Id, string Code, string Name);
+    public record ProvinceResponse(Guid Id, string Code, string Name);
 }

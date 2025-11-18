@@ -1,10 +1,10 @@
 ﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 
-namespace Shop.Contract.Services.V1.Provincies;
+namespace Shop.Contract.Services.V1.Provinces;
 public static class Query
 {
-    public record GetProvinciesQuery(string? SearchTerm, int PageIndex, int PageSize) : IQuery<PagedResult<Response.ProvincyResponse>>;
-    public record GetProvincyByIdQuery(Guid Id) : IQuery<Response.ProvincyResponse>;
-    public record GetByCompanyQuery() : IQuery<IList<Response.ProvincyResponse>>;
+    public record GetProvincesQuery(string? SearchTerm, int PageIndex, int PageSize) : IQuery<PagedResult<Response.ProvinceResponse>>;
+    public record GetProvinceByIdQuery(Guid Id) : IQuery<Response.ProvinceResponse>;
+    public record GetByCompanyQuery() : IQuery<IList<Response.ProvinceResponse>>;
 }

@@ -22,14 +22,14 @@ public class GetWardsQueryHandler : IQueryHandler<Query.GetWardsQuery, PagedResu
 
     public async Task<Result<PagedResult<Response.WardResponse>>> Handle(Query.GetWardsQuery request, CancellationToken cancellationToken)
     {
-        var villageQuery = string.IsNullOrWhiteSpace(request.SearchTerm)
+        var wardQuery = string.IsNullOrWhiteSpace(request.SearchTerm)
           ? _repositoryBase.FindAll().Where(x => x.ComId == _userProvider.GetRequiredCompanyId())
           : _repositoryBase.FindAll(x => x.ComId == _userProvider.GetRequiredCompanyId() && (x.Name.Contains(request.SearchTerm) || x.Code.Contains(request.SearchTerm)));
-        if (request.ProvincyId.HasValue)
+        if (request.ProvinceId.HasValue)
         {
-            villageQuery = villageQuery.Where(x => x.ProvincyId == request.ProvincyId);
+            wardQuery = wardQuery.Where(x => x.ProvinceId == request.ProvinceId);
         }
-        var products = await PagedResult<Ward>.CreateAsync(villageQuery,
+        var products = await PagedResult<Ward>.CreateAsync(wardQuery,
             request.PageIndex,
             request.PageSize);
 

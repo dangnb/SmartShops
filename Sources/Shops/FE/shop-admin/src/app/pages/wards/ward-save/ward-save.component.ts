@@ -28,41 +28,36 @@ import { IWardModel, WardService } from 'src/app/_services/ward.service';
   styleUrls: ['./ward-save.component.scss'],
 })
 export class WardSaveComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() id: number = 0;
+  @Input() id: string = '';
   isCollapsed1 = false;
   isCollapsed2 = true;
   isLoading = false;
   // Single model
   wardModel: IWardModel = {
-    id: 0,
+    id: '',
     name: '',
     code: '',
-    districtId: 0,
-    cityId: 0,
+    provinceId: '',
   };
 
   @ViewChild('noticeSwal')
   noticeSwal!: SwalComponent;
   swalOptions: SweetAlertOptions = {};
-  private _district$ = new BehaviorSubject<any>([]);
-  public district$ = this._district$.asObservable();
 
   private _city$ = new BehaviorSubject<any>([]);
   public city$ = this._city$.asObservable();
   constructor(
     private apiService: WardService,
-    private apiDistricyService: DistrictService,
     private apiCityService: CityService,
     private cdr: ChangeDetectorRef,
-    private fb: FormBuilder,
     public modal: NgbActiveModal
-  ) {}
+  ) { }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void {
     this.getCities();
-    if (this.id > 0) {
+    if (this.id != '') {
       this.getData(this.id);
     } else {
       this.create();
@@ -75,25 +70,16 @@ export class WardSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  changeCity(){
-    this.getDistrict(this.wardModel.cityId);
-  }
 
-  getDistrict(cityId:number) {
-    this.apiDistricyService.getByCity(cityId).subscribe((val) => {
-      this._district$.next(val.value);
-    });
-  }
 
-  getData(id: number) {
+  getData(id: string) {
     this.apiService.getWard(id).subscribe((user: any) => {
       this.wardModel = user.value;
-      this.getDistrict(this.wardModel.cityId);
     });
   }
 
   create() {
-    this.wardModel = { id: 0, name: '', code: '', districtId: 0, cityId: 0 };
+    this.wardModel = { id: '', name: '', code: '', provinceId: '' };
   }
 
   onSubmit(event: Event, myForm: NgForm) {
@@ -107,7 +93,7 @@ export class WardSaveComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'success',
       title: 'Success!',
       text:
-        this.wardModel.id > 0
+        this.wardModel.id != ''
           ? 'User updated successfully!'
           : 'User created successfully!',
     };
@@ -149,7 +135,7 @@ export class WardSaveComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     };
 
-    if (this.wardModel.id > 0) {
+    if (this.wardModel.id != '') {
       updateFn();
     } else {
       createFn();
@@ -198,5 +184,5 @@ export class WardSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 }

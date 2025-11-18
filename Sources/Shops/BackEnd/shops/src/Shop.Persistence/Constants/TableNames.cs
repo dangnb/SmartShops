@@ -30,7 +30,7 @@ internal static class TableNames
     internal const string PaymentSummaries = nameof(PaymentSummaries);
     internal const string Payments = nameof(Payments);
     internal const string PaymentDetails = nameof(PaymentDetails);
-    internal const string Provincies = nameof(Provincies);
+    internal const string Provinces = nameof(Provinces);
     internal const string Wards = nameof(Wards);
     
 }

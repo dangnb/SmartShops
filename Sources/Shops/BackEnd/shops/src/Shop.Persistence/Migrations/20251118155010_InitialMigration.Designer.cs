@@ -12,8 +12,8 @@ using Shop.Persistence;
 namespace Shop.Persistence.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20251117155435_UpdateMigration20251118")]
-    partial class UpdateMigration20251118
+    [Migration("20251118155010_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -521,7 +521,7 @@ namespace Shop.Persistence.Migrations
                     b.ToTable("Products", (string)null);
                 });
 
-            modelBuilder.Entity("Shop.Domain.Entities.Provincy", b =>
+            modelBuilder.Entity("Shop.Domain.Entities.Province", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
@@ -534,13 +534,31 @@ namespace Shop.Persistence.Migrations
                     b.Property<Guid>("ComId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
                     b.HasKey("Id");
 
-                    b.ToTable("Provincies", (string)null);
+                    b.ToTable("Provinces", (string)null);
                 });
 
             modelBuilder.Entity("Shop.Domain.Entities.Supplier", b =>
@@ -676,14 +694,34 @@ namespace Shop.Persistence.Migrations
                     b.Property<Guid>("ComId")
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("CreatedBy")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("DeletedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("tinyint(1)");
+
+                    b.Property<DateTime?>("LastModifiedAt")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<string>("LastModifiedBy")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("longtext");
 
-                    b.Property<Guid>("ProvincyId")
+                    b.Property<Guid>("ProvinceId")
                         .HasColumnType("char(36)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ProvinceId");
 
                     b.ToTable("Wards", (string)null);
                 });
@@ -749,6 +787,17 @@ namespace Shop.Persistence.Migrations
                     b.HasOne("Shop.Domain.Entities.Identity.AppUser", null)
                         .WithMany("Tokens")
                         .HasForeignKey("AppUserId");
+                });
+
+            modelBuilder.Entity("Shop.Domain.Entities.Ward", b =>
+                {
+                    b.HasOne("Shop.Domain.Entities.Province", "Province")
+                        .WithMany()
+                        .HasForeignKey("ProvinceId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Province");
                 });
 
             modelBuilder.Entity("Shop.Domain.Entities.Identity.AppRoleClaim", b =>

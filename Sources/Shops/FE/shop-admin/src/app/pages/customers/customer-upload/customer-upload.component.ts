@@ -16,7 +16,7 @@ import { NgbActiveModal, } from '@ng-bootstrap/ng-bootstrap';
 import {
   DistrictService,
 } from 'src/app/_services/district.service';
-import {  WardService } from 'src/app/_services/ward.service';
+import { WardService } from 'src/app/_services/ward.service';
 import {
   VillageService,
 } from 'src/app/_services/village.service';
@@ -72,7 +72,7 @@ export class CustomerUploadComponent implements OnInit, AfterViewInit, OnDestroy
 
   ngOnInit(): void {
     this.getCities();
-      this.create();
+    this.create();
   }
 
   getCities() {
@@ -88,7 +88,7 @@ export class CustomerUploadComponent implements OnInit, AfterViewInit, OnDestroy
   }
 
   getWards(districtId: number) {
-    this.apiWardService.getByDistrict(districtId).subscribe((val) => {
+    this.apiWardService.getByProvince(districtId).subscribe((val) => {
       this._ward$.next(val.value);
     });
   }
@@ -152,7 +152,7 @@ export class CustomerUploadComponent implements OnInit, AfterViewInit, OnDestroy
     const uploadFn = () => {
       const formData = new FormData();
       formData.append('file', this.selectedFile!);
-      formData.append('villageId',`${this.customerModel.villageId}`);
+      formData.append('villageId', `${this.customerModel.villageId}`);
       this.apiService
         .uploadCustomer(formData)
         .subscribe({
@@ -168,8 +168,8 @@ export class CustomerUploadComponent implements OnInit, AfterViewInit, OnDestroy
         });
     };
 
-      uploadFn();
-   
+    uploadFn();
+
   }
 
   extractText(obj: any): string {

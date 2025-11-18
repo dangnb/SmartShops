@@ -23,13 +23,13 @@ import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
   styleUrls: ['./citi-save.component.scss'],
 })
 export class CitySaveComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() id:number =0;
+  @Input() id:string |"" ;
   isCollapsed1 = false;
   isCollapsed2 = true;
   isLoading = false;
   // Single model
   aUser: Observable<ICityModel>;
-  cityModel: ICityModel = { id: 0, name: '', code: '' };
+  cityModel: ICityModel = { id: '', name: '', code: '' };
 
   @ViewChild('noticeSwal')
   noticeSwal!: SwalComponent;
@@ -46,14 +46,14 @@ export class CitySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void {}
 
   ngOnInit(): void {
-    if(this.id >0){
+    if(this.id != ""){
         this.getData(this.id);
     }else{
       this.create();
     }
   }
 
-  getData(id: number) {
+  getData(id: string) {
     this.aUser = this.apiService.getCity(id);
     this.aUser.subscribe((user: any) => {
       this.cityModel = user.value;
@@ -61,7 +61,7 @@ export class CitySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   create() {
-    this.cityModel = { id: 0, name: '', code: '' };
+    this.cityModel = { id: '', name: '', code: '' };
   }
 
   onSubmit(event: Event, myForm: NgForm) {
@@ -75,7 +75,7 @@ export class CitySaveComponent implements OnInit, AfterViewInit, OnDestroy {
       icon: 'success',
       title: 'Success!',
       text:
-        this.cityModel.id > 0
+        this.cityModel.id != ""
           ? 'User updated successfully!'
           : 'User created successfully!',
     };
@@ -117,7 +117,7 @@ export class CitySaveComponent implements OnInit, AfterViewInit, OnDestroy {
       });
     };
 
-    if (this.cityModel.id > 0) {
+    if (this.cityModel.id   != "") {
       updateFn();
     } else {
       createFn();

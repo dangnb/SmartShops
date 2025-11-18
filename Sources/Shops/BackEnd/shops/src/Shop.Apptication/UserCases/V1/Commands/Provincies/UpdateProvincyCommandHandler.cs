@@ -1,19 +1,19 @@
 ﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Provincies;
+using Shop.Contract.Services.V1.Provinces;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 using static Shop.Domain.Exceptions.CitiesException;
 
-namespace TP.Apptication.UserCases.V1.Commands.Provincies;
-public class UpdateProvincyCommandHandler : ICommandHandler<Command.UpdateProvincyCommand>
+namespace TP.Apptication.UserCases.V1.Commands.Provinces;
+public class UpdateProvinceCommandHandler : ICommandHandler<Command.UpdateProvinceCommand>
 {
-    private readonly IRepositoryBase<Provincy, Guid> _repositoryBase;
-    public UpdateProvincyCommandHandler(IRepositoryBase<Provincy, Guid> repositoryBase)
+    private readonly IRepositoryBase<Province, Guid> _repositoryBase;
+    public UpdateProvinceCommandHandler(IRepositoryBase<Province, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }
-    public async Task<Result> Handle(Command.UpdateProvincyCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(Command.UpdateProvinceCommand request, CancellationToken cancellationToken)
     {
 
         var city = await _repositoryBase.FindByIdAsync(request.Id) ?? throw new CityNotFoundException(request.Id);

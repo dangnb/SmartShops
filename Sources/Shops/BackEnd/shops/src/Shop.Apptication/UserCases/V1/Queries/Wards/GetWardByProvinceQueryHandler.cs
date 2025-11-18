@@ -9,18 +9,18 @@ using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 
 namespace TP.Apptication.UserCases.V1.Queries.Wards;
-public class GetWardByProvincyQueryHandler : IQueryHandler<Query.GetWardsByProvincyQuery, IList<Response.WardResponse>>
+public class GetWardByProvinceQueryHandler : IQueryHandler<Query.GetWardsByProvinceQuery, IList<Response.WardResponse>>
 {
     private readonly IRepositoryBase<Ward, Guid> _repositoryBase;
     private readonly IMapper _mapper;
-    public GetWardByProvincyQueryHandler(IRepositoryBase<Ward, Guid> repositoryBase, IMapper mapper)
+    public GetWardByProvinceQueryHandler(IRepositoryBase<Ward, Guid> repositoryBase, IMapper mapper)
     {
         _repositoryBase = repositoryBase;
         _mapper = mapper;
     }
-    public async Task<Result<IList<Response.WardResponse>>> Handle(Query.GetWardsByProvincyQuery request, CancellationToken cancellationToken)
+    public async Task<Result<IList<Response.WardResponse>>> Handle(Query.GetWardsByProvinceQuery request, CancellationToken cancellationToken)
     {
-        var wards = await _repositoryBase.FindAll().Where(x => x.ProvincyId == request.ProvincyId).ToListAsync();
+        var wards = await _repositoryBase.FindAll().Where(x => x.ProvinceId == request.ProvinceId).ToListAsync();
         var result = _mapper.Map<IList<Response.WardResponse>>(wards);
         return Result.Success(result);
     }

@@ -7,18 +7,17 @@ using static Shop.Contract.Services.V1.Customers.Response;
 using static Shop.Contract.Services.V1.Payments.Response;
 using static Shop.Contract.Services.V1.Permissions.Response;
 using static Shop.Contract.Services.V1.Products.Response;
+using static Shop.Contract.Services.V1.Provinces.Response;
 using static Shop.Contract.Services.V1.Roles.Response;
 using static Shop.Contract.Services.V1.Users.Response;
+using static Shop.Contract.Services.V1.Wards.Response;
 
 namespace Shop.Application.Mapper;
+
 internal class ServiceProfile : Profile
 {
     public ServiceProfile()
     {
-        //CreateMap<Product, Response.ProductResponse>().ReverseMap();
-        //CreateMap<PagedResult<Product>, PagedResult<Response.ProductResponse>>().ReverseMap();
-
-
         CreateMap<Permission, PermissionResponse>().ReverseMap();
         CreateMap<PagedResult<Permission>, PagedResult<PermissionResponse>>().ReverseMap();
 
@@ -52,7 +51,12 @@ internal class ServiceProfile : Profile
         CreateMap<PagedResult<AppUser>, PagedResult<UserResponse>>().ReverseMap();
 
 
-
+        CreateMap<Province, ProvinceResponse>().ReverseMap();
+        CreateMap<PagedResult<Province>, PagedResult<ProvinceResponse>>().ReverseMap();
+        CreateMap<Ward, WardResponse>().ForMember(
+                  dest => dest.ProvinceName,
+                  opt => opt.MapFrom(src => src.Province.Name)).ReverseMap();
+        CreateMap<PagedResult<Ward>, PagedResult<WardResponse>>().ReverseMap();
 
     }
 }

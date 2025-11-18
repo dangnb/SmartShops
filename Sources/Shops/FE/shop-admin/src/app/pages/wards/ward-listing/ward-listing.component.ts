@@ -38,8 +38,8 @@ export class WardListingComponent implements OnInit, AfterViewInit, OnDestroy {
 
   swalOptions: SweetAlertOptions = {};
 
-  
-  searchTerm: string= "";
+
+  searchTerm: string = "";
 
   private _items$ = new BehaviorSubject<any>([]);
   public items$ = this._items$.asObservable();
@@ -56,9 +56,9 @@ export class WardListingComponent implements OnInit, AfterViewInit, OnDestroy {
     private apiService: WardService,
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   changePage(page: number) {
     this.pageIndex = page;
@@ -109,7 +109,7 @@ export class WardListingComponent implements OnInit, AfterViewInit, OnDestroy {
     modalRef.componentInstance.id = id;
     modalRef.result.then(
       () => this.filter(this.searchTerm),
-      () => {}
+      () => { }
     );
   }
 
@@ -122,7 +122,7 @@ export class WardListingComponent implements OnInit, AfterViewInit, OnDestroy {
     modalRef.componentInstance.id = 0;
     modalRef.result.then(
       () => this.filter(this.searchTerm),
-      () => {}
+      () => { }
     );
   }
   ngOnDestroy(): void {

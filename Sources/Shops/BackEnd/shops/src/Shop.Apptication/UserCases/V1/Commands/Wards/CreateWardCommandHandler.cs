@@ -14,7 +14,7 @@ public class CreateWardCommandHandler : ICommandHandler<Command.CreateWardComman
     }
     public async Task<Result> Handle(Command.CreateWardCommand request, CancellationToken cancellationToken)
     {
-        var entity = Ward.CreateEntity(  request.Code, request.Name, request.ProvincyId);
+        var entity = Ward.CreateEntity(  request.Code, request.Name, request.ProvinceId);
         _repositoryBase.Add(entity);
         return Result.Success(entity);
     }

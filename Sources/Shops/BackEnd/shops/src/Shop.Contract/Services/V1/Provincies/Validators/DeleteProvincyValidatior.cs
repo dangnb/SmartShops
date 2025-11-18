@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 
-namespace Shop.Contract.Services.V1.Provincies.Validators;
-public class DeleteProvincyValidatior : AbstractValidator<Command.DeleteProvincyCommand>
+namespace Shop.Contract.Services.V1.Provinces.Validators;
+public class DeleteProvinceValidatior : AbstractValidator<Command.DeleteProvinceCommand>
 {
-    public DeleteProvincyValidatior()
+    public DeleteProvinceValidatior()
     {
         RuleFor(x => x.Id).NotEmpty().WithMessage("Id thành phố không được để trống");
     }

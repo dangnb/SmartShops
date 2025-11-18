@@ -71,9 +71,9 @@ export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     private cdr: ChangeDetectorRef,
     private fb: FormBuilder,
     public modal: NgbActiveModal
-  ) {}
+  ) { }
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void {
     this.getUsers();
@@ -98,7 +98,7 @@ export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   getWards(districtId: number) {
-    this.apiWardService.getByDistrict(districtId).subscribe((val) => {
+    this.apiWardService.getByProvince(districtId).subscribe((val) => {
       this._ward$.next(val.value);
     });
   }
@@ -241,5 +241,5 @@ export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  ngOnDestroy(): void {}
+  ngOnDestroy(): void { }
 }

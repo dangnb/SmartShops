@@ -1,20 +1,20 @@
 ﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Provincies;
+using Shop.Contract.Services.V1.Provinces;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 using static Shop.Domain.Exceptions.CitiesException;
 
-namespace TP.Apptication.UserCases.V1.Commands.Provincies;
+namespace TP.Apptication.UserCases.V1.Commands.Provinces;
 
-public class DeleteProvincyCommandHandler : ICommandHandler<Command.DeleteProvincyCommand>
+public class DeleteProvinceCommandHandler : ICommandHandler<Command.DeleteProvinceCommand>
 {
-    private readonly IRepositoryBase<Provincy, Guid> _repositoryBase;
-    public DeleteProvincyCommandHandler(IRepositoryBase<Provincy, Guid> repositoryBase)
+    private readonly IRepositoryBase<Province, Guid> _repositoryBase;
+    public DeleteProvinceCommandHandler(IRepositoryBase<Province, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }
-    public async Task<Result> Handle(Command.DeleteProvincyCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(Command.DeleteProvinceCommand request, CancellationToken cancellationToken)
     {
         var city = await _repositoryBase.FindByIdAsync(request.Id) ?? throw new CityNotFoundException(request.Id);
         _repositoryBase.Remove(city);

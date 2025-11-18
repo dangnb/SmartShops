@@ -11,7 +11,7 @@ export interface DataTablesResponse {
 }
 
 export interface ICityModel {
-    id: 0 | number;
+    id: string;
     code?: string;
     name: string;
 }
@@ -21,7 +21,7 @@ export interface ICityModel {
 })
 export class CityService {
 
-    private apiUrl = `${environment.apiUrlV1}/provincies`;
+    private apiUrl = `${environment.apiUrlV1}/provinces`;
 
     constructor(private http: HttpClient) { }
 
@@ -35,7 +35,7 @@ export class CityService {
         return this.http.get<any>(url);
     }
 
-    getCity(id: number): Observable<ICityModel> {
+    getCity(id: string): Observable<ICityModel> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.get<ICityModel>(url);
     }
@@ -44,12 +44,12 @@ export class CityService {
         return this.http.post<ICityModel>(this.apiUrl, user);
     }
 
-    updateCity(id: number, user: ICityModel): Observable<ICityModel> {
+    updateCity(id: string, user: ICityModel): Observable<ICityModel> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.put<ICityModel>(url, user);
     }
 
-    deleteCity(id: number): Observable<void> {
+    deleteCity(id: string): Observable<void> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.delete<void>(url);
     }

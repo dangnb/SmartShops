@@ -5,7 +5,7 @@
       <!--begin::Search-->
       <div class="d-flex align-items-center position-relative my-1">
         <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
-        <input type="text" [(ngModel)]="searchTerm" class="form-control  w-250px ps-12"
+        <input type="text" [(ngModel)]="searchTerm " class="form-control  form-control-sm w-250px ps-12"
           placeholder="Nhập mã và tên" (change)="changeSearTerm()">
       </div>
       <!--end::Search-->
@@ -18,7 +18,7 @@
       <div class="d-flex justify-content-end">
         <!--begin::Add user-->
         <button type="button" class="btn btn-primary btn-sm" (click)="create()">
-         <i class="fa fa-add"></i>Tạo mới
+          <i class="fa fa-add"></i>Tạo mới
         </button>
         <!--end::Add user-->
       </div>
@@ -37,7 +37,7 @@
           <tr class="fw-bolder text-muted">
             <th class="w-50px">
             </th>
-            <th class="min-w-150px">Quận/ Huyện</th>
+            <th class="min-w-150px">Tỉnh/ Thành phố</th>
             <th class="min-w-150px">Mã</th>
             <th class="min-w-140px">Tên</th>
             <th class="min-w-100px text-center" colspan="2">Thao tác</th>
@@ -49,18 +49,19 @@
           <tr
             *ngFor="let item of items$ | async |  paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: total }; let i = index ">
             <td class="text-center"> {{ i + pageSize * (pageIndex - 1) + 1 }}</td>
-            <td> {{item.districtName}}</td>
+            <td> {{item.provinceName}}</td>
             <td> {{item.code}}</td>
             <td> {{item.name}}</td>
-            <td class="text-center">
+            <td class="text-center w-25px">
               <a (click)="edit(item.id)" title="Cập nhật dữ liệu"
                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"><app-keenicon name="pencil"
                   class="fs-3 text-primary" ng-reflect-name="pencil" style="display: contents;"><span
                     class="fs-3 ki-duotone ki-pencil"><span class="path1"></span><span class="path2"></span>
                   </span>
-                </app-keenicon></a></td>
-                <td class="text-center">
-                <a (click)="delete(item.id)" title="Xóa dữ liệu"
+                </app-keenicon></a>
+            </td>
+            <td class="text-center w-25px">
+              <a (click)="delete(item.id)" title="Xóa dữ liệu"
                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"><app-keenicon name="trash"
                   class="fs-3 text-danger" ng-reflect-name="trash" style="display: contents;"><span
                     class="fs-3 ki-duotone ki-trash"><span class="path1"></span><span class="path2"></span><span

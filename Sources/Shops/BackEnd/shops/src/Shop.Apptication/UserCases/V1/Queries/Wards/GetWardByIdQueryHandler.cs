@@ -20,7 +20,7 @@ public class GetWardByIdQueryHandler : IQueryHandler<Query.GetWardByIdQuery, Res
     public async Task<Result<Response.WardDetailResponse>> Handle(Query.GetWardByIdQuery request, CancellationToken cancellationToken)
     {
         var ward = await _repositoryBase.FindByIdAsync(request.Id) ?? throw new WardNotFoundException(request.Id);
-        var result = new Response.WardDetailResponse(ward.Id, ward.ProvincyId, ward.Code, ward.Name, ward.Provincy.Name);
+        var result = new Response.WardDetailResponse(ward.Id, ward.ProvinceId, ward.Code, ward.Name, ward.Province.Name);
         return Result.Success(result);
     }
 }

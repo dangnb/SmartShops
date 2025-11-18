@@ -5,11 +5,11 @@ using Shop.Persistence.Constants;
 
 namespace Shop.Persistence.Configurations;
 
-internal class LocationConfiguration : IEntityTypeConfiguration<Provincy>
+internal class LocationConfiguration : IEntityTypeConfiguration<Province>
 {
-    public void Configure(EntityTypeBuilder<Provincy> builder)
+    public void Configure(EntityTypeBuilder<Province> builder)
     {
-        builder.ToTable(TableNames.Provincies);
+        builder.ToTable(TableNames.Provinces);
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
     }
@@ -21,6 +21,6 @@ internal class WardConfiguration : IEntityTypeConfiguration<Ward>
         builder.ToTable(TableNames.Wards);
         builder.HasKey(x => x.Id);
         builder.Property(x => x.Id).ValueGeneratedOnAdd();
-        builder.HasOne(t => t.Provincy);
+        builder.HasOne(t => t.Province);
     }
 }

@@ -88,7 +88,7 @@ export class CityListingComponent implements OnInit, AfterViewInit, OnDestroy {
     this.filter(this.searchTerm);
   }
 
-  delete(id: number) {
+  delete(id: string) {
     this.deleteSwal.fire().then((clicked) => {
       if (clicked.isConfirmed) {
         this.apiService.deleteCity(id).subscribe(() => {
@@ -100,7 +100,7 @@ export class CityListingComponent implements OnInit, AfterViewInit, OnDestroy {
     });
   }
 
-  edit(id: number) {
+  edit(id: string) {
     const modalRef = this.modalService.open(CitySaveComponent, {
       size: 'lg',
       backdrop: 'static',

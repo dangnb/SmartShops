@@ -1,10 +1,10 @@
 ﻿
 using Shop.Contract.Abstractions.Message;
 
-namespace Shop.Contract.Services.V1.Provincies;
+namespace Shop.Contract.Services.V1.Provinces;
 public static class Command
 {
-    public record CreateProvincyCommand(string Code, string Name) : ICommand;
-    public record UpdateProvincyCommand(Guid Id, string Code, string Name) : ICommand;
-    public record DeleteProvincyCommand(Guid Id) : ICommand;
+    public record CreateProvinceCommand(string Code, string Name) : ICommand;
+    public record UpdateProvinceCommand(Guid Id, string Code, string Name) : ICommand;
+    public record DeleteProvinceCommand(Guid Id) : ICommand;
 }

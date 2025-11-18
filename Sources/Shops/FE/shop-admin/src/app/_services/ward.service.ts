@@ -10,11 +10,9 @@ export interface DataTablesResponse {
     data: any[];
 }
 
-export interface IWardModel 
-{
-    cityId:0|number;
-    districtId:0|number;
-    id: 0 | number;
+export interface IWardModel {
+    provinceId: string;
+    id: string;
     code?: string;
     name: string;
 }
@@ -33,12 +31,12 @@ export class WardService {
         return this.http.post<any>(url, dataTablesParameters);
     }
 
-    getByDistrict(districtId:number): Observable<any> {
-        const url = `${this.apiUrl}/getbydistrict/${districtId}`;
+    getByProvince(provinceId: any): Observable<any> {
+        const url = `${this.apiUrl}/province/${provinceId}`;
         return this.http.get<any>(url);
     }
 
-    getWard(id: number): Observable<IWardModel> {
+    getWard(id: any): Observable<IWardModel> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.get<IWardModel>(url);
     }
@@ -47,12 +45,12 @@ export class WardService {
         return this.http.post<IWardModel>(this.apiUrl, user);
     }
 
-    updateWard(id: number, user: IWardModel): Observable<IWardModel> {
+    updateWard(id: any, user: IWardModel): Observable<IWardModel> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.put<IWardModel>(url, user);
     }
 
-    deleteWard(id: number): Observable<void> {
+    deleteWard(id: any): Observable<void> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.delete<void>(url);
     }

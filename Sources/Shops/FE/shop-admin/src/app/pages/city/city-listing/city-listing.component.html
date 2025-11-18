@@ -5,7 +5,7 @@
       <!--begin::Search-->
       <div class="d-flex align-items-center position-relative my-1">
         <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
-        <input type="text" [(ngModel)]="searchTerm" class="form-control  w-250px ps-10"
+        <input type="text" [(ngModel)]="searchTerm" class="form-control form-control-sm w-250px ps-10"
           placeholder="Nhập mã và tên" (change)="changeSearTerm()">
       </div>
       <!--end::Search-->
@@ -37,7 +37,7 @@
           <tr class="fw-bolder text-muted">
             <th class="w-35px">
               <div class=" text-center">
-               
+
               </div>
             </th>
             <th class="min-w-150px">Mã</th>
@@ -59,14 +59,17 @@
                   class="fs-3" ng-reflect-name="pencil" style="display: contents;"><span
                     class="fs-3 ki-duotone ki-pencil"><span class="path1"></span><span class="path2"></span>
                   </span>
-                </app-keenicon></a></td>
-              <td class="text-center w-25px">
-                <a (click)="delete(item.id)" title="Xóa dữ liệu" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm text-danger">
-                  <app-keenicon name="trash"  class="fs-3 text-danger" ng-reflect-name="trash" style="display: contents;"><span
-                    class="fs-3 ki-duotone ki-trash "><span class="path1"></span><span class="path2"></span><span
-                      class="path3"></span><span class="path4"></span><span class="path5"></span>
+                </app-keenicon></a>
+            </td>
+            <td class="text-center w-25px">
+              <a (click)="delete(item.id)" title="Xóa dữ liệu"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm text-danger">
+                <app-keenicon name="trash" class="fs-3 text-danger" ng-reflect-name="trash"
+                  style="display: contents;"><span class="fs-3 ki-duotone ki-trash "><span class="path1"></span><span
+                      class="path2"></span><span class="path3"></span><span class="path4"></span><span
+                      class="path5"></span>
                   </span></app-keenicon>
-                </a>
+              </a>
             </td>
           </tr>
         </tbody>
