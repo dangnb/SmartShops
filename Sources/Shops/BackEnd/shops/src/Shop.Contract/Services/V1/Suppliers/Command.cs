@@ -32,7 +32,6 @@ public class Command
  ) : ICommand;
     public record UpdateSupplierCommand(
     Guid Id,
-
     string Code,
     string Name,
     string? ShortName,
@@ -60,5 +59,5 @@ public class Command
     string? Note,
     bool IsActive
 ) : ICommand;
-    public record DeleteProductCommand(Guid Id) : ICommand;
+    public record DeleteSupplierCommand(Guid Id) : ICommand;
 }

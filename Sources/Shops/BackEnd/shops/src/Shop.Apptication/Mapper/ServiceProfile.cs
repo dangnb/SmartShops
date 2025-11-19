@@ -9,6 +9,7 @@ using static Shop.Contract.Services.V1.Permissions.Response;
 using static Shop.Contract.Services.V1.Products.Response;
 using static Shop.Contract.Services.V1.Provinces.Response;
 using static Shop.Contract.Services.V1.Roles.Response;
+using static Shop.Contract.Services.V1.Suppliers.Response;
 using static Shop.Contract.Services.V1.Users.Response;
 using static Shop.Contract.Services.V1.Wards.Response;
 
@@ -57,6 +58,12 @@ internal class ServiceProfile : Profile
                   dest => dest.ProvinceName,
                   opt => opt.MapFrom(src => src.Province.Name)).ReverseMap();
         CreateMap<PagedResult<Ward>, PagedResult<WardResponse>>().ReverseMap();
+
+
+        //Customers
+        CreateMap<Supplier, SupplierResponse>().ReverseMap();
+        CreateMap<Supplier, SupplierDetailResponse>().ReverseMap();
+        CreateMap<PagedResult<Supplier>, PagedResult<SupplierResponse>>().ReverseMap();
 
     }
 }

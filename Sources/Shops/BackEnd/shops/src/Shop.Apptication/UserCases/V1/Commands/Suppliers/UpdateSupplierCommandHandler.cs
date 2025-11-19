@@ -1,9 +1,9 @@
-﻿using Shop.Contract;
-using Shop.Contract.Abstractions.Message;
+﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Suppliers;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
+using static Shop.Domain.Exceptions.SuppliersException;
 
 namespace Shop.Apptication.UserCases.V1.Commands.Suppliers;
 
@@ -11,16 +11,14 @@ public class UpdateSupplierCommandHandler : ICommandHandler<Command.UpdateSuppli
 {
 
     private readonly IRepositoryBase<Supplier, Guid> _repositoryBase;
-    private readonly ICurrentUser _currentUser;
-    public UpdateSupplierCommandHandler(IRepositoryBase<Supplier, Guid> repositoryBase, ICurrentUser currentUser)
+    public UpdateSupplierCommandHandler(IRepositoryBase<Supplier, Guid> repositoryBase)
     {
         _repositoryBase= repositoryBase;
-        _currentUser= currentUser;
     }
     public async Task<Result> Handle(Command.UpdateSupplierCommand request, CancellationToken cancellationToken)
     {
         var supplier = await _repositoryBase.FindSingleAsync(x => x.Id == request.Id, cancellationToken) 
-            ?? throw new KeyNotFoundException($"Supplier {request.Id} not found.");
+            ?? throw new SupplierNotFoundException(request.Id);
 
         // Nếu cho phép đổi Code, cần check trùng
         if (!string.Equals(supplier.Code, request.Code, StringComparison.OrdinalIgnoreCase))

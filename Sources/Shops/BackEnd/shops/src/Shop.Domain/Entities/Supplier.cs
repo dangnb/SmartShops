@@ -39,7 +39,6 @@ public class Supplier : EntityAuditBase<Guid>
     public string? Note { get; private set; }
 
     public bool IsActive { get; private set; }
-    public bool IsDeleted { get; private set; }
 
     // ===== ctor cho EF =====
     private Supplier() { }
@@ -64,9 +63,9 @@ public class Supplier : EntityAuditBase<Guid>
         string? bankAccountNo,
         string? bankAccountName,
         int paymentTermDays,
-        string? note,
-        string? createdBy)
+        string? note)
     {
+
         if (string.IsNullOrWhiteSpace(code))
             throw new ArgumentException("Mã nhà cung cấp khong được để trống .", nameof(code));
 
@@ -96,14 +95,9 @@ public class Supplier : EntityAuditBase<Guid>
         BankAccountName = bankAccountName?.Trim();
 
         PaymentTermDays = paymentTermDays < 0 ? 0 : paymentTermDays;
-
         Note = note;
-
         IsActive = true;
-        IsDeleted = false;
-
-        CreatedAt = DateTime.UtcNow;
-        CreatedBy = createdBy;
+        SetIdIfEmpty();
     }
 
     // ===== Factory =====
@@ -126,9 +120,8 @@ public class Supplier : EntityAuditBase<Guid>
         string? bankAccountNo,
         string? bankAccountName,
         int paymentTermDays,
-        string? note,
-        string? createdBy)
-        => new Supplier(
+        string? note)
+        => new(
             code,
             name,
             shortName,
@@ -147,8 +140,7 @@ public class Supplier : EntityAuditBase<Guid>
             bankAccountNo,
             bankAccountName,
             paymentTermDays,
-            note,
-            createdBy);
+            note);
 
     // ===== Domain methods =====
 
