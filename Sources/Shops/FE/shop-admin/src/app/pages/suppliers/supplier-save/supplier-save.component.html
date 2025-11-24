@@ -1,0 +1,216 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
+  <div class="modal-header py-4">
+    <h4 class="modal-title" id="modal-basic-title">Tạo nhà cung cấp</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+
+  <div class="modal-body">
+    <!-- Tên nhà cung cấp -->
+    <div class="fv-row mb-7">
+      <label class="required fw-semibold fs-6 mb-2">Tên nhà cung cấp</label>
+      <input type="text" class="form-control form-control-sm" name="name" [(ngModel)]="supplierModel.name"
+        #name="ngModel" required minlength="4" />
+      <div *ngIf="myForm.submitted && name.invalid"
+        class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+        <div *ngIf="name.errors?.['required']">Tên nhà cung cấp là bắt buộc</div>
+        <div *ngIf="name.errors?.['minlength']">Tên phải ít nhất 4 ký tự</div>
+      </div>
+    </div>
+
+    <!-- Mã nhà cung cấp -->
+    <div class="fv-row mb-7">
+      <label class="required fw-semibold fs-6 mb-2">
+        <span>Mã nhà cung cấp</span>
+        <span class="ms-1" placement="end" ngbTooltip="Mã nội bộ để quản lý nhà cung cấp">
+          <app-keenicon name="information" class="fs-7"></app-keenicon>
+        </span>
+      </label>
+      <input type="text" class="form-control form-control-sm" name="code" [(ngModel)]="supplierModel.code"
+        #code="ngModel" required />
+      <div *ngIf="myForm.submitted && code.invalid"
+        class="fv-plugins-message-container fv-plugins-message-container--enabled invalid-feedback">
+        <div *ngIf="code.errors?.['required']">Mã nhà cung cấp là bắt buộc</div>
+      </div>
+    </div>
+
+    <!-- Tên viết tắt -->
+    <div class="fv-row mb-7">
+      <label class="fw-semibold fs-6 mb-2">Tên viết tắt</label>
+      <input type="text" class="form-control form-control-sm" name="shortName" [(ngModel)]="supplierModel.shortName"
+        #shortName="ngModel" />
+    </div>
+
+    <!-- Mã số thuế -->
+    <div class="fv-row mb-7">
+      <label class="fw-semibold fs-6 mb-2">
+        <span>Mã số thuế</span>
+        <span class="ms-1" placement="end" ngbTooltip="Mã số thuế của nhà cung cấp">
+          <app-keenicon name="information" class="fs-7"></app-keenicon>
+        </span>
+      </label>
+      <input type="text" class="form-control form-control-sm" name="taxCode" [(ngModel)]="supplierModel.taxCode"
+        #taxCode="ngModel" />
+    </div>
+
+    <!-- Điện thoại + Email -->
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">
+            <span>Số điện thoại</span>
+          </label>
+          <input type="text" class="form-control form-control-sm" name="phone" [(ngModel)]="supplierModel.phone"
+            #phone="ngModel" />
+        </div>
+      </div>
+
+      <div class="col-lg-6">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">
+            <span>Email</span>
+            <span class="ms-1" placement="end" ngbTooltip="Email đang hoạt động">
+              <app-keenicon name="information" class="fs-7"></app-keenicon>
+            </span>
+          </label>
+          <input type="text" class="form-control form-control-sm" name="email" [(ngModel)]="supplierModel.email"
+            #email="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Website -->
+    <div class="fv-row mb-7">
+      <label class="fw-semibold fs-6 mb-2">Website</label>
+      <input type="text" class="form-control form-control-sm" name="website" [(ngModel)]="supplierModel.website"
+        #website="ngModel" />
+    </div>
+
+    <!-- Người liên hệ + Điện thoại + Email liên hệ -->
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Người liên hệ</label>
+          <input type="text" class="form-control form-control-sm" name="contactName"
+            [(ngModel)]="supplierModel.contactName" #contactName="ngModel" />
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">SĐT liên hệ</label>
+          <input type="text" class="form-control form-control-sm" name="contactPhone"
+            [(ngModel)]="supplierModel.contactPhone" #contactPhone="ngModel" />
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Email liên hệ</label>
+          <input type="text" class="form-control form-control-sm" name="contactEmail"
+            [(ngModel)]="supplierModel.contactEmail" #contactEmail="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Địa chỉ -->
+    <div class="fv-row mb-7">
+      <label class="fw-semibold fs-6 mb-2">Địa chỉ</label>
+      <input type="text" class="form-control form-control-sm" name="addressLine" [(ngModel)]="supplierModel.addressLine"
+        #addressLine="ngModel" />
+    </div>
+
+    <!-- Tỉnh/Thành + Phường/Xã (tạm dùng input text, sau này bạn thay bằng select) -->
+    <div class="row">
+      <div class="col-lg-6">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Tỉnh/Thành</label>
+          <input type="text" class="form-control form-control-sm" name="provinceId"
+            [(ngModel)]="supplierModel.provinceId" #provinceId="ngModel" />
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Quận/Huyện/Phường/Xã</label>
+          <input type="text" class="form-control form-control-sm" name="wardId" [(ngModel)]="supplierModel.wardId"
+            #wardId="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Địa chỉ đầy đủ -->
+    <div class="fv-row mb-7">
+      <label class="fw-semibold fs-6 mb-2">Địa chỉ đầy đủ</label>
+      <input type="text" class="form-control form-control-sm" name="fullAddress" [(ngModel)]="supplierModel.fullAddress"
+        #fullAddress="ngModel" />
+    </div>
+
+    <!-- Ngân hàng -->
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Tên ngân hàng</label>
+          <input type="text" class="form-control form-control-sm" name="bankName" [(ngModel)]="supplierModel.bankName"
+            #bankName="ngModel" />
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Số tài khoản</label>
+          <input type="text" class="form-control form-control-sm" name="bankAccountNo"
+            [(ngModel)]="supplierModel.bankAccountNo" #bankAccountNo="ngModel" />
+        </div>
+      </div>
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Chủ tài khoản</label>
+          <input type="text" class="form-control form-control-sm" name="bankAccountName"
+            [(ngModel)]="supplierModel.bankAccountName" #bankAccountName="ngModel" />
+        </div>
+      </div>
+    </div>
+
+    <!-- Điều khoản thanh toán + Ghi chú -->
+    <div class="row">
+      <div class="col-lg-4">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Thời hạn thanh toán (ngày)</label>
+          <input type="number" class="form-control form-control-sm" name="paymentTermDays"
+            [(ngModel)]="supplierModel.paymentTermDays" #paymentTermDays="ngModel" min="0" />
+        </div>
+      </div>
+      <div class="col-lg-8">
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">Ghi chú</label>
+          <textarea class="form-control form-control-sm" rows="2" name="note" [(ngModel)]="supplierModel.note"
+            #note="ngModel"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <!-- Trạng thái hoạt động -->
+    <div class="fv-row mb-7 form-check form-switch">
+      <input class="form-check-input" type="checkbox" id="isActive" name="isActive"
+        [(ngModel)]="supplierModel.isActive" />
+      <label class="form-check-label fw-semibold fs-6 mb-0" for="isActive">
+        Đang hoạt động
+      </label>
+    </div>
+  </div>
+
+  <div class="modal-footer flex-center py-4">
+    <button type="reset" id="kt_modal_update_supplier_cancel" class="btn btn-light me-3 btn-sm"
+      (click)="modal.dismiss('cancel')">
+      <i class="fa fa-times"></i> Đóng
+    </button>
+
+    <button type="submit" id="kt_modal_update_supplier_submit" class="btn btn-primary btn-sm"
+      [attr.data-kt-indicator]="isLoading ? 'on' : 'off'">
+      <i class="fa fa-save"></i>
+      <span class="indicator-label">Lưu lại</span>
+      <span class="indicator-progress">
+        Please wait...
+        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+      </span>
+    </button>
+  </div>
+</form>
+
+<swal #noticeSwal [swalOptions]="swalOptions"></swal>
