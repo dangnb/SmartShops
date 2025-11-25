@@ -8,10 +8,9 @@ import { debounceTime, map } from 'rxjs/operators';
 import { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
-    selector: 'app-crud',
-    templateUrl: './crud.component.html',
-    styleUrls: ['./crud.component.scss'],
-    standalone: false
+  selector: 'app-crud',
+  templateUrl: './crud.component.html',
+  styleUrls: ['./crud.component.scss'],
 })
 export class CrudComponent implements OnInit, AfterViewInit, OnDestroy {
 

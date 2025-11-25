@@ -20,10 +20,9 @@ import { UserService } from 'src/app/_services/user.service';
 import { AddDistrictComponent } from '../add-district/add-district.component';
 
 @Component({
-    selector: 'app-user-listing',
-    templateUrl: './user-listing.component.html',
-    styleUrls: ['./user-listing.component.scss'],
-    standalone: false
+  selector: 'app-user-listing',
+  templateUrl: './user-listing.component.html',
+  styleUrls: ['./user-listing.component.scss'],
 })
 export class UserListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

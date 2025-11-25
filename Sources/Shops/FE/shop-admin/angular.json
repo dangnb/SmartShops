@@ -18,11 +18,9 @@
       "prefix": "app",
       "architect": {
         "build": {
-          "builder": "@angular-devkit/build-angular:application",
+          "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": {
-              "base": "dist/demo1"
-            },
+            "outputPath": "dist/demo1",
             "allowedCommonJsDependencies": [
               "object-path",
               "apexcharts",
@@ -32,9 +30,8 @@
               "moment"
             ],
             "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
+            "main": "src/main.ts",
+            "polyfills": "src/polyfills.ts",
             "tsConfig": "tsconfig.app.json",
             "inlineStyleLanguage": "scss",
             "assets": [
@@ -52,8 +49,7 @@
               "node_modules/datatables.net-bs5/js/dataTables.bootstrap5.min.js",
               "node_modules/flatpickr/dist/flatpickr.min.js",
               "node_modules/flatpickr/dist/l10n/vn.js"
-            ],
-            "browser": "src/main.ts"
+            ]
           },
           "configurations": {
             "production": {
@@ -78,7 +74,9 @@
               "outputHashing": "all"
             },
             "development": {
+              "buildOptimizer": false,
               "optimization": false,
+              "vendorChunk": true,
               "extractLicenses": false,
               "sourceMap": true,
               "namedChunks": true

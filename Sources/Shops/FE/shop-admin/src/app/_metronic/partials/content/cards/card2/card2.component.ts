@@ -2,9 +2,8 @@ import { Component, Input } from '@angular/core';
 import { IconUserModel } from '../icon-user.model';
 
 @Component({
-    selector: 'app-card2',
-    templateUrl: './card2.component.html',
-    standalone: false
+  selector: 'app-card2',
+  templateUrl: './card2.component.html',
 })
 export class Card2Component {
   @Input() icon: string = '';

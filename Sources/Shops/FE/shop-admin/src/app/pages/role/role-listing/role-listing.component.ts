@@ -9,10 +9,9 @@ import { IRoleModel, RoleService } from 'src/app/_services/role.service';
 import { SweetAlertOptions } from 'sweetalert2';
 
 @Component({
-    selector: 'app-role-listing',
-    templateUrl: './role-listing.component.html',
-    styleUrls: ['./role-listing.component.scss'],
-    standalone: false
+  selector: 'app-role-listing',
+  templateUrl: './role-listing.component.html',
+  styleUrls: ['./role-listing.component.scss']
 })
 export class RoleListingComponent implements OnInit, AfterViewInit, OnDestroy {
 

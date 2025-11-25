@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
 
 @Component({
-    selector: 'app-deactivate-account',
-    templateUrl: './deactivate-account.component.html',
-    standalone: false
+  selector: 'app-deactivate-account',
+  templateUrl: './deactivate-account.component.html',
 })
 export class DeactivateAccountComponent {
   constructor() {}

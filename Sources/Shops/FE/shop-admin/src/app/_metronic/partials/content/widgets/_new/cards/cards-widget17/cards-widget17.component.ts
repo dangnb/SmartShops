@@ -2,10 +2,9 @@ import { Component, Input, OnInit } from '@angular/core';
 import { getCSSVariableValue } from '../../../../../../kt/_utils';
 
 @Component({
-    selector: 'app-cards-widget17',
-    templateUrl: './cards-widget17.component.html',
-    styleUrls: ['./cards-widget17.component.scss'],
-    standalone: false
+  selector: 'app-cards-widget17',
+  templateUrl: './cards-widget17.component.html',
+  styleUrls: ['./cards-widget17.component.scss'],
 })
 export class CardsWidget17Component implements OnInit {
   chartOptions: any = {};

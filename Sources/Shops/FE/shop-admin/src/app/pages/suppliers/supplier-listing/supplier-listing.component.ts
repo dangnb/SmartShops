@@ -17,10 +17,9 @@ import { SupplierSaveComponent } from '../supplier-save/supplier-save.component'
 import { ICityModel } from 'src/app/_services/city.service';
 
 @Component({
-    selector: 'supplier-listing',
-    templateUrl: './supplier-listing.component.html',
-    styleUrls: ['./supplier-listing.component.scss'],
-    standalone: false
+  selector: 'supplier-listing',
+  templateUrl: './supplier-listing.component.html',
+  styleUrls: ['./supplier-listing.component.scss'],
 })
 export class SupplierListingComponent implements OnInit, AfterViewInit, OnDestroy {
 

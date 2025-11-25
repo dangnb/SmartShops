@@ -1,9 +1,8 @@
 import { Component, HostBinding, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-dropdown-menu3',
-    templateUrl: './dropdown-menu3.component.html',
-    standalone: false
+  selector: 'app-dropdown-menu3',
+  templateUrl: './dropdown-menu3.component.html',
 })
 export class DropdownMenu3Component implements OnInit {
   @HostBinding('class') class =

@@ -7,9 +7,8 @@ export type NotificationsTabsType =
   | 'kt_topbar_notifications_3';
 
 @Component({
-    selector: 'app-notifications-inner',
-    templateUrl: './notifications-inner.component.html',
-    standalone: false
+  selector: 'app-notifications-inner',
+  templateUrl: './notifications-inner.component.html',
 })
 export class NotificationsInnerComponent implements OnInit {
   @HostBinding('class') class =

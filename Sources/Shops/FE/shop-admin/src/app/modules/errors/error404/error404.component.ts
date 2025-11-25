@@ -12,10 +12,9 @@ import {
 import { ThemeModeService } from '../../../_metronic/partials/layout/theme-mode-switcher/theme-mode.service';
 
 @Component({
-    selector: 'app-error404',
-    templateUrl: './error404.component.html',
-    styleUrls: ['./error404.component.scss'],
-    standalone: false
+  selector: 'app-error404',
+  templateUrl: './error404.component.html',
+  styleUrls: ['./error404.component.scss'],
 })
 export class Error404Component implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];

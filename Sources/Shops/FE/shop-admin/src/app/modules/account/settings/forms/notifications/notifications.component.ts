@@ -2,9 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-notifications',
-    templateUrl: './notifications.component.html',
-    standalone: false
+  selector: 'app-notifications',
+  templateUrl: './notifications.component.html',
 })
 export class NotificationsComponent implements OnInit, OnDestroy {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

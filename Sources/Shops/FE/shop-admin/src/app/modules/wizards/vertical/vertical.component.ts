@@ -3,9 +3,8 @@ import { BehaviorSubject, Subscription } from 'rxjs';
 import { ICreateAccount, inits } from '../create-account.helper';
 
 @Component({
-    selector: 'app-vertical',
-    templateUrl: './vertical.component.html',
-    standalone: false
+  selector: 'app-vertical',
+  templateUrl: './vertical.component.html',
 })
 export class VerticalComponent implements OnInit, OnDestroy {
   formsCount = 5;

@@ -2,10 +2,9 @@ import {Component, HostBinding, Input, OnInit} from '@angular/core';
 import icons from './icons.json';
 
 @Component({
-    selector: 'app-keenicon',
-    templateUrl: './keenicon.component.html',
-    styleUrls: ['./keenicon.component.scss'],
-    standalone: false
+  selector: 'app-keenicon',
+  templateUrl: './keenicon.component.html',
+  styleUrls: ['./keenicon.component.scss']
 })
 export class KeeniconComponent implements OnInit {
   @Input() name: string;

@@ -18,10 +18,9 @@ import { CityService, ICityModel } from 'src/app/_services/city.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
-    selector: 'app-citi-save',
-    templateUrl: './citi-save.component.html',
-    styleUrls: ['./citi-save.component.scss'],
-    standalone: false
+  selector: 'app-citi-save',
+  templateUrl: './citi-save.component.html',
+  styleUrls: ['./citi-save.component.scss'],
 })
 export class CitySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id:string |"" ;

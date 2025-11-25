@@ -3,9 +3,8 @@ import { ApexOptions } from 'ng-apexcharts';
 import { getCSSVariableValue } from '../../../../../kt/_utils';
 
 @Component({
-    selector: 'app-stats-widget4',
-    templateUrl: './stats-widget4.component.html',
-    standalone: false
+  selector: 'app-stats-widget4',
+  templateUrl: './stats-widget4.component.html',
 })
 export class StatsWidget4Component implements OnInit {
   @Input() svgIcon = '';

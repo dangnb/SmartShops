@@ -1,10 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-cards-widget18',
-    templateUrl: './cards-widget18.component.html',
-    styleUrls: ['./cards-widget18.component.scss'],
-    standalone: false
+  selector: 'app-cards-widget18',
+  templateUrl: './cards-widget18.component.html',
+  styleUrls: ['./cards-widget18.component.scss'],
 })
 export class CardsWidget18Component implements OnInit {
   @Input() cssClass: string = '';
