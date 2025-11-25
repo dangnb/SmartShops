@@ -19,9 +19,10 @@ import { PaymentService } from 'src/app/_services/payment.service';
 import { FilterFormComponent } from '../filter-form/filter-form.component';
 
 @Component({
-  selector: 'app-payment-listing',
-  templateUrl: './payment-listing.component.html',
-  styleUrls: ['./payment-listing.component.scss'],
+    selector: 'app-payment-listing',
+    templateUrl: './payment-listing.component.html',
+    styleUrls: ['./payment-listing.component.scss'],
+    standalone: false
 })
 export class PaymentListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

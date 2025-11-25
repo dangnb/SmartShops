@@ -18,9 +18,10 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CitySaveComponent } from '../citi-save/citi-save.component';
 
 @Component({
-  selector: 'app-city-listing',
-  templateUrl: './city-listing.component.html',
-  styleUrls: ['./city-listing.component.scss'],
+    selector: 'app-city-listing',
+    templateUrl: './city-listing.component.html',
+    styleUrls: ['./city-listing.component.scss'],
+    standalone: false
 })
 export class CityListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

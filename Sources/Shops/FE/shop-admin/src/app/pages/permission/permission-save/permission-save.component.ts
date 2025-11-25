@@ -17,9 +17,10 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { IPermissionModel, PermisionService } from 'src/app/_services/permision.service';
 
 @Component({
-  selector: 'app-permission-save',
-  templateUrl: './permission-save.component.html',
-  styleUrls: ['./permission-save.component.scss'],
+    selector: 'app-permission-save',
+    templateUrl: './permission-save.component.html',
+    styleUrls: ['./permission-save.component.scss'],
+    standalone: false
 })
 export class PermissionSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id:string ="";

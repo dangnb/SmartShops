@@ -26,9 +26,10 @@ import {
 
 
 @Component({
-  selector: 'app-supplier-upload',
-  templateUrl: './supplier-upload.component.html',
-  styleUrls: ['./supplier-upload.component.scss'],
+    selector: 'app-supplier-upload',
+    templateUrl: './supplier-upload.component.html',
+    styleUrls: ['./supplier-upload.component.scss'],
+    standalone: false
 })
 export class SupplierUploadComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: string = '';

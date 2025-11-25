@@ -28,9 +28,10 @@ import {
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-  selector: 'app-village-save',
-  templateUrl: './village-save.component.html',
-  styleUrls: ['./village-save.component.scss'],
+    selector: 'app-village-save',
+    templateUrl: './village-save.component.html',
+    styleUrls: ['./village-save.component.scss'],
+    standalone: false
 })
 export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: number = 0;

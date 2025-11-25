@@ -33,9 +33,10 @@ import {
 type Tabs = 'Customer' | 'Payment';
 
 @Component({
-  selector: 'app-customer-save',
-  templateUrl: './customer-save.component.html',
-  styleUrls: ['./customer-save.component.scss'],
+    selector: 'app-customer-save',
+    templateUrl: './customer-save.component.html',
+    styleUrls: ['./customer-save.component.scss'],
+    standalone: false
 })
 export class CustomerSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: string = '';

@@ -13,7 +13,8 @@ import {
   @Component({
     selector: 'app-filter-form',
     templateUrl: './filter-form.component.html',
-  })
+    standalone: false
+})
   export class FilterFormComponent implements OnInit, AfterViewInit, OnDestroy {
     
     @ViewChild('datepicker', { static: true }) datepicker!: ElementRef;

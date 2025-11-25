@@ -23,9 +23,10 @@ import {
 import { IWardModel, WardService } from 'src/app/_services/ward.service';
 
 @Component({
-  selector: 'app-ward-save',
-  templateUrl: './ward-save.component.html',
-  styleUrls: ['./ward-save.component.scss'],
+    selector: 'app-ward-save',
+    templateUrl: './ward-save.component.html',
+    styleUrls: ['./ward-save.component.scss'],
+    standalone: false
 })
 export class WardSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: string = '';

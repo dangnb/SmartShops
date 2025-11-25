@@ -19,9 +19,10 @@ import { ISupplierModel, SupplierService } from 'src/app/_services/supplier.serv
 type Tabs = 'Customer' | 'Payment';
 
 @Component({
-  selector: 'app-supplier-save',
-  templateUrl: './supplier-save.component.html',
-  styleUrls: ['./supplier-save.component.scss'],
+    selector: 'app-supplier-save',
+    templateUrl: './supplier-save.component.html',
+    styleUrls: ['./supplier-save.component.scss'],
+    standalone: false
 })
 export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: string = '';

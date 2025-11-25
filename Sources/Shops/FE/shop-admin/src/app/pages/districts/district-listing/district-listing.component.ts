@@ -18,9 +18,10 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { DistrictSaveComponent } from '../district-save/district-save.component';
 import { DistrictService } from 'src/app/_services/district.service';
 @Component({
-  selector: 'app-district-listing',
-  templateUrl: './district-listing.component.html',
-  styleUrls: ['./district-listing.component.scss'],
+    selector: 'app-district-listing',
+    templateUrl: './district-listing.component.html',
+    styleUrls: ['./district-listing.component.scss'],
+    standalone: false
 })
 export class DistrictListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

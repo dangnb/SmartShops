@@ -17,9 +17,10 @@ import { WardService } from 'src/app/_services/ward.service';
 import { VillageSaveComponent } from '../village-save/village-save.component';
 import { VillageService } from 'src/app/_services/village.service';
 @Component({
-  selector: 'village-listing',
-  templateUrl: './village-listing.component.html',
-  styleUrls: ['./village-listing.component.scss'],
+    selector: 'village-listing',
+    templateUrl: './village-listing.component.html',
+    styleUrls: ['./village-listing.component.scss'],
+    standalone: false
 })
 export class VillageListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')
