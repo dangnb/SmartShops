@@ -3,10 +3,9 @@ import { NavigationCancel, NavigationEnd, Router } from '@angular/router';
 import { Subscription } from 'rxjs/internal/Subscription';
 // import { DrawerComponent } from '../../../kt/components';
 @Component({
-    selector: 'app-content',
-    templateUrl: './content.component.html',
-    styleUrls: ['./content.component.scss'],
-    standalone: false
+  selector: 'app-content',
+  templateUrl: './content.component.html',
+  styleUrls: ['./content.component.scss'],
 })
 export class ContentComponent implements OnInit, OnDestroy {
   @Input() contentContainerCSSClass: string = '';

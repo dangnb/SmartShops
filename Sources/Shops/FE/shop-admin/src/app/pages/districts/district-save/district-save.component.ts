@@ -19,10 +19,9 @@ import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { DistrictService, IDistrictModel } from 'src/app/_services/district.service';
 
 @Component({
-    selector: 'app-district-save',
-    templateUrl: './district-save.component.html',
-    styleUrls: ['./district-save.component.scss'],
-    standalone: false
+  selector: 'app-district-save',
+  templateUrl: './district-save.component.html',
+  styleUrls: ['./district-save.component.scss'],
 })
 export class DistrictSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id:number =0;

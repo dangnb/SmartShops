@@ -15,9 +15,8 @@ import { PageInfoService } from '../../core/page-info.service';
 import { Title } from '@angular/platform-browser';
 
 @Component({
-    selector: 'app-scripts-init',
-    templateUrl: './scripts-init.component.html',
-    standalone: false
+  selector: 'app-scripts-init',
+  templateUrl: './scripts-init.component.html',
 })
 export class ScriptsInitComponent implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];

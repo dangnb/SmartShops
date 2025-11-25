@@ -1,4 +1,4 @@
-import { NgModule, inject, provideAppInitializer } from '@angular/core';
+import { NgModule, APP_INITIALIZER } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
@@ -38,10 +38,12 @@ function appInitializer(authService: AuthService) {
     SweetAlert2Module.forRoot()], providers: [
       { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
       { provide: HTTP_INTERCEPTORS, useClass: ErrorInterceptor, multi: true },
-      provideAppInitializer(() => {
-        const initializerFn = (appInitializer)(inject(AuthService));
-        return initializerFn();
-      }),
+      {
+        provide: APP_INITIALIZER,
+        useFactory: appInitializer,
+        multi: true,
+        deps: [AuthService],
+      },
       provideHttpClient(withInterceptorsFromDi()),
     ]
 })

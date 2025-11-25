@@ -19,10 +19,9 @@ import { CustomerSaveComponent } from '../customer-save/customer-save.component'
 import { CustomerService } from 'src/app/_services/customer.service';
 import { CustomerUploadComponent } from '../customer-upload/customer-upload.component';
 @Component({
-    selector: 'customer-listing',
-    templateUrl: './customer-listing.component.html',
-    styleUrls: ['./customer-listing.component.scss'],
-    standalone: false
+  selector: 'customer-listing',
+  templateUrl: './customer-listing.component.html',
+  styleUrls: ['./customer-listing.component.scss'],
 })
 export class CustomerListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

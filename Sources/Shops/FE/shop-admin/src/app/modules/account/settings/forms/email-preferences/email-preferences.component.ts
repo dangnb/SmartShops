@@ -2,9 +2,8 @@ import { ChangeDetectorRef, Component, OnDestroy, OnInit } from '@angular/core';
 import { BehaviorSubject, Subscription } from 'rxjs';
 
 @Component({
-    selector: 'app-email-preferences',
-    templateUrl: './email-preferences.component.html',
-    standalone: false
+  selector: 'app-email-preferences',
+  templateUrl: './email-preferences.component.html',
 })
 export class EmailPreferencesComponent implements OnInit, OnDestroy {
   isLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);

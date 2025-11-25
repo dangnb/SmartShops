@@ -1,9 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-    selector: 'app-base-tables-widget1',
-    templateUrl: './base-tables-widget1.component.html',
-    standalone: false
+  selector: 'app-base-tables-widget1',
+  templateUrl: './base-tables-widget1.component.html',
 })
 export class BaseTablesWidget1Component implements OnInit {
   TABS: string[] = ['Month', 'Week', 'Day'];

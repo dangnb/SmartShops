@@ -10,9 +10,8 @@ import {
 } from '../../../../kt/components';
 
 @Component({
-    selector: 'app-scroll-top',
-    templateUrl: './scroll-top.component.html',
-    standalone: false
+  selector: 'app-scroll-top',
+  templateUrl: './scroll-top.component.html',
 })
 export class LayoutScrollTopComponent implements OnInit, OnDestroy {
   @HostBinding('class') class = 'kt_scrolltop';

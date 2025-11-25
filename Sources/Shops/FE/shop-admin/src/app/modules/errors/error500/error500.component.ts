@@ -12,10 +12,9 @@ import {
 import { ThemeModeService } from '../../../_metronic/partials/layout/theme-mode-switcher/theme-mode.service';
 
 @Component({
-    selector: 'app-error500',
-    templateUrl: './error500.component.html',
-    styleUrls: ['./error500.component.scss'],
-    standalone: false
+  selector: 'app-error500',
+  templateUrl: './error500.component.html',
+  styleUrls: ['./error500.component.scss'],
 })
 export class Error500Component implements OnInit, OnDestroy {
   private unsubscribe: Subscription[] = [];

@@ -22,7 +22,6 @@ import { FilterFormComponent } from '../filter-form/filter-form.component';
   selector: 'app-payment-listing',
   templateUrl: './payment-listing.component.html',
   styleUrls: ['./payment-listing.component.scss'],
-  standalone: false
 })
 export class PaymentListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')
@@ -39,8 +38,8 @@ export class PaymentListingComponent implements OnInit, AfterViewInit, OnDestroy
 
   swalOptions: SweetAlertOptions = {};
 
-
-  searchTerm: string = "";
+  
+  searchTerm: string= "";
 
   private _items$ = new BehaviorSubject<any>([]);
   public items$ = this._items$.asObservable();
@@ -58,9 +57,9 @@ export class PaymentListingComponent implements OnInit, AfterViewInit, OnDestroy
     private roleService: RoleService,
     private cdr: ChangeDetectorRef,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
-  ngAfterViewInit(): void { }
+  ngAfterViewInit(): void {}
 
   changePage(page: number) {
     this.pageIndex = page;
@@ -90,7 +89,7 @@ export class PaymentListingComponent implements OnInit, AfterViewInit, OnDestroy
     this.filter(this.searchTerm);
   }
 
-
+  
   openModalFilter() {
     const modalRef = this.modalService.open(FilterFormComponent, {
       size: 'lg',
@@ -99,7 +98,7 @@ export class PaymentListingComponent implements OnInit, AfterViewInit, OnDestroy
     });
     modalRef.result.then(
       () => this.filter(this.searchTerm),
-      () => { }
+      () => {}
     );
   }
 

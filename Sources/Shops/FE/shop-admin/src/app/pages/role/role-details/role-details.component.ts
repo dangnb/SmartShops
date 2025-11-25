@@ -10,10 +10,9 @@ import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { NgForm } from '@angular/forms';
 
 @Component({
-    selector: 'app-role-details',
-    templateUrl: './role-details.component.html',
-    styleUrls: ['./role-details.component.scss'],
-    standalone: false
+  selector: 'app-role-details',
+  templateUrl: './role-details.component.html',
+  styleUrls: ['./role-details.component.scss']
 })
 export class RoleDetailsComponent implements OnInit {
   roleModel: IRoleModel = { id: '', name: '', description: '',  permissionCodes: [] };

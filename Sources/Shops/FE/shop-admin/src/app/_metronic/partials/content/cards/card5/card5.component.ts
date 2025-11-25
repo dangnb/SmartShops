@@ -1,9 +1,8 @@
 import { Component, HostBinding, Input } from '@angular/core';
 
 @Component({
-    selector: 'app-card5',
-    templateUrl: './card5.component.html',
-    standalone: false
+  selector: 'app-card5',
+  templateUrl: './card5.component.html',
 })
 export class Card5Component {
   @Input() image: string = '';

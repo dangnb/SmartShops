@@ -2,9 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { getCSSVariableValue } from '../../../../../kt/_utils';
 
 @Component({
-    selector: 'app-charts-widget6',
-    templateUrl: './charts-widget6.component.html',
-    standalone: false
+  selector: 'app-charts-widget6',
+  templateUrl: './charts-widget6.component.html',
 })
 export class ChartsWidget6Component implements OnInit {
   chartOptions: any = {};
