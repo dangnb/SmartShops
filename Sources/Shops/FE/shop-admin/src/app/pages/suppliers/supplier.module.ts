@@ -10,7 +10,6 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SupplierListingComponent } from './supplier-listing/supplier-listing.component';
 import { SupplierUploadComponent } from './supplier-upload/supplier-upload.component';
 import { SupplierSaveComponent } from './supplier-save/supplier-save.component';
-import { NgSelectModule } from '@ng-select/ng-select';
 
 
 @NgModule({
@@ -30,7 +29,6 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SharedModule,
     NgbNavModule,
     NgbDropdownModule,
-    NgSelectModule,
     NgbCollapseModule,
     NgbTooltipModule,
     NgxPaginationModule,
