@@ -19,9 +19,10 @@ import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { IProductModel, ProductService } from 'src/app/_services/product.service';
 
 @Component({
-  selector: 'app-product-save',
-  templateUrl: './product-save.component.html',
-  styleUrls: ['./product-save.component.scss'],
+    selector: 'app-product-save',
+    templateUrl: './product-save.component.html',
+    styleUrls: ['./product-save.component.scss'],
+    standalone: false
 })
 export class ProductSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id:number =0;

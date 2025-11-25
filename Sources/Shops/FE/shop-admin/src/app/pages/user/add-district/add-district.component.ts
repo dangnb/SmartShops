@@ -13,8 +13,9 @@ import { DistrictService, IDistrictModel } from 'src/app/_services/district.serv
 import { UserService } from 'src/app/_services/user.service';
 
 @Component({
-  selector: 'app-add-district',
-  templateUrl: './add-district.component.html',
+    selector: 'app-add-district',
+    templateUrl: './add-district.component.html',
+    standalone: false
 })
 export class AddDistrictComponent implements OnInit {
   @Input() id: string = '';

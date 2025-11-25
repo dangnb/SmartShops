@@ -19,9 +19,10 @@ import { PermissionSaveComponent } from '../permission-save/permission-save.comp
 import { PermissionService } from 'src/app/_fake/services/permission.service';
 
 @Component({
-  selector: 'app-permission-listing',
-  templateUrl: './permission-listing.component.html',
-  styleUrls: ['./permission-listing.component.scss'],
+    selector: 'app-permission-listing',
+    templateUrl: './permission-listing.component.html',
+    styleUrls: ['./permission-listing.component.scss'],
+    standalone: false
 })
 export class PermissionListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

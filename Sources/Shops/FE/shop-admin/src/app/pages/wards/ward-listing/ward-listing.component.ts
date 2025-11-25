@@ -19,9 +19,10 @@ import { DistrictService } from 'src/app/_services/district.service';
 import { WardSaveComponent } from '../ward-save/ward-save.component';
 import { WardService } from 'src/app/_services/ward.service';
 @Component({
-  selector: 'ward-listing-listing',
-  templateUrl: './ward-listing.component.html',
-  styleUrls: ['./ward-listing.component.scss'],
+    selector: 'ward-listing-listing',
+    templateUrl: './ward-listing.component.html',
+    styleUrls: ['./ward-listing.component.scss'],
+    standalone: false
 })
 export class WardListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')

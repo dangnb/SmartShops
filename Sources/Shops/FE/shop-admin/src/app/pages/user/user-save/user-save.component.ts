@@ -18,9 +18,10 @@ import { IUserModel, UserService } from 'src/app/_services/user.service';
 import { IRoleModel, RoleService } from 'src/app/_services/role.service';
 
 @Component({
-  selector: 'app-user-save',
-  templateUrl: './user-save.component.html',
-  styleUrls: ['./user-save.component.scss'],
+    selector: 'app-user-save',
+    templateUrl: './user-save.component.html',
+    styleUrls: ['./user-save.component.scss'],
+    standalone: false
 })
 export class UserSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id:string ="";

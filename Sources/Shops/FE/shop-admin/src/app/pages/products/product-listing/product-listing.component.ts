@@ -19,9 +19,10 @@ import { ProductSaveComponent } from '../product-save/product-save.component';
 import { ProductService } from 'src/app/_services/product.service';
 
 @Component({
-  selector: 'app-product-listing',
-  templateUrl: './product-listing.component.html',
-  styleUrls: ['./product-listing.component.scss'],
+    selector: 'app-product-listing',
+    templateUrl: './product-listing.component.html',
+    styleUrls: ['./product-listing.component.scss'],
+    standalone: false
 })
 export class ProductListingComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('deleteSwal')
