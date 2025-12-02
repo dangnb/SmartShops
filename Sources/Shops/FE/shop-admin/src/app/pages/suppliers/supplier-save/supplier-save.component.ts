@@ -15,6 +15,7 @@ import { CityService } from 'src/app/_services/city.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { WardService } from 'src/app/_services/ward.service';
 import { ISupplierModel, SupplierService } from 'src/app/_services/supplier.service';
+import { AlertService } from 'src/app/_services/alert_service';
 
 type Tabs = 'Customer' | 'Payment';
 
@@ -64,7 +65,8 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     private apiCityService: CityService,
     private apiWardService: WardService,
     private cdr: ChangeDetectorRef,
-    public modal: NgbActiveModal
+    public modal: NgbActiveModal,
+    public alertService: AlertService
   ) { }
 
 
@@ -97,6 +99,7 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmit(event: Event, myForm: NgForm) {
+    this.alertService.showWarningMessage("Đằng nguyễn Bá");
     if (myForm && myForm.invalid) {
       return;
     }
