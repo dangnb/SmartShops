@@ -10,11 +10,10 @@ export interface DataTablesResponse {
     data: any[];
 }
 
-export interface IVillageModel 
-{
-    cityId:0|number;
-    wardId:0|number;
-    districtId:0|number;
+export interface IVillageModel {
+    cityId: string;
+    wardId: string;
+    districtId: 0 | number;
     id: 0 | number;
     code?: string;
     name: string;
@@ -35,7 +34,7 @@ export class VillageService {
         return this.http.post<any>(url, dataTablesParameters);
     }
 
-    getByWard(wardId:number): Observable<any> {
+    getByWard(wardId: number): Observable<any> {
         const url = `${this.apiUrl}/getbywardid/${wardId}`;
         return this.http.get<any>(url);
     }

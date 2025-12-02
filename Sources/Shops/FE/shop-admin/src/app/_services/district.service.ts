@@ -10,20 +10,20 @@ export interface DataTablesResponse {
     error: any;
 }
 
-export interface ValueModel{
-    items:any;
-    pageIndex:number;
+export interface ValueModel {
+    items: any;
+    pageIndex: number;
     pageSize: number;
-    totalCount:number;
-    hasNextPage:boolean;
-    hasPreviousPage:boolean;
+    totalCount: number;
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
 }
 
 export interface IDistrictModel {
     id: 0 | number;
     code: string;
     name: string;
-    cityId:number;
+    cityId: number;
 }
 
 @Injectable({
@@ -39,8 +39,8 @@ export class DistrictService {
         const url = `${this.apiUrl}/filter`;
         return this.http.post<any>(url, dataTablesParameters);
     }
-    
-    getByCity(cityId:number): Observable<any> {
+
+    getByCity(cityId: string): Observable<any> {
         const url = `${this.apiUrl}/getbycity/${cityId}`;
         return this.http.get<any>(url);
     }

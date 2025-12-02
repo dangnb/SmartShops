@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, mergeMap, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../_core/models/api-response';
 
 export interface DataTablesResponse {
     draw?: number;
@@ -30,9 +31,9 @@ export class CityService {
         return this.http.post<any>(url, dataTablesParameters);
     }
 
-    getAll(): Observable<any> {
+    getAll(): Observable<ApiResponse<ICityModel[]>> {
         const url = `${this.apiUrl}/getall`;
-        return this.http.get<any>(url);
+        return this.http.get<ApiResponse<ICityModel[]>>(url);
     }
 
     getCity(id: string): Observable<ICityModel> {

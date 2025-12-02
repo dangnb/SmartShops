@@ -11,11 +11,12 @@ import {
 import { NgForm } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
 import { SweetAlertOptions } from 'sweetalert2';
-import { CityService } from 'src/app/_services/city.service';
+import { CityService, ICityModel } from 'src/app/_services/city.service';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
-import { WardService } from 'src/app/_services/ward.service';
+import { IWardModel, WardService } from 'src/app/_services/ward.service';
 import { ISupplierModel, SupplierService } from 'src/app/_services/supplier.service';
 import { AlertService } from 'src/app/_services/alert_service';
+import { lastValueFrom } from 'rxjs';
 
 type Tabs = 'Customer' | 'Payment';
 
@@ -52,13 +53,13 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     isActive: false
   };
 
-  provinces = signal([]);
+  provincesSignal = signal<ICityModel[]>([]);
+  wardsSignal = signal<IWardModel[]>([]);
 
 
   @ViewChild('noticeSwal')
   noticeSwal!: SwalComponent;
   swalOptions: SweetAlertOptions = {};
-
 
   constructor(
     private apiService: SupplierService,
@@ -83,10 +84,20 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
 
 
   private async getProvide() {
-    var response = await this.apiCityService.getAll()
-    debugger
+    var response = await lastValueFrom(this.apiCityService.getAll())
+    this.provincesSignal.set(response.value)
   }
 
+
+  public async changeProvince(event: Event) {
+    const selectedProvinceId = (event.target as HTMLSelectElement).value;
+    if (selectedProvinceId == "" || selectedProvinceId == undefined) {
+      this.wardsSignal.set([])
+      return;
+    }
+    var response = await lastValueFrom(this.apiWardService.getByProvince(selectedProvinceId))
+    this.wardsSignal.set(response.value)
+  }
 
 
   getData(id: string) {
@@ -99,7 +110,6 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onSubmit(event: Event, myForm: NgForm) {
-    this.alertService.showWarningMessage("Đằng nguyễn Bá");
     if (myForm && myForm.invalid) {
       return;
     }

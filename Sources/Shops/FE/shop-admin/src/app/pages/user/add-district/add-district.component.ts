@@ -44,7 +44,7 @@ export class AddDistrictComponent implements OnInit {
     private cityService: CityService,
     private districtService: DistrictService,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getDistrictCode();
@@ -68,7 +68,7 @@ export class AddDistrictComponent implements OnInit {
     this.getDistrict(data.value);
   }
 
-  private getDistrict(cityId: number) {
+  private getDistrict(cityId: string) {
     this.districtService.getByCity(cityId).subscribe((val) => {
       this._district$.next(val.value);
     });
@@ -166,7 +166,7 @@ export class AddDistrictComponent implements OnInit {
       swalOptions
     );
     this.cdr.detectChanges();
-    this.noticeSwal.fire().then((val)=>{
+    this.noticeSwal.fire().then((val) => {
       this.modal.close();
     });
   }

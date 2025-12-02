@@ -35,7 +35,7 @@ export class SupplierUploadComponent implements OnInit, AfterViewInit, OnDestroy
   isLoading = false;
   // Single model
   customerModel = {
-    cityId: 0,
+    cityId: '',
     districtId: 0,
     wardId: 0,
     villageId: 0,
@@ -105,7 +105,7 @@ export class SupplierUploadComponent implements OnInit, AfterViewInit, OnDestroy
     this.getWards(this.customerModel.districtId);
   }
 
-  getDistrict(cityId: number) {
+  getDistrict(cityId: string) {
     this.apiDistricyService.getByCity(cityId).subscribe((val) => {
       this._district$.next(val.value);
     });
@@ -120,7 +120,7 @@ export class SupplierUploadComponent implements OnInit, AfterViewInit, OnDestroy
   create() {
     this.customerModel = {
       districtId: 0,
-      cityId: 0,
+      cityId: '',
       wardId: 0,
       villageId: 0,
     };

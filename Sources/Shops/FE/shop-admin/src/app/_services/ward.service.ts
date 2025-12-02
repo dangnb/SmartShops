@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, mergeMap, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../_core/models/api-response';
 
 export interface DataTablesResponse {
     draw?: number;
@@ -31,7 +32,7 @@ export class WardService {
         return this.http.post<any>(url, dataTablesParameters);
     }
 
-    getByProvince(provinceId: any): Observable<any> {
+    getByProvince(provinceId: any): Observable<ApiResponse<IWardModel[]>> {
         const url = `${this.apiUrl}/province/${provinceId}`;
         return this.http.get<any>(url);
     }

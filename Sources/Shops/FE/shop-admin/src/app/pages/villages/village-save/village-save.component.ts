@@ -42,9 +42,9 @@ export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     id: 0,
     name: '',
     code: '',
-    cityId: 0,
+    cityId: '',
     districtId: 0,
-    wardId: 0,
+    wardId: '',
     username: '',
   };
 
@@ -111,7 +111,7 @@ export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     this.getWards(this.villageModel.districtId);
   }
 
-  getDistrict(cityId: number) {
+  getDistrict(cityId: string) {
     this.apiDistricyService.getByCity(cityId).subscribe((val) => {
       this._district$.next(val.value);
     });
@@ -131,8 +131,8 @@ export class VillageSaveComponent implements OnInit, AfterViewInit, OnDestroy {
       name: '',
       code: '',
       districtId: 0,
-      cityId: 0,
-      wardId: 0,
+      cityId: '',
+      wardId: '',
       username: '',
     };
   }
