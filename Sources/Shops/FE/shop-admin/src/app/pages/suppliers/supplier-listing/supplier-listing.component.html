@@ -46,7 +46,8 @@
             <th class="min-w-140px">Tên</th>
             <th class="min-w-140px">Địa chỉ</th>
             <th class="min-w-140px">Email</th>
-            <th class="min-w-100px text-center" colspan="2">Thao tác</th>
+            <th class="min-w-140px text-center">Trạng thái</th>
+            <th class="min-w-70px text-center" colspan="3">Thao tác</th>
           </tr>
         </thead>
         <!-- end::Table head -->
@@ -63,6 +64,22 @@
             <td> {{item.addressLine}}</td>
             <td> {{item.email}}</td>
             <td class="text-center">
+              <span *ngIf="item.isActive" class="badge badge-light-success fs-8 fw-bolder">Hoạt động</span>
+              <span *ngIf="!item.isActive" class="badge badge-light-danger fs-8 fw-bolder">Không hoạt động</span>
+            </td>
+            <td class="text-center max-w-30px">
+              <a (click)="viewDetails(item.id)" title="Xem chi tiết"
+                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                <app-keenicon name="eye" class="fs-3 text-primary" ng-reflect-name="eye" style="display: contents;">
+                  <span class="fs-3 ki-duotone ki-eye">
+                    <span class="path1"></span>
+                    <span class="path2"></span>
+                  </span>
+                </app-keenicon>
+              </a>
+            </td>
+
+            <td class="text-center max-w-30px">
               <a (click)="edit(item.id)" title="Cập nhật dữ liệu"
                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"><app-keenicon name="pencil"
                   class="fs-3 text-primary" ng-reflect-name="pencil" style="display: contents;"><span
@@ -70,7 +87,7 @@
                   </span>
                 </app-keenicon></a>
             </td>
-            <td class="text-center">
+            <td class="text-center max-w-30px">
               <a (click)="delete(item.id)" title="Xóa dữ liệu"
                 class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"><app-keenicon name="trash"
                   class="fs-3 text-danger" ng-reflect-name="trash" style="display: contents;"><span

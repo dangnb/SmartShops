@@ -10,10 +10,11 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { SupplierListingComponent } from './supplier-listing/supplier-listing.component';
 import { SupplierUploadComponent } from './supplier-upload/supplier-upload.component';
 import { SupplierSaveComponent } from './supplier-save/supplier-save.component';
+import { SupplierDetailComponent } from './supplier-detail/supplier-detail.component';
 
 
 @NgModule({
-  declarations: [SupplierListingComponent, SupplierSaveComponent, SupplierUploadComponent],
+  declarations: [SupplierListingComponent, SupplierSaveComponent, SupplierUploadComponent, SupplierDetailComponent],
   imports: [
     CommonModule,
     FormsModule,

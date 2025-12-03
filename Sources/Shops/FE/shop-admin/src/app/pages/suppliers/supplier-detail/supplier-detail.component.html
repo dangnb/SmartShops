@@ -1,0 +1,170 @@
+<div class="modal-header py-4">
+  <h4 class="modal-title" id="modal-basic-title">Chi tiết nhà cung cấp</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+</div>
+
+<div class="modal-body">
+  <!-- Primary Information Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h5 class="fw-semibold fs-2 mb-0 d-flex justify-content-end">Thông tin chính</h5>
+    </div>
+    <div class="card-body">
+      <!-- Tên nhà cung cấp -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-6 mb-2">Tên nhà cung cấp</label>
+        <p>{{ supplierModel.name }}</p>
+      </div>
+
+      <!-- Mã nhà cung cấp -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-6 mb-2">Mã nhà cung cấp</label>
+        <p>{{ supplierModel.code }}</p>
+      </div>
+
+      <!-- Tên viết tắt -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-6 mb-2">Tên viết tắt</label>
+        <p>{{ supplierModel.shortName }}</p>
+      </div>
+
+      <!-- Mã số thuế -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-6 mb-2">Mã số thuế</label>
+        <p>{{ supplierModel.taxCode }}</p>
+      </div>
+
+      <!-- Điện thoại + Email -->
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Số điện thoại</label>
+            <p>{{ supplierModel.phone }}</p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Email</label>
+            <p>{{ supplierModel.email }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Website -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-2  mb-2">Website</label>
+        <p>{{ supplierModel.website }}</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Secondary Information Section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h4 class="fw-semibold fs-2 mb-0 d-flex justify-content-end">Thông tin liên hệ</h4>
+    </div>
+    <div class="card-body">
+      <!-- Người liên hệ + Điện thoại + Email liên hệ -->
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Người liên hệ</label>
+            <p>{{ supplierModel.contactName }}</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">SĐT liên hệ</label>
+            <p>{{ supplierModel.contactPhone }}</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Email liên hệ</label>
+            <p>{{ supplierModel.contactEmail }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Địa chỉ -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-6 mb-2">Địa chỉ</label>
+        <p>{{ supplierModel.addressLine }}</p>
+      </div>
+
+      <!-- Tỉnh/Thành + Phường/Xã -->
+      <div class="row">
+        <div class="col-lg-6">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Tỉnh/Thành</label>
+            <p>{{ supplierModel.provinceId }}</p>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Quận/Huyện/Phường/Xã</label>
+            <p>{{ supplierModel.wardId }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Địa chỉ đầy đủ -->
+      <div class="fv-row mb-3">
+        <label class="fw-semibold fs-6 mb-2">Địa chỉ đầy đủ</label>
+        <p>{{ supplierModel.fullAddress }}</p>
+      </div>
+
+      <!-- Ngân hàng -->
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Tên ngân hàng</label>
+            <p>{{ supplierModel.bankName }}</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Số tài khoản</label>
+            <p>{{ supplierModel.bankAccountNo }}</p>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Chủ tài khoản</label>
+            <p>{{ supplierModel.bankAccountName }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Điều khoản thanh toán + Ghi chú -->
+      <div class="row">
+        <div class="col-lg-4">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Thời hạn thanh toán (ngày)</label>
+            <p>{{ supplierModel.paymentTermDays }}</p>
+          </div>
+        </div>
+        <div class="col-lg-8">
+          <div class="fv-row mb-3">
+            <label class="fw-semibold fs-6 mb-2">Ghi chú</label>
+            <p>{{ supplierModel.note }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Trạng thái hoạt động -->
+      <div class="fv-row mb-3 form-check form-switch">
+        <label class="form-check-label fw-semibold fs-6 mb-0">Đang hoạt động</label>
+        <p>{{ supplierModel.isActive ? 'Có' : 'Không' }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Footer -->
+<div class="modal-footer flex-center py-4">
+  <button type="button" id="kt_modal_update_supplier_cancel" class="btn btn-light me-3 btn-sm"
+    (click)="modal.dismiss('cancel')">
+    <i class="fa fa-times"></i> Đóng
+  </button>
+</div>

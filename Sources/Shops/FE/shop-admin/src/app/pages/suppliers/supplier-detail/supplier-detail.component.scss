@@ -1,0 +1,32 @@
+.card-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+.fv-row p {
+    font-size: 1rem;
+    color: #495057;
+}
+
+.fv-row label {
+    color: #343a40;
+}
+
+.card-header {
+    display: flex;
+    justify-content: center;
+    /* Horizontally centers the content */
+    align-items: center;
+    /* Vertically centers the content */
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
+}
+
+.card-header h4 {
+    margin-bottom: 0;
+    /* Ensures no margin at the bottom */
+}

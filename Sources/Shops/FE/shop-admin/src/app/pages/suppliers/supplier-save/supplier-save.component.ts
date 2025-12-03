@@ -116,19 +116,6 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
 
     this.isLoading = true;
 
-    const successAlert: SweetAlertOptions = {
-      icon: 'success',
-      title: 'Success!',
-      text:
-        this.supplierModel.id != ''
-          ? 'User updated successfully!'
-          : 'User created successfully!',
-    };
-    const errorAlert: SweetAlertOptions = {
-      icon: 'error',
-      title: 'Error!',
-      text: '',
-    };
 
     const completeFn = () => {
       this.isLoading = false;
@@ -139,11 +126,11 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
         .update(this.supplierModel.id, this.supplierModel)
         .subscribe({
           next: () => {
-            this.showAlert(successAlert);
+            this.alertService.showSuccessMessage("Cập nhật nhà cung cấp thành công");
+            this.modal.close();
           },
           error: (error) => {
-            errorAlert.text = this.extractText(error.error);
-            this.showAlert(errorAlert);
+            this.alertService.showErrorMessage(error.error.detail);
             this.isLoading = false;
           },
           complete: completeFn,
@@ -153,11 +140,12 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     const createFn = () => {
       this.apiService.create(this.supplierModel).subscribe({
         next: () => {
-          this.showAlert(successAlert);
+
+          this.alertService.showSuccessMessage("Tạo mới nhà cung cấp thành công");
+          this.modal.close();
         },
         error: (error) => {
-          errorAlert.text = this.extractText(error.error);
-          this.showAlert(errorAlert);
+          this.alertService.showErrorMessage(error.error.detail);
           this.isLoading = false;
         },
         complete: completeFn,
@@ -190,28 +178,6 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
     var text = uniqueTextArray.join('\n');
 
     return text;
-  }
-
-  showAlert(swalOptions: SweetAlertOptions) {
-    debugger
-    let style = swalOptions.icon?.toString() || 'success';
-    if (swalOptions.icon === 'error') {
-      style = 'danger';
-    }
-    this.swalOptions = Object.assign(
-      {
-        buttonsStyling: false,
-        confirmButtonText: 'Ok, got it!',
-        customClass: {
-          confirmButton: 'btn btn-' + style,
-        },
-      },
-      swalOptions
-    );
-    this.cdr.detectChanges();
-    this.noticeSwal.fire().then((val) => {
-      this.modal.close();
-    });
   }
 
   ngOnDestroy(): void { }

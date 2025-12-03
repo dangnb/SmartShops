@@ -15,6 +15,7 @@ import { SupplierService } from 'src/app/_services/supplier.service';
 import { SupplierUploadComponent } from '../supplier-upload/supplier-upload.component';
 import { SupplierSaveComponent } from '../supplier-save/supplier-save.component';
 import { ICityModel } from 'src/app/_services/city.service';
+import { SupplierDetailComponent } from '../supplier-detail/supplier-detail.component';
 
 @Component({
   selector: 'supplier-listing',
@@ -99,7 +100,7 @@ export class SupplierListingComponent implements OnInit, AfterViewInit, OnDestro
 
   edit(id: string) {
     const modalRef = this.modalService.open(SupplierSaveComponent, {
-      size: 'lg',
+      size: 'xl',
       backdrop: 'static',
       keyboard: true,
     });
@@ -109,6 +110,20 @@ export class SupplierListingComponent implements OnInit, AfterViewInit, OnDestro
       () => { }
     );
   }
+
+  viewDetails(id: string) {
+    const modalRef = this.modalService.open(SupplierDetailComponent, {
+      size: 'xl',
+      backdrop: 'static',
+      keyboard: true,
+    });
+    modalRef.componentInstance.id = id;
+    modalRef.result.then(
+      () => this.filter(this.searchTerm),
+      () => { }
+    );
+  }
+
 
   upload() {
     const modalRef = this.modalService.open(SupplierUploadComponent, {

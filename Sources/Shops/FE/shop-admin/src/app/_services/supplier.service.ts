@@ -49,9 +49,9 @@ export class SupplierService {
         return this.http.post<any>(url, dataTablesParameters);
     }
 
-    get(id: string): Observable<ISupplierModel> {
+    get(id: string): Observable<ApiResponse<ISupplierModel>> {
         const url = `${this.apiUrl}/${id}`;
-        return this.http.get<ISupplierModel>(url);
+        return this.http.get<ApiResponse<ISupplierModel>>(url);
     }
 
     create(user: ISupplierModel): Observable<ApiResponse<any>> {
