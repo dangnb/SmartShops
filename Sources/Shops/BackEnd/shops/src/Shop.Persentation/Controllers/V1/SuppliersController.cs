@@ -84,7 +84,6 @@ public class SuppliersController : ApiController
                 request.ContactPhone,
                 request.ContactEmail,
                 request.ProvinceId,
-                request.DistrictId,
                 request.WardId,
                 request.AddressLine,
                 request.FullAddress,

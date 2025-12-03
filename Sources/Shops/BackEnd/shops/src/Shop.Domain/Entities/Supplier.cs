@@ -21,8 +21,8 @@ public class Supplier : EntityAuditBase<Guid>
     public string? ContactEmail { get; private set; }
 
     // ===== Địa chỉ (trải phẳng, dùng Id danh mục) =====
-    public int? ProvinceId { get; private set; }
-    public int? WardId { get; private set; }
+    public Guid? ProvinceId { get; private set; }
+    public Guid? WardId { get; private set; }
 
     public string? AddressLine { get; private set; }   // Số nhà, tên đường
     public string? FullAddress { get; private set; }   // Cache hiển thị
@@ -41,7 +41,7 @@ public class Supplier : EntityAuditBase<Guid>
     public bool IsActive { get; private set; }
 
     // ===== ctor cho EF =====
-    private Supplier() { }
+    protected Supplier() { }
 
     // ===== ctor private dùng trong factory =====
     private Supplier(
@@ -55,8 +55,8 @@ public class Supplier : EntityAuditBase<Guid>
         string? contactName,
         string? contactPhone,
         string? contactEmail,
-        int? provinceId,
-        int? wardId,
+        Guid? provinceId,
+        Guid? wardId,
         string? addressLine,
         string? fullAddress,
         string? bankName,
@@ -112,8 +112,8 @@ public class Supplier : EntityAuditBase<Guid>
         string? contactName,
         string? contactPhone,
         string? contactEmail,
-        int? provinceId,
-        int? wardId,
+        Guid? provinceId,
+        Guid? wardId,
         string? addressLine,
         string? fullAddress,
         string? bankName,
@@ -177,8 +177,8 @@ public class Supplier : EntityAuditBase<Guid>
     }
 
     public void UpdateAddress(
-        int? provinceId,
-        int? wardId,
+        Guid? provinceId,
+        Guid? wardId,
         string? addressLine,
         string? fullAddress)
     {

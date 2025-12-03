@@ -17,9 +17,8 @@ public class Command
      string? ContactPhone,
      string? ContactEmail,
 
-     int? ProvinceId,
-     int? DistrictId,
-     int? WardId,
+     Guid? ProvinceId,
+     Guid? WardId,
      string? AddressLine,
      string? FullAddress,
 
@@ -44,9 +43,8 @@ public class Command
     string? ContactPhone,
     string? ContactEmail,
 
-    int? ProvinceId,
-    int? DistrictId,
-    int? WardId,
+    Guid? ProvinceId,
+    Guid? WardId,
     string? AddressLine,
     string? FullAddress,
 

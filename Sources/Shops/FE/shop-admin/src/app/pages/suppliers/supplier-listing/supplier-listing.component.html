@@ -5,8 +5,8 @@
       <!--begin::Search-->
       <div class="d-flex align-items-center position-relative my-1">
         <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
-        <input type="text" [(ngModel)]="searchTerm" class="form-control w-250px ps-12" placeholder="Nhập mã và tên"
-          (change)="changeSearTerm()">
+        <input type="text" [(ngModel)]="searchTerm" class="form-control form-control-sm w-250px ps-12"
+          placeholder="Nhập mã và tên" (change)="changeSearTerm()">
       </div>
       <!--end::Search-->
     </div>
@@ -21,9 +21,10 @@
         <button type="button" class="btn btn-info btn-sm me-4" (click)="upload()">
           <i class="fa fa-upload"></i> upload
         </button>
-        <button type="button" class="btn btn-primary btn-sm" (click)="create()">
+        <button type="button" class="btn btn-primary btn-sm me-4" (click)="create()">
           <i class="fa fa-add"></i> Tạo mới
         </button>
+        <i class="fa fa-sync icon-lg fs-3 text-info py-2" style="cursor: pointer;" (click)="changeSearTerm()"></i>
         <!--end::Add user-->
       </div>
       <!--end::Toolbar-->
@@ -57,9 +58,9 @@
             <td> {{item.code}}</td>
             <td>
               Tên: {{item.name}}<br>
-              SĐT: {{item.phoneNumber}}
+              SĐT: {{item.contactPhone}}
             </td>
-            <td> {{item.address}}</td>
+            <td> {{item.addressLine}}</td>
             <td> {{item.email}}</td>
             <td class="text-center">
               <a (click)="edit(item.id)" title="Cập nhật dữ liệu"

@@ -193,6 +193,7 @@ export class SupplierSaveComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   showAlert(swalOptions: SweetAlertOptions) {
+    debugger
     let style = swalOptions.icon?.toString() || 'success';
     if (swalOptions.icon === 'error') {
       style = 'danger';

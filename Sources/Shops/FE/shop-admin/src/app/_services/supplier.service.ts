@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable, mergeMap, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { ApiResponse } from '../_core/models/api-response';
 
 export interface DataTablesResponse {
     draw?: number;
@@ -53,13 +54,13 @@ export class SupplierService {
         return this.http.get<ISupplierModel>(url);
     }
 
-    create(user: ISupplierModel): Observable<ISupplierModel> {
-        return this.http.post<ISupplierModel>(this.apiUrl, user);
+    create(user: ISupplierModel): Observable<ApiResponse<any>> {
+        return this.http.post<ApiResponse<any>>(this.apiUrl, user);
     }
 
-    update(id: string, user: ISupplierModel): Observable<ISupplierModel> {
+    update(id: string, user: ISupplierModel): Observable<ApiResponse<any>> {
         const url = `${this.apiUrl}/${id}`;
-        return this.http.put<ISupplierModel>(url, user);
+        return this.http.put<ApiResponse<any>>(url, user);
     }
 
     upload(formData: FormData): Observable<any> {

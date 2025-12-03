@@ -9,11 +9,11 @@ using Shop.Domain.Entities;
 namespace TP.Apptication.UserCases.V1.Queries.Suppliers;
 public class GetSuppliersQueryHandler : IQueryHandler<Query.GetSuppliersQuery, PagedResult<Response.SupplierResponse>>
 {
-    private readonly IRepositoryBase<Ward, Guid> _repositoryBase;
+    private readonly IRepositoryBase<Supplier, Guid> _repositoryBase;
     private readonly IMapper _mapper;
     private readonly ICurrentUser _userProvider;
 
-    public GetSuppliersQueryHandler(IRepositoryBase<Ward, Guid> wardRepository, IMapper mapper, ICurrentUser userProvider)
+    public GetSuppliersQueryHandler(IRepositoryBase<Supplier, Guid> wardRepository, IMapper mapper, ICurrentUser userProvider)
     {
         _repositoryBase = wardRepository;
         _mapper = mapper;
@@ -29,7 +29,7 @@ public class GetSuppliersQueryHandler : IQueryHandler<Query.GetSuppliersQuery, P
         {
             wardQuery = wardQuery.Where(x => x.ProvinceId == request.ProvinceId);
         }
-        var products = await PagedResult<Ward>.CreateAsync(wardQuery,
+        var products = await PagedResult<Supplier>.CreateAsync(wardQuery,
             request.PageIndex,
             request.PageSize);
 
