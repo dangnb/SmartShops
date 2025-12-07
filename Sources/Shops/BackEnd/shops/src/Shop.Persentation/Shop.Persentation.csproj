@@ -7,8 +7,12 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<Folder Include="Controllers\V2\" />
-		<Folder Include="Controllers\V3\" />
+	  <Compile Remove="Controllers\V2\**" />
+	  <Compile Remove="Controllers\V3\**" />
+	  <EmbeddedResource Remove="Controllers\V2\**" />
+	  <EmbeddedResource Remove="Controllers\V3\**" />
+	  <None Remove="Controllers\V2\**" />
+	  <None Remove="Controllers\V3\**" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="Asp.Versioning.Mvc.ApiExplorer" Version="8.1.0" />
