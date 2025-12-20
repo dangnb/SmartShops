@@ -23,7 +23,7 @@ public class CategoriesController : ApiController
     [HttpPost("gettree")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetTree([FromBody] GetCustomersQuery request)
+    public async Task<IActionResult> GetTree([FromBody] GetCategoriesQuery request)
     {
         var result = await sender.Send(request);
         if (result.IsFailure)
@@ -41,7 +41,7 @@ public class CategoriesController : ApiController
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<IActionResult> GetById(Guid id)
     {
-        var result = await sender.Send(new GetCustomerByIdQuery(id));
+        var result = await sender.Send(new GetCategoryByIdQuery(id));
         if (result.IsFailure)
         {
             return HandlerFailure(result);

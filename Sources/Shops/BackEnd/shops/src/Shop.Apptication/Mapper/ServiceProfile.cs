@@ -68,6 +68,7 @@ internal class ServiceProfile : Profile
 
         //Categories
         CreateMap<Category, CategoryResponse>().ReverseMap();
+        CreateMap<Category, CategoryTreeResponse>().ReverseMap();
         CreateMap<PagedResult<Category>, PagedResult<CategoryResponse>>().ReverseMap();
 
     }

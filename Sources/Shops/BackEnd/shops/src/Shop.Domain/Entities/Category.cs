@@ -9,8 +9,8 @@ public class Category : EntityAuditBase<Guid>
     public string Slug { get; private set; } = default!;
     public Guid? ParentId { get; private set; }
     public int? SortOrder { get; private set; } = default!;
-    public Category? Parent { get; set; }
-    public ICollection<Category> Children { get; set; } = new List<Category>();
+    public virtual Category? Parent { get; set; }
+    public virtual ICollection<Category> Children { get; set; } = new List<Category>();
     public int? Level { get; private set; }
     public bool IsActive { get; private set; } = true;
     protected Category() { }

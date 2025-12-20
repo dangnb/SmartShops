@@ -1,4 +1,6 @@
-﻿namespace Shop.Persistence.Constants;
+﻿using DocumentFormat.OpenXml.Drawing.Diagrams;
+
+namespace Shop.Persistence.Constants;
 internal static class TableNames
 {
     // *********** Plural Nouns ****************
@@ -20,6 +22,7 @@ internal static class TableNames
     internal const string Companies = nameof(Companies);
 
     internal const string Customers = nameof(Customers);
+    internal const string Categories = nameof(Categories);
 
     internal const string Configs = nameof(Configs);
 

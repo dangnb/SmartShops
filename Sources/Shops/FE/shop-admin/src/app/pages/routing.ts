@@ -43,6 +43,10 @@ const Routing: Routes = [
     loadChildren: () => import('./suppliers/supplier.module').then((m) => m.SupplierModule),
   },
   {
+    path: 'apps/categories',
+    loadChildren: () => import('./categories/category.module').then((m) => m.CategoryModule),
+  },
+  {
     path: 'apps/roles',
     loadChildren: () => import('./role/role.module').then((m) => m.RoleModule),
   },

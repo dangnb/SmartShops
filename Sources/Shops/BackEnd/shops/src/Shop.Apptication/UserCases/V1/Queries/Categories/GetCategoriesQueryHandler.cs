@@ -9,7 +9,7 @@ using Shop.Domain.Entities;
 
 namespace Shop.Apptication.UserCases.V1.Queries.Categories;
 
-public class GetCategoriesQueryHandler : IQueryHandler<Query.GetCustomersQuery, List<Response.CategoryTreeResponse>>
+public class GetCategoriesQueryHandler : IQueryHandler<Query.GetCategoriesQuery, List<Response.CategoryTreeResponse>>
 {
     private readonly IRepositoryBase<Category, Guid> _repositoryBase;
     private readonly IMapper _mapper;
@@ -22,7 +22,7 @@ public class GetCategoriesQueryHandler : IQueryHandler<Query.GetCustomersQuery, 
         _currentUser = currentUser;
     }
 
-    public async Task<Result<List<Response.CategoryTreeResponse>>> Handle(Query.GetCustomersQuery request, CancellationToken cancellationToken)
+    public async Task<Result<List<Response.CategoryTreeResponse>>> Handle(Query.GetCategoriesQuery request, CancellationToken cancellationToken)
     {
         Guid comId = _currentUser.GetRequiredCompanyId();
         var customerQuery = string.IsNullOrWhiteSpace(request.SearchTerm)
