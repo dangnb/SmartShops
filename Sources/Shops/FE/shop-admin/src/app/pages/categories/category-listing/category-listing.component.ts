@@ -4,6 +4,7 @@ import {
   Component,
   OnDestroy,
   OnInit,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
@@ -13,6 +14,7 @@ import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CategorySaveComponent } from '../category-save/category-save.component';
 import { CategoryUploadComponent } from '../category-upload/category-upload.component';
 import { CategoryService } from 'src/app/_services/category.service';
+import { TreeNode } from 'node_modules/primeng/api/public_api';
 @Component({
   selector: 'category-listing',
   templateUrl: './category-listing.component.html',
@@ -42,7 +44,7 @@ export class CategoryListingComponent implements OnInit, AfterViewInit, OnDestro
   public pageIndex = 1;
   public pageSize = 10;
   public total = 0;
-
+  categorySignal = signal<TreeNode<any>[]>([]);
   modalConfig: NgbModalOptions = {
     modalDialogClass: 'modal-dialog modal-dialog-centered mw-650px',
   };
@@ -68,10 +70,25 @@ export class CategoryListingComponent implements OnInit, AfterViewInit, OnDestro
     this.apiService
       .getTree()
       .subscribe((val) => {
-        debugger
-        this._items$.next(val.value);
+        this.categorySignal.set(this.toTreeNode(val.value));
       });
   }
+  get categorySignalValue(): TreeNode<any>[] {
+    return this.categorySignal();
+  }
+  toTreeNode(data: any[]): TreeNode[] {
+    return data.map(item => ({
+      data: {
+        label: item.name,  // 👈 bạn đổi label ở đây
+        key: item.id,              // key để select
+        data: item.id,
+        code: item.code,
+        status: item.status,
+      },            // giữ lại data gốc nếu cần
+      children: item.children ? this.toTreeNode(item.children) : []
+    }));
+  };
+
 
   ngOnInit(): void {
     this.filter(this.searchTerm);

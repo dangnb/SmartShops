@@ -39,7 +39,7 @@
     </div>
 
     <!-- Parent -->
-    <!-- <div class="fv-row mb-7">
+    <div class="fv-row mb-7">
       <label class="fw-semibold fs-6 mb-2">
         <span>Danh mục cha</span>
         <span class="ms-1" placement="end" ngbTooltip="Có thể bỏ trống nếu là danh mục gốc">
@@ -47,13 +47,19 @@
         </span>
       </label>
 
-      <select class="form-select form-select-sm" name="parentId" [(ngModel)]="createModel.parentId" #parentId="ngModel">
-        <option value="">-- Không chọn --</option>
-        <option *ngFor="let p of parentOptions" [value]="p.id">
-          {{ p.name }} ({{ p.code }})
-        </option>
-      </select>
-    </div> -->
+      <p-treeSelect [required]="isRequired && !isParent" #parentId="ngModel" [options]="categorySignalValue"
+        [(ngModel)]="selectedNode" placeholder="Chọn loại sản phẩm" name="parentId" [filter]="true" class="w-100"
+        (ngModelChange)="handleChange($event)" style="width: 100%;display: grid;">
+        <ng-template let-node pTemplate="default">
+          <span
+            [ngClass]="{'d-flex align-items-center': true, 'text-gray-800': true, 'fw-semibold': node.children?.length > 0}">
+            <i *ngIf="node.children?.length > 0" class="fas fa-sitemap me-2 text-primary"></i>
+            <i *ngIf="!node.children?.length" class="fas fa-sitemap me-2 text-primary"></i>
+            {{ node.label }}
+          </span>
+        </ng-template>
+      </p-treeSelect>
+    </div>
 
     <div class="row">
       <!-- SortOrder -->

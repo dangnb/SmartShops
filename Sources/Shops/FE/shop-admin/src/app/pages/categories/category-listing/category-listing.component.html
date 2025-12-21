@@ -32,58 +32,35 @@
   </div>
 
   <div class="card-body pt-0">
-    <!-- begin::Table container -->
     <div class="table-responsive">
-      <!-- begin::Table -->
-      <table class="table table-row-dashed  table-bordered table-row-gray-300 align-middle gs-0 gy-4">
-        <!-- begin::Table head -->
-        <thead>
-          <tr class="fw-bolder text-muted">
-            <th class="w-50px">
-            </th>
-            <th class="min-w-150px">Mã</th>
-            <th class="min-w-140px">Tên</th>
-            <th class="min-w-140px">Địa chỉ</th>
-            <th class="min-w-140px">Email</th>
-            <th class="min-w-100px text-center" colspan="2">Thao tác</th>
+      <p-treeTable #table [value]="categorySignalValue" [tableStyle]="{'min-width': '50rem'}"
+        [globalFilterFields]="['label']">
+        <ng-template pTemplate="header">
+          <tr>
+            <th><b>Tên</b></th>
+            <th width="400" class="text-bold"><b> Mã</b></th>
+            <th width="100" colspan="2" class="text-center p-0"><b>Thao tác</b></th>
           </tr>
-        </thead>
-        <!-- end::Table head -->
-        <!-- begin::Table body -->
-        <tbody>
-          <tr
-            *ngFor="let item of items$ | async |  paginate: { itemsPerPage: pageSize, currentPage: pageIndex, totalItems: total }; let i = index ">
-            <td class="text-center"> {{ i + pageSize * (pageIndex - 1) + 1 }}</td>
-            <td> {{item.code}}</td>
+        </ng-template>
+        <ng-template pTemplate="body" let-rowNode let-rowData="rowData" class="p-datatable-gridlines">
+          <tr>
             <td>
-              Tên: {{item.name}}<br>
-              SĐT: {{item.phoneNumber}}
+              <p-treeTableToggler [rowNode]="rowNode" [expandedIcon]="'pi pi-minus'" [collapsedIcon]="'pi pi-plus'">
+              </p-treeTableToggler>
+              <b>{{rowData.label}}</b>
             </td>
-            <td> {{item.address}}</td>
-            <td> {{item.email}}</td>
+            <td><b>{{rowData.code}}</b></td>
             <td class="text-center">
-              <a (click)="edit(item.id)" title="Cập nhật dữ liệu"
-                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1"><app-keenicon name="pencil"
-                  class="fs-3 text-primary" ng-reflect-name="pencil" style="display: contents;"><span
-                    class="fs-3 ki-duotone ki-pencil"><span class="path1"></span><span class="path2"></span>
-                  </span>
-                </app-keenicon></a>
+
             </td>
-            <td class="text-center">
-              <a (click)="delete(item.id)" title="Xóa dữ liệu"
-                class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm"><app-keenicon name="trash"
-                  class="fs-3 text-danger" ng-reflect-name="trash" style="display: contents;"><span
-                    class="fs-3 ki-duotone ki-trash"><span class="path1"></span><span class="path2"></span><span
-                      class="path3"></span><span class="path4"></span><span class="path5"></span>
-                  </span></app-keenicon></a>
+            <td class="text-center p-0" style="width: 50px;">
+              <a title="" class="cursor-pointer">
+                <i class="fas fa-pencil-alt text-primary" style="font-size: 13px;" (click)="edit(rowData.data)"></i>
+              </a>
             </td>
           </tr>
-        </tbody>
-        <!-- end::Table body -->
-      </table>
-      <!-- end::Table -->
-      <pagination-controls previousLabel="Về trang trước" nextLabel="Về trang sau"
-        (pageChange)="changePage($event)"></pagination-controls>
+        </ng-template>
+      </p-treeTable>
     </div>
     <!-- end::Table container -->
   </div>

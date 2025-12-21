@@ -1,0 +1,43 @@
+.modal.fade .modal-dialog {
+    transition: transform 0.3s ease-out;
+    transform: translateY(-50px);
+}
+
+.modal.show .modal-dialog {
+    transform: translateY(0);
+}
+
+select.form-select {
+    max-width: 100%;
+    /* Đảm bảo dropdown không mở rộng quá modal */
+    z-index: 1050;
+    /* Đặt cao hơn modal */
+}
+
+select.form-select option {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+tree-root {
+    border: 1px solid #ccc;
+    /* Thêm border */
+    padding: 10px;
+    /* Thêm padding (tùy chọn) */
+}
+
+.node-wrapper {
+    border-bottom: 1px solid #eee;
+    /* Thêm border cho từng nút (tùy chọn) */
+    padding: 5px;
+    /* Thêm padding cho từng nút (tùy chọn) */
+}
+
+::ng-deep .p-tree-container.ng-star-inserted {
+    padding: 0.2rem !important;
+}
+
+::ng-deep .p-tree-container.ng-star-inserted {
+    padding: 0.2rem !important;
+}

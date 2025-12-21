@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
@@ -10,6 +10,8 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { CategoryListingComponent } from './category-listing/category-listing.component';
 import { CategorySaveComponent } from './category-save/category-save.component';
 import { CategoryUploadComponent } from './category-upload/category-upload.component';
+import { TreeSelectModule } from 'primeng/treeselect';
+import { TreeTableModule } from 'primeng/treetable';
 
 
 @NgModule({
@@ -32,7 +34,9 @@ import { CategoryUploadComponent } from './category-upload/category-upload.compo
     NgbCollapseModule,
     NgbTooltipModule,
     NgxPaginationModule,
+    TreeSelectModule,
+    TreeTableModule,
     SweetAlert2Module.forChild(),
-  ]
+  ], schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class CategoryModule { }

@@ -2,34 +2,18 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   Input,
   OnDestroy,
   OnInit,
+  signal,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
+import { NgForm } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DataTablesResponse } from 'src/app/_fake/services/user-service';
 import { SweetAlertOptions } from 'sweetalert2';
-import { RoleService } from 'src/app/_fake/services/role.service';
-import { CityService, ICityModel } from 'src/app/_services/city.service';
-import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
-import {
-  DistrictService,
-  IDistrictModel,
-} from 'src/app/_services/district.service';
-import { IWardModel, WardService } from 'src/app/_services/ward.service';
-import {
-  IVillageModel,
-  VillageService,
-} from 'src/app/_services/village.service';
-import {
-  CustomerService,
-  ICustomerModel,
-} from 'src/app/_services/customer.service';
+import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { CategoryService, ICreateCategoryModel } from 'src/app/_services/category.service';
+import { TreeNode } from 'primeng/api';
 
 type Tabs = 'Customer' | 'Payment';
 
@@ -42,6 +26,9 @@ export class CategorySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @Input() id: string = '';
   isLoading = false;
   parentOptions = [];
+  selectedNode: any;
+  isRequired = false;
+  isParent = false;
   // Single model
   createModel: ICreateCategoryModel = {
     id: '',
@@ -56,7 +43,7 @@ export class CategorySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   @ViewChild('noticeSwal')
   noticeSwal!: SwalComponent;
   swalOptions: SweetAlertOptions = {};
-
+  categorySignal = signal<TreeNode<any>[]>([]);
 
   constructor(
     private apiService: CategoryService,
@@ -68,16 +55,50 @@ export class CategorySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   ngAfterViewInit(): void { }
 
   ngOnInit(): void {
-    if (this.id != '') {
-      this.getData(this.id);
-    } else {
-      this.create();
+    this.getTree();
+  }
+  // Khi sử dụng trong template, đảm bảo bạn lấy giá trị thực:
+  get categorySignalValue(): TreeNode<any>[] {
+    return this.categorySignal();
+  }
+
+  handleChange(event: any) {
+    if (event) {
+      this.createModel.parentId = event.data;
     }
+  }
+
+  toTreeNode(data: any[]): TreeNode[] {
+    return data
+      .filter((x) => x.id != this.id)
+      .map((item) => ({
+        label: item.name, // 👈 bạn đổi label ở đây
+        key: item.id, // key để select
+        data: item.id, // giữ lại data gốc nếu cần
+        children: item.children ? this.toTreeNode(item.children) : [],
+      }));
+  }
+
+  getTree() {
+    return this.apiService.getTree().subscribe({
+      next: (val: any) => {
+        this.categorySignal.set(this.toTreeNode(val.value));
+        if (this.id != '' || this.id != undefined) {
+          this.getData(this.id);
+        } else {
+          this.create();
+        }
+      },
+      complete: () => { },
+    });
   }
 
   getData(id: string) {
     this.apiService.get(id).subscribe((value: any) => {
       this.createModel = value.value;
+      if (this.createModel.parentId == "" || this.createModel.parentId == null || this.createModel.parentId == undefined) {
+        this.isParent = true;
+      }
     });
   }
 
