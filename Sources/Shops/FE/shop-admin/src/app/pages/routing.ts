@@ -35,20 +35,12 @@ const Routing: Routes = [
     // data: { layout: 'light-sidebar' },
   },
   {
-    path: 'apps/users',
-    loadChildren: () => import('./user/user.module').then((m) => m.UserModule),
-  },
-  {
-    path: 'apps/suppliers',
-    loadChildren: () => import('./suppliers/supplier.module').then((m) => m.SupplierModule),
-  },
-  {
-    path: 'apps/categories',
-    loadChildren: () => import('./categories/category.module').then((m) => m.CategoryModule),
+    path: 'identities',
+    loadChildren: () => import('../modules/Identities/identity.module').then((m) => m.IdentityModule),
   },
   {
     path: 'apps/roles',
-    loadChildren: () => import('./role/role.module').then((m) => m.RoleModule),
+    loadChildren: () => import('../modules/Identities/role/role.module').then((m) => m.RoleModule),
   },
   {
     path: 'apps/cities',
@@ -71,16 +63,16 @@ const Routing: Routes = [
     loadChildren: () => import('./villages/village.module').then((m) => m.VillageModule),
   },
   {
-    path: 'apps/products',
-    loadChildren: () => import('./products/product.module').then((m) => m.ProductModule),
-  },
-  {
     path: 'apps/permissions',
-    loadChildren: () => import('./permission/permission.module').then((m) => m.PermissionModule),
+    loadChildren: () => import('../modules/Identities/permission/permission.module').then((m) => m.PermissionModule),
   },
   {
     path: 'apps/payment',
     loadChildren: () => import('./payments/payment.module').then((m) => m.PaymentModule),
+  },
+  {
+    path: 'catalogs',
+    loadChildren: () => import('../modules/catalogs/catalog.module').then((m) => m.CatalogModule),
   },
   {
     path: '',
