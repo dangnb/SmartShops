@@ -6,6 +6,7 @@ import {
   Input,
   OnDestroy,
   OnInit,
+  signal,
   ViewChild,
 } from '@angular/core';
 import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
@@ -17,6 +18,8 @@ import { RoleService } from 'src/app/_fake/services/role.service';
 import { CityService, ICityModel } from 'src/app/_services/city.service';
 import { NgbActiveModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { IProductModel, ProductService } from 'src/app/_services/product.service';
+import { CategoryService } from 'src/app/_services/category.service';
+import { TreeNode } from 'node_modules/primeng/api/public_api';
 
 @Component({
   selector: 'app-product-save',
@@ -24,47 +27,87 @@ import { IProductModel, ProductService } from 'src/app/_services/product.service
   styleUrls: ['./product-save.component.scss'],
 })
 export class ProductSaveComponent implements OnInit, AfterViewInit, OnDestroy {
-  @Input() id:number =0;
-  isCollapsed1 = false;
-  isCollapsed2 = true;
+  @Input() id: string | undefined = undefined;
   isLoading = false;
+  isParent = false;
+  isRequired = false;
   // Single model
-  productModel: IProductModel = { id:0, name: '', code: '', price: "0",isActive: true, productType: 0 };
+  productModel: IProductModel = {
+    id: 0, name: '',
+    code: '',
+    barCode: '',
+    categoryId: undefined,
+    isActive: true
+  };
 
   @ViewChild('noticeSwal')
   noticeSwal!: SwalComponent;
+  selectedNode: any;
   swalOptions: SweetAlertOptions = {};
   roles$: Observable<DataTablesResponse>;
+  categorySignal = signal<TreeNode<any>[]>([]);
+
   constructor(
+    private categoryService: CategoryService,
     private apiService: ProductService,
     private cdr: ChangeDetectorRef,
-    private fb:FormBuilder,
+    private fb: FormBuilder,
     public modal: NgbActiveModal
-  ) {}
+  ) { }
 
 
-  ngAfterViewInit(): void {}
+  ngAfterViewInit(): void { }
 
   ngOnInit(): void {
-    if(this.id >0){
-        this.getData(this.id);
-    }else{
-      this.create();
+    this.getTree();
+  }
+
+  get categorySignalValue(): TreeNode<any>[] {
+    return this.categorySignal();
+  }
+
+  handleChange(event: any) {
+    if (event) {
+      this.productModel.categoryId = event.data;
     }
   }
 
-  getData(id: number) {
-     this.apiService.getProduct(id).subscribe((user: any) => {
+  getData(id: string | undefined) {
+    this.apiService.getProduct(id ?? "").subscribe((user: any) => {
       this.productModel = user.value;
+      this.selectedNode = this.findNodeById(this.categorySignalValue);
+    });
+  }
+
+  findNodeById(nodes: any): TreeNode | null {
+    for (let node of nodes) {
+      if (node.data === this.productModel.categoryId) {
+        return node;
+      }
+      if (node.children?.length! > 0) {
+        const found = this.findNodeById(node.children);
+        if (found) return found;
+      }
+    }
+    return null;
+  }
+
+  private getTree() {
+    return this.categoryService.getTree().subscribe({
+      next: (val: any) => {
+        this.categorySignal.set(this.toTreeNode(val.value));
+        if (this.id != '' || this.id != undefined) {
+          this.getData(this.id);
+        } else {
+          this.create();
+        }
+      },
+      complete: () => { },
     });
   }
 
   create() {
-    this.productModel = { id:0, name: '', code: '', price: "0",isActive: true, productType: 0 };
-  }
-  onNumberChange(value: string) {
-    // Loại bỏ dấu chấm khi cập nhật giá trị thực trong component
-    this.productModel.price = value.replace(/\./g, '');
+    this.productModel = { id: 0, name: '', code: '', barCode: '', categoryId: undefined };
   }
   onSubmit(event: Event, myForm: NgForm) {
     if (myForm && myForm.invalid) {
@@ -87,16 +130,16 @@ export class ProductSaveComponent implements OnInit, AfterViewInit, OnDestroy {
       text: '',
     };
 
-    
+
     const completeFn = () => {
       this.isLoading = false;
     };
 
-   
+
 
 
     const updateFn = () => {
-      this.apiService.updateProduct(this.productModel.id, this.productModel).subscribe({
+      this.apiService.updateProduct(this.productModel.id?.toString() ?? "", this.productModel).subscribe({
         next: () => {
           this.showAlert(successAlert);
         },
@@ -167,9 +210,20 @@ export class ProductSaveComponent implements OnInit, AfterViewInit, OnDestroy {
       swalOptions
     );
     this.cdr.detectChanges();
-    this.noticeSwal.fire().then((val)=>{
+    this.noticeSwal.fire().then((val) => {
       this.modal.close();
     });
+  }
+
+  private toTreeNode(data: any[]): TreeNode[] {
+    return data
+      .filter((x) => x.id != this.id)
+      .map((item) => ({
+        label: item.name, // 👈 bạn đổi label ở đây
+        key: item.id, // key để select
+        data: item.id, // giữ lại data gốc nếu cần
+        children: item.children ? this.toTreeNode(item.children) : [],
+      }));
   }
 
   ngOnDestroy(): void {

@@ -2,6 +2,6 @@
 
 public class Response
 {
-    public record ProductResponse(int Id, string Code, string Name, int IsActive);
+    public record ProductResponse(Guid Id, string Code, string Name, Guid CategoryId, int Status);
 }
 

@@ -57,9 +57,22 @@ export class CategorySaveComponent implements OnInit, AfterViewInit, OnDestroy {
   ngOnInit(): void {
     this.getTree();
   }
-  // Khi sử dụng trong template, đảm bảo bạn lấy giá trị thực:
+
   get categorySignalValue(): TreeNode<any>[] {
     return this.categorySignal();
+  }
+
+  findNodeById(nodes: any): TreeNode | null {
+    for (let node of nodes) {
+      if (node.data === this.createModel.parentId) {
+        return node;
+      }
+      if (node.children?.length! > 0) {
+        const found = this.findNodeById(node.children);
+        if (found) return found;
+      }
+    }
+    return null;
   }
 
   handleChange(event: any) {
@@ -99,6 +112,7 @@ export class CategorySaveComponent implements OnInit, AfterViewInit, OnDestroy {
       if (this.createModel.parentId == "" || this.createModel.parentId == null || this.createModel.parentId == undefined) {
         this.isParent = true;
       }
+      this.selectedNode = this.findNodeById(this.categorySignalValue);
     });
   }
 

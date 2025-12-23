@@ -39,8 +39,6 @@
             </th>
             <th class="min-w-150px">Mã</th>
             <th class="min-w-140px">Tên</th>
-            <th class="min-w-140px">Giá</th>
-            <th class="min-w-140px" class="text-center">Loại</th>
             <th class="min-w-140px" class="text-center">Trạng thái</th>
             <th class="min-w-100px text-center" colspan="2">Thao tác</th>
           </tr>
@@ -53,14 +51,9 @@
             <td class="text-center"> {{ i + pageSize * (pageIndex - 1) + 1 }}</td>
             <td> {{item.code}}</td>
             <td> {{item.name}}</td>
-            <td> {{item.price| number}}</td>
             <td class="text-center">
-              <ng-container *ngIf="item.productType ==0">Hộ gia đình</ng-container>
-              <ng-container *ngIf="item.productType ==1">Hộ kinh doanh</ng-container>
-            </td>
-            <td class="text-center">
-              <ng-container *ngIf="item.isActive ==true"><i class="fa fa-check text-success"></i></ng-container>
-              <ng-container *ngIf="item.isActive ==false"><i class="fa fa-check text-danger"></i></ng-container>
+              <ng-container *ngIf="item.status ==1"><i class="fa fa-check text-success"></i></ng-container>
+              <ng-container *ngIf="item.status ==2"><i class="fa fa-check text-danger"></i></ng-container>
             </td>
             <td class="text-center w-25px">
               <a (click)="edit(item.id)" title="Cập nhật dữ liệu"

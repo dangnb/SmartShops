@@ -9,11 +9,12 @@ import { CrudModule } from 'src/app/modules/crud/crud.module';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { ProductSaveComponent } from './product-save/product-save.component';
 import { ProductListingComponent } from './product-listing/product-listing.component';
+import { TreeSelectModule } from 'primeng/treeselect';
 
 
 
 @NgModule({
-  declarations: [ProductListingComponent,ProductSaveComponent],
+  declarations: [ProductListingComponent, ProductSaveComponent],
   imports: [
     CommonModule,
     FormsModule,
@@ -23,11 +24,12 @@ import { ProductListingComponent } from './product-listing/product-listing.compo
         path: '',
         component: ProductListingComponent,
       }
-      
+
     ]),
     CrudModule,
     SharedModule,
     NgbNavModule,
+    TreeSelectModule,
     NgbDropdownModule,
     NgbCollapseModule,
     NgbTooltipModule,

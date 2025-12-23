@@ -10,14 +10,13 @@ export interface DataTablesResponse {
     data: any[];
 }
 
-export interface IProductModel 
-{
+export interface IProductModel {
     id: number;
-    code:string;
-    name:string;
-    price: string;
-    isActive:boolean;
-    productType:0|number;
+    code: string;
+    name: string;
+    barCode: string;
+    categoryId?: string;
+    isActive?: boolean;
 }
 
 @Injectable({
@@ -34,7 +33,7 @@ export class ProductService {
         return this.http.post<any>(url, dataTablesParameters);
     }
 
-    getProduct(id: number): Observable<IProductModel> {
+    getProduct(id: string): Observable<IProductModel> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.get<IProductModel>(url);
     }
@@ -43,12 +42,12 @@ export class ProductService {
         return this.http.post<IProductModel>(this.apiUrl, user);
     }
 
-    updateProduct(id: number, user: IProductModel): Observable<IProductModel> {
+    updateProduct(id: string, user: IProductModel): Observable<IProductModel> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.put<IProductModel>(url, user);
     }
 
-    deleteProduct(id: number): Observable<void> {
+    deleteProduct(id: string): Observable<void> {
         const url = `${this.apiUrl}/${id}`;
         return this.http.delete<void>(url);
     }
