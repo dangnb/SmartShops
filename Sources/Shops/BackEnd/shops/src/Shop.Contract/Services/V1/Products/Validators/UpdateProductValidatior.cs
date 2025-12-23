@@ -5,7 +5,6 @@ public class UpdateProductValidatior : AbstractValidator<Command.UpdateProductCo
 {
     public UpdateProductValidatior()
     {
-        RuleFor(x => x.Code).NotEmpty().WithMessage("Mã không được để trống");
         RuleFor(x => x.Name).NotEmpty().WithMessage("Tên không được để trống");
     }
 }

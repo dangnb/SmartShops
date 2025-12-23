@@ -8,6 +8,7 @@ using Shop.Contract.Services.V1.Products;
 using Shop.Persentation.Abtractions;
 
 namespace Shop.Persentation.Controllers.V1;
+
 [ApiVersion(1)]
 public class ProductsController(ISender sender) : ApiController(sender)
 {
@@ -30,13 +31,14 @@ public class ProductsController(ISender sender) : ApiController(sender)
     [HttpGet("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> GetById(int id)
+    public async Task<IActionResult> GetById(Guid id)
     {
         var result = await sender.Send(new Query.GetProductByIdQuery(id));
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -50,7 +52,8 @@ public class ProductsController(ISender sender) : ApiController(sender)
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -58,13 +61,14 @@ public class ProductsController(ISender sender) : ApiController(sender)
     [HttpPut("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Update([FromBody] Command.UpdateProductCommand request, int id)
+    public async Task<IActionResult> Update([FromBody] Command.UpdateProductCommand request, Guid id)
     {
-        var result = await sender.Send(new Command.UpdateProductCommand(id, request.Code, request.Name, request.Price, request.IsActive, request.ProductType));
+        var result = await sender.Send(new Command.UpdateProductCommand(id, request.Name, request.BarCode, request.CategoryId));
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 
@@ -72,13 +76,14 @@ public class ProductsController(ISender sender) : ApiController(sender)
     [HttpDelete("{id}")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
-    public async Task<IActionResult> Delete(int id)
+    public async Task<IActionResult> Delete(Guid id)
     {
         var result = await sender.Send(new Command.DeleteProductCommand(id));
         if (result.IsFailure)
         {
             return HandlerFailure(result);
-        };
+        }
+        ;
         return Ok(result);
     }
 }

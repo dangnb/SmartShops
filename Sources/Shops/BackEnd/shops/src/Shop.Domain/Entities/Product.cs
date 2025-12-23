@@ -1,4 +1,5 @@
-﻿using Shop.Domain.Abstractions;
+﻿using DocumentFormat.OpenXml.Wordprocessing;
+using Shop.Domain.Abstractions;
 using Shop.Domain.Abstractions.Entities;
 using Shop.Domain.Entities.enums;
 
@@ -15,21 +16,30 @@ public class Product : EntityAuditBase<Guid>, ICompanyScopedEntity
     public ProductStatus Status { get; private set; } = ProductStatus.New; // Trạng thái sản phẩm
     protected Product() { }
 
-    private Product(Guid comId, string name, string code, string barCode, Guid categoryId)
+    private Product(string name, string code, string barCode, Guid categoryId)
     {
-        ComId = comId;
         Name = name;
         Code = code;
         BarCode = barCode;
         CategoryId = categoryId;
     }
-    public static Product CreateEntity(Guid comId, string name, string code, string barCode, Guid categoryId)
+    public static Product CreateEntity(string name, string code, string barCode, Guid categoryId)
     {
-        return new Product(comId, name, code, barCode, categoryId);
+        return new Product(name, code, barCode, categoryId);
     }
 
-    public void Update(string name)
+    public void Update(string name, string barCode, Guid categoryId)
     {
         Name = name;
+        BarCode = barCode;
+        CategoryId = categoryId;
+    }
+    public void SoftDelete()
+    {
+        if (!IsDeleted)
+        {
+            IsDeleted = true;
+            Status = ProductStatus.Inactive;
+        }
     }
 }
