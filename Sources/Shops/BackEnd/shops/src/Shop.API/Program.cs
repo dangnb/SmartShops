@@ -1,12 +1,14 @@
+using DocumentFormat.OpenXml.Office2016.Drawing.ChartDrawing;
+using Microsoft.Extensions.DependencyInjection.Extensions;
+using Serilog;
 using Shop.API.DependencyInjection.Extensions;
 using Shop.API.Middleware;
-using Shop.Persistence.DependencyInjection.Options;
-using Shop.Persistence.DependencyInjection.Extentions;
 using Shop.Application.DependencyInjection.Extensions;
-using Serilog;
 using Shop.Infrastructure.Extensions;
-using Microsoft.Extensions.DependencyInjection.Extensions;
+using Shop.Persistence;
 using Shop.Persistence.Dapper.DependencyInjection.Extensions;
+using Shop.Persistence.DependencyInjection.Extentions;
+using Shop.Persistence.DependencyInjection.Options;
 
 internal class Program
 {
@@ -36,6 +38,7 @@ internal class Program
 
 
         //Add Persistence
+        builder.Services.AddScoped<DomainEventsInterceptor>();
         builder.Services.ConfigureMySqlRetryOptions(builder.Configuration.GetSection(nameof(MySqlRetryOptions)));
         builder.Services.AddSqlConfiguration();
         builder.Services.AddRepositoryBaseConfiguration();

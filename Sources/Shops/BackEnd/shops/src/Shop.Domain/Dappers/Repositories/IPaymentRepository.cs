@@ -1,4 +1,6 @@
-﻿namespace Shop.Domain.Dappers.Repositories;
-public interface IPaymentRepository : IGenericRepository<Shop.Domain.Entities.Payment>
+﻿using Shop.Domain.Entities.Purchases;
+
+namespace Shop.Domain.Dappers.Repositories;
+public interface IPaymentRepository : IGenericRepository<Payment>
 {
 }

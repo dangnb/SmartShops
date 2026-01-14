@@ -2,7 +2,8 @@
 using Shop.Domain.Abstractions.Entities;
 
 namespace Shop.Domain.Abstractions;
-public abstract class DomainEntity<TKey>: IEntityBase<TKey>
+
+public abstract class DomainEntity<TKey> : Entity, IEntityBase<TKey>
 {
     public virtual TKey Id { get; set; }
 
@@ -15,7 +16,7 @@ public abstract class DomainEntity<TKey>: IEntityBase<TKey>
         return Id.Equals(default(TKey));
     }
 
-      // Hàm này để tự động sinh UUID v7 khi cần
+    // Hàm này để tự động sinh UUID v7 khi cần
     public void SetIdIfEmpty()
     {
         if (Id.Equals(default(TKey)) && typeof(TKey) == typeof(Guid))
@@ -24,3 +25,14 @@ public abstract class DomainEntity<TKey>: IEntityBase<TKey>
         }
     }
 }
+
+public abstract class Entity
+{
+    private readonly List<IDomainEvent> _domainEvents = new();
+    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+
+    protected void AddDomainEvent(IDomainEvent @event) => _domainEvents.Add(@event);
+    public void ClearDomainEvents() => _domainEvents.Clear();
+}
+
+public interface IDomainEvent { }

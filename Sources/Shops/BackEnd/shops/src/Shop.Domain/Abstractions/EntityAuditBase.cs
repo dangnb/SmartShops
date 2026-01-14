@@ -1,4 +1,5 @@
-﻿using Shop.Domain.Abstractions.Entities;
+﻿using MediatR;
+using Shop.Domain.Abstractions.Entities;
 
 namespace Shop.Domain.Abstractions;
 public class EntityAuditBase<TKey> : DomainEntity<TKey>, IEntityAuditBase<TKey>, ICompanyScopedEntity
@@ -10,4 +11,10 @@ public class EntityAuditBase<TKey> : DomainEntity<TKey>, IEntityAuditBase<TKey>,
     public string? LastModifiedBy { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime? DeletedAt { get; set; }
+
+    private readonly List<INotification> _domainEvents = new();
+    public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
+
+    protected void Raise(INotification ev) => _domainEvents.Add(ev);
+    public void ClearDomainEvents() => _domainEvents.Clear();
 }
