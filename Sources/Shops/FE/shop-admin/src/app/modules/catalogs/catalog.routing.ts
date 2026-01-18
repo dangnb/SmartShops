@@ -6,6 +6,10 @@ const CatalogRouting: Routes = [
         loadChildren: () => import('./suppliers/supplier.module').then((m) => m.SupplierModule),
     },
     {
+        path: 'warehouses',
+        loadChildren: () => import('./warehouses/warehouse.module').then((m) => m.WarehouseModule),
+    },
+    {
         path: 'categories',
         loadChildren: () => import('./categories/category.module').then((m) => m.CategoryModule),
     },

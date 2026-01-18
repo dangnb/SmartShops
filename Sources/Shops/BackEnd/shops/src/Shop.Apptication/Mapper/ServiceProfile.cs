@@ -4,6 +4,7 @@ using Shop.Contract.Services.V1.Payments.Dtos;
 using Shop.Domain.Entities;
 using Shop.Domain.Entities.Identity;
 using Shop.Domain.Entities.Purchases;
+using static Shop.Contract.Services.Purchasing.V1.Warehouses.Response;
 using static Shop.Contract.Services.V1.Categories.Response;
 using static Shop.Contract.Services.V1.Customers.Response;
 using static Shop.Contract.Services.V1.Payments.Response;
@@ -76,6 +77,10 @@ internal class ServiceProfile : Profile
         //Products
         CreateMap<Product, ProductResponse>().ReverseMap();
         CreateMap<PagedResult<Product>, PagedResult<ProductResponse>>().ReverseMap();
+
+        //Products
+        CreateMap<Warehouse, WarehouseResponse>().ReverseMap();
+        CreateMap<PagedResult<Warehouse>, PagedResult<WarehouseResponse>>().ReverseMap();
 
     }
 }

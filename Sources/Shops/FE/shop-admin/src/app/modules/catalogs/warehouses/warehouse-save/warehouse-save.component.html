@@ -1,0 +1,96 @@
+<form #myForm="ngForm" (ngSubmit)="onSubmit($event, myForm)">
+  <!-- Header -->
+  <div class="modal-header py-2">
+    <h4 class="modal-title">Nhập thông tin kho</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+    </button>
+  </div>
+
+  <!-- Body -->
+  <div class="modal-body">
+    <div class="d-flex flex-column scroll-y me-n7 pe-7" data-kt-scroll="true"
+      data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto"
+      data-kt-scroll-offset="300px">
+
+      <div class="collapse show">
+
+        <!-- Mã kho -->
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">
+            Mã kho
+          </label>
+          <input type="text" class="form-control form-control-sm" name="code" [(ngModel)]="warehouseModel.code"
+            #code="ngModel" />
+
+        </div>
+
+        <!-- Tên kho -->
+        <div class="fv-row mb-7">
+          <label class="required fw-semibold fs-6 mb-2">
+            Tên kho
+          </label>
+          <input type="text" class="form-control form-control-sm" name="name" [(ngModel)]="warehouseModel.name"
+            #name="ngModel" required minlength="3" />
+
+          <div *ngIf="myForm.submitted && name.invalid" class="invalid-feedback d-block">
+            <div *ngIf="name.errors?.['required']">
+              Tên kho là bắt buộc
+            </div>
+            <div *ngIf="name.errors?.['minlength']">
+              Tên kho tối thiểu 3 ký tự
+            </div>
+          </div>
+        </div>
+
+        <!-- Địa chỉ -->
+        <div class="fv-row mb-7">
+          <label class="required fw-semibold fs-6 mb-2">
+            Địa chỉ
+          </label>
+          <textarea rows="3" class="form-control form-control-sm" name="address" [(ngModel)]="warehouseModel.address"
+            #address="ngModel" required>
+          </textarea>
+
+          <div *ngIf="myForm.submitted && address.invalid" class="invalid-feedback d-block">
+            <div *ngIf="address.errors?.['required']">
+              Địa chỉ là bắt buộc
+            </div>
+          </div>
+        </div>
+
+        <!-- Trạng thái -->
+        <div class="fv-row mb-7">
+          <label class="fw-semibold fs-6 mb-2">
+            Trạng thái hoạt động
+          </label>
+          <div class="form-check form-switch">
+            <input class="form-check-input" type="checkbox" name="isActive" [(ngModel)]="warehouseModel.isActive" />
+            <label class="form-check-label">
+              Hoạt động
+            </label>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="modal-footer flex-center py-2">
+    <button type="reset" class="btn btn-light btn-sm me-3" (click)="modal.dismiss('cancel')">
+      Đóng
+    </button>
+
+    <button type="submit" class="btn btn-sm btn-primary" [attr.data-kt-indicator]="isLoading ? 'on' : 'off'">
+      <span class="indicator-label">
+        Lưu lại
+      </span>
+      <span class="indicator-progress">
+        Please wait...
+        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+      </span>
+    </button>
+  </div>
+</form>
+
+<swal #noticeSwal [swalOptions]="swalOptions"></swal>
