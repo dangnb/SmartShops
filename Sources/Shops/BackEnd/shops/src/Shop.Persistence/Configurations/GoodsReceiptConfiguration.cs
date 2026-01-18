@@ -9,19 +9,25 @@ public sealed class GoodsReceiptConfiguration : IEntityTypeConfiguration<GoodsRe
     public void Configure(EntityTypeBuilder<GoodsReceipt> b)
     {
         b.ToTable("goods_receipts");
+
         b.HasKey(x => x.Id);
-        b.Property(x => x.ReceiptNo).HasMaxLength(50).IsRequired();
+
+        b.Property(x => x.ReceiptNo)
+            .HasMaxLength(50)
+            .IsRequired();
+
         b.HasIndex(x => x.ReceiptNo).IsUnique();
-        b.Property(x => x.Status).HasConversion<int>();
-        b.Property(x => x.ReceiptDate).HasColumnType("date");
 
+        b.Property(x => x.Status)
+            .HasConversion<int>();
+
+        b.Property(x => x.ReceiptDate)
+            .HasColumnType("date");
+
+        // ✅ MAP QUA PROPERTY Lines
         b.HasMany(x => x.Lines)
-        .WithOne()
-        .HasForeignKey("GoodsReceiptId")
-        .OnDelete(DeleteBehavior.Cascade);
-
-        b.Navigation(x => x.Lines)
-         .UsePropertyAccessMode(PropertyAccessMode.Field);
-
+            .WithOne()
+            .HasForeignKey("GoodsReceiptId")
+            .OnDelete(DeleteBehavior.Cascade);
     }
 }

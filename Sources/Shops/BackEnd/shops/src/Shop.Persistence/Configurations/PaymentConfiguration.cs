@@ -5,11 +5,21 @@ using Shop.Domain.Entities.Purchases;
 using Shop.Persistence.Constants;
 
 namespace Shop.Persistence.Configurations;
+
 public class PaymentConfiguration : IEntityTypeConfiguration<Payment>
 {
     public void Configure(EntityTypeBuilder<Payment> builder)
     {
         builder.ToTable(TableNames.Payments);
         builder.HasKey(x => x.Id);
+
+        builder.HasMany(x => x.Allocations)
+        .WithOne()
+        .HasForeignKey("PaymentId")
+        .OnDelete(DeleteBehavior.Cascade);
+
+        builder.Navigation(x => x.Allocations)
+            .UsePropertyAccessMode(PropertyAccessMode.Field)
+            .HasField("_allocations");
     }
 }

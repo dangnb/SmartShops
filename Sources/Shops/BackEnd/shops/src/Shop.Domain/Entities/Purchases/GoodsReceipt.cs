@@ -6,10 +6,11 @@ namespace Shop.Domain.Entities.Purchases;
 
 public class GoodsReceipt : EntityAuditBase<Guid>
 {
-    // _lines không phải là property trực tiếp ánh xạ qua EF Core
+    // EF Core sẽ tự dùng backing field ngầm
+    protected GoodsReceipt() { }
+
     private readonly List<GoodsReceiptLine> _lines = new();
 
-    // Property công khai cho EF Core
     public string ReceiptNo { get; private set; } = default!;
     public Guid SupplierId { get; private set; }
     public Guid WarehouseId { get; private set; }
@@ -19,25 +20,28 @@ public class GoodsReceipt : EntityAuditBase<Guid>
     public decimal Subtotal { get; private set; }
     public decimal Total { get; private set; }
 
-    // Các navigation properties cần phải là `virtual` cho Lazy Loading
-    public IReadOnlyCollection<GoodsReceiptLine> Lines => _lines.AsReadOnly();  // <-- Đây là property công khai
+    // ✅ NAVIGATION DUY NHẤT – PHẢI VIRTUAL
+    public virtual IReadOnlyCollection<GoodsReceiptLine> Lines => _lines;
 
-    // Constructor protected hoặc public
-    protected GoodsReceipt() { }
-
-    public GoodsReceipt(string receiptNo, Guid supplierId, Guid warehouseId, DateOnly receiptDate)
+    public GoodsReceipt(
+        string receiptNo,
+        Guid supplierId,
+        Guid warehouseId,
+        DateOnly receiptDate)
     {
         if (string.IsNullOrWhiteSpace(receiptNo))
             throw new DomainBaseException("ReceiptNo is required.");
+
         ReceiptNo = receiptNo.Trim();
         SupplierId = supplierId;
         WarehouseId = warehouseId;
         ReceiptDate = receiptDate;
     }
 
-    public void AddLine(Guid productId, decimal qty, decimal? unitCost = null)
+    public void AddLine(Guid productId, decimal qty, decimal? unitCost)
     {
         EnsureDraft();
+
         if (qty <= 0)
             throw new DomainBaseException("Qty must be > 0.");
 
@@ -48,17 +52,20 @@ public class GoodsReceipt : EntityAuditBase<Guid>
     public void Post(DateTime utcNow)
     {
         EnsureDraft();
+
         if (_lines.Count == 0)
             throw new DomainBaseException("Cannot post receipt without lines.");
 
         Status = DocumentStatus.Posted;
 
         Raise(new GoodsReceiptPostedEvent(
-            ReceiptId: Id,
-            SupplierId: SupplierId,
-            WarehouseId: WarehouseId,
-            PostedAtUtc: utcNow,
-            Lines: _lines.Select(l => new GoodsReceiptPostedLine(l.ProductId, l.Qty, l.UnitCost)).ToList()
+            Id,
+            SupplierId,
+            WarehouseId,
+            utcNow,
+            _lines.Select(l =>
+                new GoodsReceiptPostedLine(l.ProductId, l.Qty, l.UnitCost)
+            ).ToList()
         ));
     }
 
@@ -74,3 +81,4 @@ public class GoodsReceipt : EntityAuditBase<Guid>
         Total = Subtotal;
     }
 }
+

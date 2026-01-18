@@ -24,7 +24,7 @@ public static class ServiceConllectionEntensions
             builder
             .EnableDetailedErrors(true)
             .EnableSensitiveDataLogging(true)
-            //.UseLazyLoadingProxies(true) // => If UseLazyLoadingProxies, all of the navigation fields should be VIRTUAL
+            .UseLazyLoadingProxies(true) // => If UseLazyLoadingProxies, all of the navigation fields should be VIRTUAL
             .UseMySql(
                  configuration.GetConnectionString("ConnectionStrings"),
                  new MySqlServerVersion(new Version(8, 0, 21)),
