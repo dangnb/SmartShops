@@ -24,10 +24,13 @@ public sealed class GoodsReceiptConfiguration : IEntityTypeConfiguration<GoodsRe
         b.Property(x => x.ReceiptDate)
             .HasColumnType("date");
 
-        // ✅ MAP QUA PROPERTY Lines
         b.HasMany(x => x.Lines)
             .WithOne()
             .HasForeignKey("GoodsReceiptId")
             .OnDelete(DeleteBehavior.Cascade);
+
+        // 🔥 DÒNG QUYẾT ĐỊNH SỐ PHẬN
+        b.Navigation(x => x.Lines)
+            .UsePropertyAccessMode(PropertyAccessMode.Field);
     }
 }

@@ -26,6 +26,7 @@ public sealed class TransactionPipelineBehavior<TRequest, TResponse>
         RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
+        // Query thì không mở transaction
         if (!IsCommand())
             return await next();
 
@@ -36,35 +37,49 @@ public sealed class TransactionPipelineBehavior<TRequest, TResponse>
             await using var transaction =
                 await _context.Database.BeginTransactionAsync(cancellationToken);
 
-            var response = await next();
+            try
+            {
+                // 1️⃣ Handler chỉ modify entity, KHÔNG SaveChanges
+                var response = await next();
 
-            ApplyAuditInfo(); // <-- xử lý audit ở đây
+                // 2️⃣ Apply audit CHỈ cho entity thực sự thay đổi
+                ApplyAuditInfo();
 
-            await _context.SaveChangesAsync(cancellationToken);
-            await transaction.CommitAsync(cancellationToken);
+                // 3️⃣ SaveChanges tập trung 1 chỗ
+                await _context.SaveChangesAsync(cancellationToken);
 
-            return response;
+                await transaction.CommitAsync(cancellationToken);
+
+                return response;
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                await transaction.RollbackAsync(cancellationToken);
+                throw; // hoặc map sang BusinessException nếu bạn muốn
+            }
         });
     }
 
-    private bool IsCommand()
+    private static bool IsCommand()
         => typeof(TRequest).Name.EndsWith("Command");
 
     private void ApplyAuditInfo()
     {
         var now = DateTime.UtcNow;
+        var userId = _currentUser.UserId ?? "system";
+        var comId = _currentUser.ComId;
 
-        // Có thể có những trường hợp không có HttpContext (background job, test)
-        // => ComId nullable, đừng dùng GetRequiredCompanyId() nếu không chắc
+        // ⚠️ CHỈ xử lý entity có thay đổi state
+        var entries = _context.ChangeTracker
+            .Entries<IAuditable>()
+            .Where(e =>
+                e.State == EntityState.Added ||
+                e.State == EntityState.Modified ||
+                e.State == EntityState.Deleted);
 
-        foreach (var entry in _context.ChangeTracker.Entries())
+        foreach (var entry in entries)
         {
-            if (entry.Entity is not IAuditable auditEntity)
-                continue;
-
-            var comId = _currentUser.ComId;
-            var userId = _currentUser.UserId ?? "system";
-
+            // Set ComId khi tạo mới
             if (entry.Entity is ICompanyScopedEntity companyScoped &&
                 entry.State == EntityState.Added &&
                 comId.HasValue &&
@@ -76,23 +91,24 @@ public sealed class TransactionPipelineBehavior<TRequest, TResponse>
             switch (entry.State)
             {
                 case EntityState.Added:
-                    auditEntity.CreatedAt = now;
-                    auditEntity.CreatedBy = userId;
-                    auditEntity.IsDeleted = false;
-                    auditEntity.DeletedAt = null;
+                    entry.Entity.CreatedAt = now;
+                    entry.Entity.CreatedBy = userId;
+                    entry.Entity.IsDeleted = false;
+                    entry.Entity.DeletedAt = null;
                     break;
 
                 case EntityState.Modified:
-                    auditEntity.LastModifiedAt = now;
-                    auditEntity.LastModifiedBy = userId;
+                    entry.Entity.LastModifiedAt = now;
+                    entry.Entity.LastModifiedBy = userId;
                     break;
 
                 case EntityState.Deleted:
+                    // Soft delete
                     entry.State = EntityState.Modified;
-                    auditEntity.IsDeleted = true;
-                    auditEntity.DeletedAt = now;
-                    auditEntity.LastModifiedAt = now;
-                    auditEntity.LastModifiedBy = userId;
+                    entry.Entity.IsDeleted = true;
+                    entry.Entity.DeletedAt = now;
+                    entry.Entity.LastModifiedAt = now;
+                    entry.Entity.LastModifiedBy = userId;
                     break;
             }
         }

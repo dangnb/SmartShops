@@ -1,17 +1,25 @@
-﻿namespace Shop.Domain.Entities.Purchases;
+﻿using Shop.Domain.Abstractions;
 
-public class GoodsReceiptLine
+namespace Shop.Domain.Entities.Purchases;
+
+public class GoodsReceiptLine : DomainEntity<Guid>
 {
-    public Guid Id { get; private set; }
+    protected GoodsReceiptLine() { }
     public Guid GoodsReceiptId { get; private set; }
     public Guid ProductId { get; private set; }
     public decimal Qty { get; private set; }
     public decimal? UnitCost { get; private set; }
 
-    public GoodsReceiptLine(Guid productId, decimal qty, decimal? unitCost = null)
+    internal GoodsReceiptLine(Guid receiptId, Guid productId, decimal qty, decimal? unitCost)
     {
-        Id = Guid.NewGuid();
+        GoodsReceiptId = receiptId;
         ProductId = productId;
+        Qty = qty;
+        UnitCost = unitCost;
+    }
+
+    public void Update(decimal qty, decimal? unitCost)
+    {
         Qty = qty;
         UnitCost = unitCost;
     }

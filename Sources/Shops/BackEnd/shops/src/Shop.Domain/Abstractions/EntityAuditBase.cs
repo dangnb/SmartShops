@@ -13,8 +13,8 @@ public class EntityAuditBase<TKey> : DomainEntity<TKey>, IEntityAuditBase<TKey>,
     public DateTime? DeletedAt { get; set; }
 
     private readonly List<INotification> _domainEvents = new();
-    public IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
+    public new IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
 
     protected void Raise(INotification ev) => _domainEvents.Add(ev);
-    public void ClearDomainEvents() => _domainEvents.Clear();
+    public new void ClearDomainEvents() => _domainEvents.Clear();
 }

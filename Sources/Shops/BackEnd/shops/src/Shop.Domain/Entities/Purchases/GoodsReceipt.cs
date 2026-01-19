@@ -45,7 +45,12 @@ public class GoodsReceipt : EntityAuditBase<Guid>
         if (qty <= 0)
             throw new DomainBaseException("Qty must be > 0.");
 
-        _lines.Add(new GoodsReceiptLine(productId, qty, unitCost));
+        _lines.Add(
+            new GoodsReceiptLine(
+                Id,
+                productId,
+                qty,
+                unitCost));
         Recalc();
     }
 
@@ -63,9 +68,9 @@ public class GoodsReceipt : EntityAuditBase<Guid>
             SupplierId,
             WarehouseId,
             utcNow,
-            _lines.Select(l =>
+            [.. _lines.Select(l =>
                 new GoodsReceiptPostedLine(l.ProductId, l.Qty, l.UnitCost)
-            ).ToList()
+            )]
         ));
     }
 
@@ -79,6 +84,31 @@ public class GoodsReceipt : EntityAuditBase<Guid>
     {
         Subtotal = _lines.Sum(x => (x.UnitCost ?? 0m) * x.Qty);
         Total = Subtotal;
+    }
+
+    public void RemoveLine(Guid lineId)
+    {
+        EnsureDraft();
+
+        var line = _lines.FirstOrDefault(x => x.Id == lineId)
+            ?? throw new DomainBaseException("Line not found.");
+
+        _lines.Remove(line);
+        Recalc();
+    }
+
+    public void UpdateLine(Guid lineId, decimal qty, decimal? unitCost)
+    {
+        EnsureDraft();
+
+        if (qty <= 0)
+            throw new DomainBaseException("Qty must be > 0.");
+
+        var line = _lines.FirstOrDefault(x => x.Id == lineId)
+            ?? throw new DomainBaseException("Line not found.");
+
+        line.Update(qty, unitCost);
+        Recalc();
     }
 }
 
