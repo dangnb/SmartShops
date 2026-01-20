@@ -1,19 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Inventory;
 using Shop.Domain.Entities.Purchases;
 
-namespace Shop.Apptication.UserCases.V1.Inventory.Commands.Transfers;
+namespace Shop.Apptication.UserCases.V1.Inventory.Events.Transfers;
 
-public sealed class OnTransferDispatched : INotificationHandler<StockTransferDispatchedEvent>
+public sealed class OnTransferDispatchedEvent : INotificationHandler<StockTransferDispatchedEvent>
 {
     private readonly IRepositoryBase<StockMovement, Guid> _repositoryBase;
-    public OnTransferDispatched(IRepositoryBase<StockMovement, Guid> repositoryBase)
+    public OnTransferDispatchedEvent(IRepositoryBase<StockMovement, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

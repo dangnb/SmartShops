@@ -3,12 +3,12 @@ using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Inventory;
 using Shop.Domain.Entities.Purchases;
 
-namespace Shop.Apptication.UserCases.V1.Inventory.Commands.Transfers;
+namespace Shop.Apptication.UserCases.V1.Inventory.Events.Transfers;
 
-public sealed class OnTransferReceived : INotificationHandler<StockTransferReceivedEvent>
+public sealed class OnTransferReceivedEvent : INotificationHandler<StockTransferReceivedEvent>
 {
     private readonly IRepositoryBase<StockMovement, Guid> _repositoryBase;
-    public OnTransferReceived(IRepositoryBase<StockMovement, Guid> repositoryBase)
+    public OnTransferReceivedEvent(IRepositoryBase<StockMovement, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

@@ -3,12 +3,12 @@ using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Inventory;
 using Shop.Domain.Entities.Purchases;
 
-namespace Shop.Apptication.UserCases.V1.Inventory.Commands.Adjustments;
+namespace Shop.Apptication.UserCases.V1.Inventory.Events.Adjustments;
 
-public sealed class OnAdjustmentPosted : INotificationHandler<InventoryAdjustmentPostedEvent>
+public sealed class OnAdjustmentPostedEvent : INotificationHandler<InventoryAdjustmentPostedEvent>
 {
     private readonly IRepositoryBase<StockMovement, Guid> _repositoryBase;
-    public OnAdjustmentPosted(IRepositoryBase<StockMovement, Guid> repositoryBase)
+    public OnAdjustmentPostedEvent(IRepositoryBase<StockMovement, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }

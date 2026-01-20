@@ -7,14 +7,17 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Middleware\**" />
 	  <Compile Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
 	  <Compile Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
 	  <Compile Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
 	  <Compile Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <EmbeddedResource Remove="Middleware\**" />
 	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
 	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
 	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
 	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <None Remove="Middleware\**" />
 	  <None Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
 	  <None Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
 	  <None Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
@@ -23,7 +26,6 @@
 
 	<ItemGroup>
 		<Folder Include="DependencyInjection\Options\" />
-		<Folder Include="Middleware\" />
 	</ItemGroup>
 	<ItemGroup>
 		<PackageReference Include="AutoMapper" Version="13.0.1" />
