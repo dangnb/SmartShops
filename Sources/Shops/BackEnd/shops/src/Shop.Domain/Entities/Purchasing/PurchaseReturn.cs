@@ -1,8 +1,8 @@
 ﻿using DocumentFormat.OpenXml.Office2010.Excel;
 using Shop.Domain.Abstractions;
 using Shop.Domain.Entities.enums;
+using Shop.Domain.Entities.Purchasing;
 using Shop.Domain.Exceptions;
-using Shop.Domain.Purchasing;
 
 public class PurchaseReturn : EntityAuditBase<Guid>
 {

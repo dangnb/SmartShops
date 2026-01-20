@@ -1,6 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shop.Domain.Purchasing;
 
 namespace Shop.Infrastructure.Persistence.Configurations.Purchasing;
 

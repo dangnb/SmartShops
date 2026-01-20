@@ -4,7 +4,6 @@ using Shop.Domain.Entities;
 using Shop.Domain.Entities.Identity;
 using Shop.Domain.Entities.Inventory;
 using Shop.Domain.Entities.Purchases;
-using Shop.Domain.Purchasing;
 
 namespace Shop.Persistence;
 public sealed class ApplicationDbContext : IdentityDbContext<AppUser, AppRole, Guid>

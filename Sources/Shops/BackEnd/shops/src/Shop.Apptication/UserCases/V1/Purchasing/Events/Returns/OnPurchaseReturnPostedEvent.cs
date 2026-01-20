@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Purchases;
-using Shop.Domain.Purchasing;
+using Shop.Domain.Entities.Purchasing;
 
 namespace Shop.Apptication.UserCases.V1.Purchasing.Events.Returns;
 

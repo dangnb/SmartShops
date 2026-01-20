@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace Shop.Domain.Purchasing;
+namespace Shop.Domain.Entities.Purchasing;
 
 public sealed record PurchaseReturnPostedEvent(
     Guid ReturnId, Guid SupplierId, Guid WarehouseId, DateTime AtUtc,

@@ -1,22 +1,40 @@
 ﻿using Asp.Versioning;
 using HRM.Persentation.Controllers.V1;
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shop.Apptication.DTOs;
 using Shop.Persentation.Abtractions;
 using static Shop.Contract.Services.V1.Purchasing.GoodsReceipts.Command;
+using static Shop.Contract.Services.V1.Purchasing.GoodsReceipts.Query;
 
 namespace Shop.Persentation.Controllers.V1;
 
+[Authorize]
 [ApiVersion(1)]
-public class GoodsReceiptController : ApiController
+public class GoodsReceiptsController : ApiController
 {
     private readonly ILogger<AccountsController> _logger;
 
-    public GoodsReceiptController(ISender sender, ILogger<AccountsController> logger) : base(sender: sender)
+    public GoodsReceiptsController(ISender sender, ILogger<AccountsController> logger) : base(sender: sender)
     {
         _logger = logger;
+    }
+
+    [HttpPost("filter")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    public async Task<IActionResult> Filter([FromBody] GetGoodsReceiptsQuery request)
+    {
+        var result = await sender.Send(request);
+        if (result.IsFailure)
+        {
+            return HandlerFailure(result);
+        }
+            ;
+        return Ok(result);
     }
 
     /// <summary>

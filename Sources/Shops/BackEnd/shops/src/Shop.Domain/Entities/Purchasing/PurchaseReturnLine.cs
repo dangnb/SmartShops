@@ -1,4 +1,4 @@
-﻿namespace Shop.Domain.Purchasing;
+﻿namespace Shop.Domain.Entities.Purchasing;
 
 public class PurchaseReturnLine   
 {

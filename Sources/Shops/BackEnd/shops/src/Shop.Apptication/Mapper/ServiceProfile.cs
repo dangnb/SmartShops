@@ -1,10 +1,10 @@
 ﻿using AutoMapper;
+using Shop.Apptication.DTOs;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Services.V1.Common.Payments.Dtos;
 using Shop.Domain.Entities;
 using Shop.Domain.Entities.Identity;
 using Shop.Domain.Entities.Purchases;
-using static Shop.Contract.Services.V1.Purchasing.Warehouses.Response;
 using static Shop.Contract.Services.V1.Common.Categories.Response;
 using static Shop.Contract.Services.V1.Common.Customers.Response;
 using static Shop.Contract.Services.V1.Common.Payments.Response;
@@ -15,6 +15,8 @@ using static Shop.Contract.Services.V1.Common.Roles.Response;
 using static Shop.Contract.Services.V1.Common.Suppliers.Response;
 using static Shop.Contract.Services.V1.Common.Users.Response;
 using static Shop.Contract.Services.V1.Common.Wards.Response;
+using static Shop.Contract.Services.V1.Purchasing.GoodsReceipts.Response;
+using static Shop.Contract.Services.V1.Purchasing.Warehouses.Response;
 
 namespace Shop.Application.Mapper;
 
@@ -81,6 +83,14 @@ internal class ServiceProfile : Profile
         //Products
         CreateMap<Warehouse, WarehouseResponse>().ReverseMap();
         CreateMap<PagedResult<Warehouse>, PagedResult<WarehouseResponse>>().ReverseMap();
+
+
+        //GoodsReceipts
+        CreateMap<GoodsReceiptViewDto, GoodsReceiptResponse>().ForMember(
+                  dest => dest.CreatedAt,
+                  opt => opt.MapFrom(src => src.CreatedAt.ToString("dd/MM/yyyy HH:mm:ss"))).ReverseMap();
+        ;
+        CreateMap<PagedResult<GoodsReceiptViewDto>, PagedResult<GoodsReceiptResponse>>().ReverseMap();
 
     }
 }
