@@ -2,7 +2,7 @@
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Purchases;
 
-namespace Shop.Apptication.UserCases.V1.Purchasing.Commands.GoodsReceipts;
+namespace Shop.Apptication.UserCases.V1.Purchasing.Events.GoodsReceipts;
 
 public sealed class OnGoodsReceiptPosted(IRepositoryBase<StockMovement, Guid> repositoryBase) : INotificationHandler<GoodsReceiptPostedEvent>
 {

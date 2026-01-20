@@ -3,12 +3,12 @@ using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Purchases;
 using Shop.Domain.Purchasing;
 
-namespace Shop.Apptication.UserCases.V1.Purchasing.Commands.Returns;
+namespace Shop.Apptication.UserCases.V1.Purchasing.Events.Returns;
 
-public sealed class OnPurchaseReturnPosted : INotificationHandler<PurchaseReturnPostedEvent>
+public sealed class OnPurchaseReturnPostedEvent : INotificationHandler<PurchaseReturnPostedEvent>
 {
     private readonly IRepositoryBase<StockMovement, Guid> _repositoryBase;
-    public OnPurchaseReturnPosted(IRepositoryBase<StockMovement, Guid> repositoryBase)
+    public OnPurchaseReturnPostedEvent(IRepositoryBase<StockMovement, Guid> repositoryBase)
     {
         _repositoryBase = repositoryBase;
     }
