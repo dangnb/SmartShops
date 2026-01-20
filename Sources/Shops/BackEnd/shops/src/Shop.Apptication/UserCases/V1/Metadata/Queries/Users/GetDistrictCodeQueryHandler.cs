@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Identity;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Users;
+using Shop.Contract.Services.V1.Common.Users;
 using Shop.Domain.Dappers.Repositories;
 using Shop.Domain.Entities.Identity;
 

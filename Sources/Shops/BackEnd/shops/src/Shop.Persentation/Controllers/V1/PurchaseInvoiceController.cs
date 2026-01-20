@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shop.Apptication.DTOs;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.Purchasing.V1.Invoices.Command;
+using static Shop.Contract.Services.V1.Purchasing.Invoices.Command;
 
 namespace Shop.Persentation.Controllers.V1;
 

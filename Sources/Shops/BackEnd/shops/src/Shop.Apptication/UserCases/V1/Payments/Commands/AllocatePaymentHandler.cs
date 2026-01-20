@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.Payables.V1.Payments;
+using Shop.Contract.Services.V1.Payables.Payments;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Purchases;
 

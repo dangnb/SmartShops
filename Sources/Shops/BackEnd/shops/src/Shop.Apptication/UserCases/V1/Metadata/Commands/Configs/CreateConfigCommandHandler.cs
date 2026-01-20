@@ -1,7 +1,7 @@
 ﻿using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Configs;
+using Shop.Contract.Services.V1.Common.Configs;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 

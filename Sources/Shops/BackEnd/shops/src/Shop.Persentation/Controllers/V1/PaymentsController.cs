@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Contract.Services.V1.Payments;
+using Shop.Contract.Services.V1.Common.Payments;
 using Shop.Persentation.Abtractions;
 
 namespace Shop.Persentation.Controllers.V1;

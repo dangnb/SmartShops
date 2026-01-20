@@ -6,9 +6,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Contract.Enumerations;
-using Shop.Contract.Services.V1.Categories;
+using Shop.Contract.Services.V1.Common.Categories;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.V1.Categories.Query;
+using static Shop.Contract.Services.V1.Common.Categories.Query;
 
 namespace Shop.Persentation.Controllers.V1;
 

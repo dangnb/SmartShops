@@ -1,7 +1,7 @@
 ﻿using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Permissions;
+using Shop.Contract.Services.V1.Common.Permissions;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Identity;
 using static Shop.Domain.Exceptions.PermissionsException;

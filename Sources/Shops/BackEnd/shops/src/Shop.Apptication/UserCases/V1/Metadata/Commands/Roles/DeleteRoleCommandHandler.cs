@@ -1,10 +1,10 @@
 ﻿
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Roles;
 using Shop.Domain.Entities.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Shop.Contract.Services.V1.Common.Roles;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Commands.Roles;
 public sealed class DeleteRoleCommandHandler : ICommandHandler<Command.DeleteRoleCommand>

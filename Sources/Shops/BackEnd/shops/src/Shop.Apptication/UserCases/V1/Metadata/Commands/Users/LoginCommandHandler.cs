@@ -10,7 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Extensions;
-using Shop.Contract.Services.V1.Users;
+using Shop.Contract.Services.V1.Common.Users;
 using Shop.Domain.Entities.Identity;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Commands.Users;

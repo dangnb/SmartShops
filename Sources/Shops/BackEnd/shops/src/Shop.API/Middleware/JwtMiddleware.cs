@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Users;
+using Shop.Contract.Services.V1.Common.Users;
 
 namespace Shop.API.Middleware;
 

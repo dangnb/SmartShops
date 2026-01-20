@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Categories;
+using Shop.Contract.Services.V1.Common.Categories;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 

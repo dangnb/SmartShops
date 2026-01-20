@@ -3,10 +3,10 @@ using AutoMapper;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Users;
+using Shop.Contract.Services.V1.Common.Users;
 using Shop.Domain.Dappers.Repositories;
 using Shop.Domain.Entities.Identity;
-using static Shop.Contract.Services.V1.Users.Response;
+using static Shop.Contract.Services.V1.Common.Users.Response;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Queries.Users;
 public class GetUsersQueryHandler : IQueryHandler<Query.GetUsersQuery, PagedResult<UserResponse>>

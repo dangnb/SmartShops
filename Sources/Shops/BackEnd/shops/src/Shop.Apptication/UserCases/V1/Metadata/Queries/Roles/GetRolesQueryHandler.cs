@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Roles;
+using Shop.Contract.Services.V1.Common.Roles;
 using Shop.Domain.Entities.Identity;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Queries.Roles;

@@ -3,9 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using  Shop.Contract.Services.V1.Provinces;
+using Shop.Contract.Services.V1.Common.Provincies;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.V1.Provinces.Query;
+using static Shop.Contract.Services.V1.Common.Provincies.Query;
 
 namespace Shop.Persentation.Controllers.V1;
 [ApiVersion(1)]

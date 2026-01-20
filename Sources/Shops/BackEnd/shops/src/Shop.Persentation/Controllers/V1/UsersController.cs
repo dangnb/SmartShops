@@ -11,8 +11,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shop.Contract;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.V1.Users.Command;
-using static Shop.Contract.Services.V1.Users.Query;
+using static Shop.Contract.Services.V1.Common.Users.Command;
+using static Shop.Contract.Services.V1.Common.Users.Query;
 
 namespace Shop.Persentation.Controllers.V1;
 [ApiVersion(1)]

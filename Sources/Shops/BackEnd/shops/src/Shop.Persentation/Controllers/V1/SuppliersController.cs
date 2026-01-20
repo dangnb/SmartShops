@@ -3,9 +3,9 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Shop.Contract.Services.V1.Suppliers;
+using Shop.Contract.Services.V1.Common.Suppliers;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.V1.Suppliers.Query;
+using static Shop.Contract.Services.V1.Common.Suppliers.Query;
 
 namespace Shop.Persentation.Controllers.V1;
 

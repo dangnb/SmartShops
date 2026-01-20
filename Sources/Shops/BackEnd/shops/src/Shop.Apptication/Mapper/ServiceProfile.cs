@@ -1,20 +1,20 @@
 ﻿using AutoMapper;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Payments.Dtos;
+using Shop.Contract.Services.V1.Common.Payments.Dtos;
 using Shop.Domain.Entities;
 using Shop.Domain.Entities.Identity;
 using Shop.Domain.Entities.Purchases;
-using static Shop.Contract.Services.Purchasing.V1.Warehouses.Response;
-using static Shop.Contract.Services.V1.Categories.Response;
-using static Shop.Contract.Services.V1.Customers.Response;
-using static Shop.Contract.Services.V1.Payments.Response;
-using static Shop.Contract.Services.V1.Permissions.Response;
-using static Shop.Contract.Services.V1.Products.Response;
-using static Shop.Contract.Services.V1.Provinces.Response;
-using static Shop.Contract.Services.V1.Roles.Response;
-using static Shop.Contract.Services.V1.Suppliers.Response;
-using static Shop.Contract.Services.V1.Users.Response;
-using static Shop.Contract.Services.V1.Wards.Response;
+using static Shop.Contract.Services.V1.Purchasing.Warehouses.Response;
+using static Shop.Contract.Services.V1.Common.Categories.Response;
+using static Shop.Contract.Services.V1.Common.Customers.Response;
+using static Shop.Contract.Services.V1.Common.Payments.Response;
+using static Shop.Contract.Services.V1.Common.Permissions.Response;
+using static Shop.Contract.Services.V1.Common.Products.Response;
+using static Shop.Contract.Services.V1.Common.Provincies.Response;
+using static Shop.Contract.Services.V1.Common.Roles.Response;
+using static Shop.Contract.Services.V1.Common.Suppliers.Response;
+using static Shop.Contract.Services.V1.Common.Users.Response;
+using static Shop.Contract.Services.V1.Common.Wards.Response;
 
 namespace Shop.Application.Mapper;
 

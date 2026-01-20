@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Wards;
+using Shop.Contract.Services.V1.Common.Wards;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 

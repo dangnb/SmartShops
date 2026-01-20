@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Identity;
 using Shop.Contract;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Roles;
+using Shop.Contract.Services.V1.Common.Roles;
 using Shop.Domain.Entities.Identity;
 using static Shop.Domain.Exceptions.RolesException;
 

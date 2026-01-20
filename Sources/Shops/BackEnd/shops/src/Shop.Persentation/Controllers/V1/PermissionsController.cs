@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Persentation.Abtractions;
-using Shop.Contract.Services.V1.Permissions;
+using Shop.Contract.Services.V1.Common.Permissions;
 
 namespace Shop.Persentation.Controllers.V1;
 [ApiVersion(1)]

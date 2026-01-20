@@ -3,12 +3,12 @@ using Shop.Contract;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Contract.Enumerations;
 using Shop.Contract.Extensions.Products;
-using Shop.Contract.Services.V1.Users;
 using Shop.Persentation.Abtractions;
 using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Shop.Contract.Services.V1.Common.Users;
 
 namespace HRM.Persentation.Controllers.V1;
 

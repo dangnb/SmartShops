@@ -2,8 +2,8 @@
 using Microsoft.EntityFrameworkCore;
 using Shop.Domain.Entities;
 using Shop.Domain.Entities.Identity;
+using Shop.Domain.Entities.Inventory;
 using Shop.Domain.Entities.Purchases;
-using Shop.Domain.Inventory;
 using Shop.Domain.Purchasing;
 
 namespace Shop.Persistence;

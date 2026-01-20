@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Persentation.Abtractions;
-using Shop.Contract.Services.Purchasing.V1.Warehouses;
+using Shop.Contract.Services.V1.Purchasing.Warehouses;
 
 namespace Shop.Persentation.Controllers.V1;
 [ApiVersion(1)]

@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using Shop.Domain.Inventory;
+using Shop.Domain.Entities.Inventory;
 
 public class InventoryAdjustmentConfiguration
     : IEntityTypeConfiguration<InventoryAdjustment>

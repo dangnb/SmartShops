@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Shop.Apptication.DTOs;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.Payables.V1.Payments.Command;
+using static Shop.Contract.Services.V1.Payables.Payments.Command;
 
 namespace Shop.Persentation.Controllers.V1;
 

@@ -1,6 +1,6 @@
 ﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.Purchasing.V1.Warehouses;
+using Shop.Contract.Services.V1.Purchasing.Warehouses;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Purchases;
 using static Shop.Domain.Exceptions.WardsException;

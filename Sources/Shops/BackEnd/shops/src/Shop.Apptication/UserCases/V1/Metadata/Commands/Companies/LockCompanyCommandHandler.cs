@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Companies;
+using Shop.Contract.Services.V1.Common.Companies;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
 

@@ -1,6 +1,6 @@
 ﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.Purchasing.V1.GoodsReceipts;
+using Shop.Contract.Services.V1.Purchasing.GoodsReceipts;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Purchases;
 

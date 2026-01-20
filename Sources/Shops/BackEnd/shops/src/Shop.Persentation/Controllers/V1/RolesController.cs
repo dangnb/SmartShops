@@ -5,8 +5,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Shop.Persentation.Abtractions;
-using static Shop.Contract.Services.V1.Roles.Command;
-using static Shop.Contract.Services.V1.Roles.Query;
+using static Shop.Contract.Services.V1.Common.Roles.Command;
+using static Shop.Contract.Services.V1.Common.Roles.Query;
 
 namespace Shop.Persentation.Controllers.V1;
 [ApiVersion(1)]

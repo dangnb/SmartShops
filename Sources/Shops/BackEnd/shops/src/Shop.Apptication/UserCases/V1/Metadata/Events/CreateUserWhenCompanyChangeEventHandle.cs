@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Shop.Contract.Abstractions.Message;
-using Shop.Contract.Services.V1.Companies;
+using Shop.Contract.Services.V1.Common.Companies;
 using Shop.Domain.Entities.Identity;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Events;

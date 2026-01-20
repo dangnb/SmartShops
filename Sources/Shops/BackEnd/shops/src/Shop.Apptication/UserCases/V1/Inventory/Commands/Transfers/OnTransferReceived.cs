@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Shop.Domain.Abstractions.Repositories;
+using Shop.Domain.Entities.Inventory;
 using Shop.Domain.Entities.Purchases;
-using Shop.Domain.Inventory;
 
 namespace Shop.Apptication.UserCases.V1.Inventory.Commands.Transfers;
 

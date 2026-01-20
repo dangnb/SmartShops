@@ -1,5 +1,5 @@
 ﻿using FluentValidation;
-using Shop.Contract.Services.Purchasing.V1.Warehouses;
+using Shop.Contract.Services.V1.Purchasing.Warehouses;
 
 namespace Shop.Apptication.UserCases.V1.Purchasing.Commands.Warehouses.Validators;
 

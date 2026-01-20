@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using static Shop.Contract.Services.V1.Categories.Response;
+using static Shop.Contract.Services.V1.Common.Categories.Response;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Queries.Categories;
 

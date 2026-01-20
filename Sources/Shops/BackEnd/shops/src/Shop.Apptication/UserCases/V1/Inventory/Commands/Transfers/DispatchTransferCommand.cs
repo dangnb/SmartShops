@@ -1,7 +1,7 @@
 ﻿using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Domain.Abstractions.Repositories;
-using Shop.Domain.Inventory;
+using Shop.Domain.Entities.Inventory;
 
 namespace Shop.Apptication.UserCases.V1.Inventory.Commands.Transfers;
 

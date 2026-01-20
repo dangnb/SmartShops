@@ -2,12 +2,12 @@
 using AutoMapper;
 using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
-using Shop.Contract.Services.V1.Users;
 using Shop.Domain.Abstractions;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities.Identity;
 using MediatR;
 using Microsoft.AspNetCore.Identity;
+using Shop.Contract.Services.V1.Common.Users;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Commands.Users;
 public sealed class DeleteRoleCommandHandler : ICommandHandler<Command.DeleteUserCommand>

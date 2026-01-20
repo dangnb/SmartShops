@@ -4,7 +4,7 @@ using Shop.Contract.Abstractions.Message;
 using Shop.Contract.Abstractions.Shared;
 using Shop.Domain.Abstractions.Repositories;
 using Shop.Domain.Entities;
-using Command = Shop.Contract.Services.V1.Customers.Command;
+using Command = Shop.Contract.Services.V1.Common.Customers.Command;
 
 namespace Shop.Apptication.UserCases.V1.Metadata.Commands.Customers;
 
