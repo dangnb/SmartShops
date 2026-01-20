@@ -1,7 +1,6 @@
 ﻿using Shop.Domain.Abstractions;
 using Shop.Domain.Entities.enums;
 using Shop.Domain.Exceptions;
-using Shop.Domain.Inventory;
 
 namespace Shop.Domain.Entities.Inventory;
 

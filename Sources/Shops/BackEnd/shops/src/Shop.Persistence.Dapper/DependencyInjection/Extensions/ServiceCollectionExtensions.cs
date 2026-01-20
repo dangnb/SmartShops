@@ -1,23 +1,34 @@
-﻿using Shop.Domain.Dappers;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Data;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using MySql.Data.MySqlClient;
-using System.Data;
-using Shop.Domain.Dappers.Repositories;
-using Shop.Persistence.Dapper.Repositories;
+using Shop.Domain.Dappers;
 
 namespace Shop.Persistence.Dapper.DependencyInjection.Extensions;
-public static class ServiceCollectionExtensions
+
+public static class InfrastructureDapperExtensions
 {
-    public static void AddInfrastructureDapper(this IServiceCollection servies, IConfiguration configuration)
+    public static IServiceCollection AddInfrastructureDapper(
+        this IServiceCollection services,
+        IConfiguration configuration)
     {
-        string connectionString = configuration.GetConnectionString("ConnectionStrings");
-        servies.AddTransient<IDbConnection>(sp => new MySqlConnection(connectionString))
-               .AddTransient<IProductRepository, ProductRepository>()
-               .AddTransient<IPaymentRepository, PaymentRepository>()
-               .AddTransient<IUserRepository, UserRepository>()
-               .AddTransient<ICustomerRepository, CustomerRepository>()
-               
-               .AddTransient<IUnitOfWork, UnitOfWork>();
+        // ✅ 1. Register IDbConnection (1 connection / 1 request)
+        services.AddScoped<IDbConnection>(sp =>
+            new MySqlConnection(
+                configuration.GetConnectionString("ConnectionStrings")));
+
+        // ✅ 2. Register UnitOfWork
+        services.AddScoped<IUnitOfWork, UnitOfWork>();
+
+        // ✅ 3. Auto register all *Repository classes
+        services.Scan(scan => scan
+            .FromAssemblyOf<UnitOfWork>() // hoặc bất kỳ repository nào
+            .AddClasses(classes =>
+                classes.Where(type => type.Name.EndsWith("Repository")))
+            .AsImplementedInterfaces()
+            .WithScopedLifetime()
+        );
+
+        return services;
     }
 }
