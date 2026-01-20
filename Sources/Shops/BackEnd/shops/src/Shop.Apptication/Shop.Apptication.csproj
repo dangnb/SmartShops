@@ -7,6 +7,21 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
+	  <Compile Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <Compile Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
+	  <Compile Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
+	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
+	  <EmbeddedResource Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <None Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
+	  <None Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	  <None Remove="UserCases\V1\Metadata\Commands\Adjustments\**" />
+	  <None Remove="UserCases\V1\Metadata\Commands\Transfers\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<Folder Include="DependencyInjection\Options\" />
 		<Folder Include="Middleware\" />
 	</ItemGroup>
