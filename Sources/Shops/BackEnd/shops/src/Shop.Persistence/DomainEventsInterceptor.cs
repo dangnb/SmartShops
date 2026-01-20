@@ -21,7 +21,7 @@ public sealed class DomainEventsInterceptor : SaveChangesInterceptor
         // Dispatch all domain events (loop để bắt event phát sinh thêm)
         while (true)
         {
-            var entities = ctx.ChangeTracker.Entries<Entity>()
+            var entities = ctx.ChangeTracker.Entries<EntityEvent>()
                 .Select(e => e.Entity)
                 .Where(e => e.DomainEvents.Count > 0)
                 .ToList();

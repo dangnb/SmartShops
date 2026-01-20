@@ -57,7 +57,7 @@ public class StockTransfer : EntityAuditBase<Guid>
 
         Status = DocumentStatus.Dispatched;
 
-        Raise(new StockTransferDispatchedEvent(
+        RaiseDomainEvent(new StockTransferDispatchedEvent(
             Id,
             FromWarehouseId,
             ToWarehouseId,
@@ -75,7 +75,7 @@ public class StockTransfer : EntityAuditBase<Guid>
 
         Status = DocumentStatus.Received;
 
-        Raise(new StockTransferReceivedEvent(
+        RaiseDomainEvent(new StockTransferReceivedEvent(
             Id,
             FromWarehouseId,
             ToWarehouseId,

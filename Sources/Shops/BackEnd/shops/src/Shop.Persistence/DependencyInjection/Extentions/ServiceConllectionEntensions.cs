@@ -16,7 +16,7 @@ public static class ServiceConllectionEntensions
 {
     public static void AddSqlConfiguration(this IServiceCollection services)
     {
-        services.AddDbContextPool<DbContext, ApplicationDbContext>((provider, builder) =>
+        services.AddDbContext<DbContext, ApplicationDbContext>((provider, builder) =>
         {
             var configuration = provider.GetRequiredService<IConfiguration>();
             var options = provider.GetRequiredService<IOptionsMonitor<MySqlRetryOptions>>();
@@ -50,7 +50,7 @@ public static class ServiceConllectionEntensions
         // provider.GetRequiredService<DomainEventsInterceptor>() sẽ yêu cầu DI container
         // cung cấp đối tượng DomainEventsInterceptor đã được đăng ký trước đó.
         // Điều này đảm bảo rằng interceptor sẽ được thêm vào trong pipeline xử lý của DbContext.
-        //.AddInterceptors(provider.GetRequiredService<DomainEventsInterceptor>())
+        .AddInterceptors(provider.GetRequiredService<DomainEventsInterceptor>())
         ;
 
             #endregion ============== SQL-SERVER-STRATEGY-1 ==============

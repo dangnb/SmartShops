@@ -48,7 +48,7 @@ public class InventoryAdjustment : EntityAuditBase<Guid>
 
         Status = DocumentStatus.Posted;
 
-        Raise(new InventoryAdjustmentPostedEvent(
+        RaiseDomainEvent(new InventoryAdjustmentPostedEvent(
             Id,
             WarehouseId,
             utcNow,

@@ -1,9 +1,10 @@
 ﻿using FDS.UuidV7.NetCore;
+using MediatR;
 using Shop.Domain.Abstractions.Entities;
 
 namespace Shop.Domain.Abstractions;
 
-public abstract class DomainEntity<TKey> : Entity, IEntityBase<TKey>
+public abstract class DomainEntity<TKey> : EntityEvent, IEntityBase<TKey>
 {
     public virtual TKey Id { get; set; }
 
@@ -26,13 +27,17 @@ public abstract class DomainEntity<TKey> : Entity, IEntityBase<TKey>
     }
 }
 
-public abstract class Entity
+public abstract class EntityEvent
 {
-    private readonly List<IDomainEvent> _domainEvents = new();
-    public IReadOnlyCollection<IDomainEvent> DomainEvents => _domainEvents.AsReadOnly();
+    private readonly List<INotification> _domainEvents = new();
 
-    protected void AddDomainEvent(IDomainEvent @event) => _domainEvents.Add(@event);
-    public void ClearDomainEvents() => _domainEvents.Clear();
+    public IReadOnlyCollection<INotification> DomainEvents
+        => _domainEvents.AsReadOnly();
+
+    protected void RaiseDomainEvent(INotification domainEvent)
+        => _domainEvents.Add(domainEvent);
+
+    public void ClearDomainEvents()
+        => _domainEvents.Clear();
 }
 
-public interface IDomainEvent { }

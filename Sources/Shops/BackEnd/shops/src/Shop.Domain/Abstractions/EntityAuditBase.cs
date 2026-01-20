@@ -11,10 +11,4 @@ public class EntityAuditBase<TKey> : DomainEntity<TKey>, IEntityAuditBase<TKey>,
     public string? LastModifiedBy { get; set; }
     public bool IsDeleted { get; set; }
     public DateTime? DeletedAt { get; set; }
-
-    private readonly List<INotification> _domainEvents = new();
-    public new IReadOnlyCollection<INotification> DomainEvents => _domainEvents.AsReadOnly();
-
-    protected void Raise(INotification ev) => _domainEvents.Add(ev);
-    public new void ClearDomainEvents() => _domainEvents.Clear();
 }

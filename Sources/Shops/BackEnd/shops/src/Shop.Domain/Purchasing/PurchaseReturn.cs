@@ -49,7 +49,7 @@ public class PurchaseReturn : EntityAuditBase<Guid>
 
         Status = DocumentStatus.Posted;
 
-        Raise(new PurchaseReturnPostedEvent(
+        RaiseDomainEvent(new PurchaseReturnPostedEvent(
             Id,
             SupplierId,
             WarehouseId,

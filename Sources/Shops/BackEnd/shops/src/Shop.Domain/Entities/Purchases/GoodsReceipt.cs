@@ -9,18 +9,40 @@ public class GoodsReceipt : EntityAuditBase<Guid>
     // EF Core sẽ tự dùng backing field ngầm
     protected GoodsReceipt() { }
 
+    // 🔹 Backing field chứa các dòng hàng nhập (aggregate child)
+    // 🔹 Chỉ domain mới được phép thay đổi
     private readonly List<GoodsReceiptLine> _lines = new();
 
+    // 🔹 Số chứng từ nhập kho (unique business key, ví dụ: GR-2026-0001)
+    // 🔹 Dùng để tra cứu, đối soát, in chứng từ
     public string ReceiptNo { get; private set; } = default!;
+
+    // 🔹 Nhà cung cấp của phiếu nhập
+    // 🔹 Thường map tới Supplier aggregate (không cần navigation để tránh coupling)
     public Guid SupplierId { get; private set; }
+
+    // 🔹 Kho nhận hàng
+    // 🔹 Dùng để tạo stock movement khi Post
     public Guid WarehouseId { get; private set; }
+
+    // 🔹 Ngày nhập hàng (ngày nghiệp vụ, KHÔNG phải CreatedAt)
+    // 🔹 DateOnly để tránh lệch múi giờ
     public DateOnly ReceiptDate { get; private set; }
+
+    // 🔹 Trạng thái chứng từ:
+    // 🔹 Draft     : đang tạo, cho phép sửa
+    // 🔹 Posted    : đã ghi sổ, phát sinh tồn kho
+    // 🔹 Cancelled : đã huỷ (không được chỉnh sửa)
     public DocumentStatus Status { get; private set; } = DocumentStatus.Draft;
 
+    // 🔹 Tổng tiền trước thuế / phí
+    // 🔹 Được tính từ tổng (Qty × UnitCost) của các dòng
     public decimal Subtotal { get; private set; }
+
+    // 🔹 Tổng tiền cuối cùng của phiếu nhập
+    // 🔹 Có thể = Subtotal + Tax + Surcharge - Discount
     public decimal Total { get; private set; }
 
-    // ✅ NAVIGATION DUY NHẤT – PHẢI VIRTUAL
     public virtual IReadOnlyCollection<GoodsReceiptLine> Lines => _lines;
 
     public GoodsReceipt(
@@ -63,7 +85,7 @@ public class GoodsReceipt : EntityAuditBase<Guid>
 
         Status = DocumentStatus.Posted;
 
-        Raise(new GoodsReceiptPostedEvent(
+        RaiseDomainEvent(new GoodsReceiptPostedEvent(
             Id,
             SupplierId,
             WarehouseId,
