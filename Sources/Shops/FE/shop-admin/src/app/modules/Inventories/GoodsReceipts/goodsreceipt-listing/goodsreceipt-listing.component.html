@@ -3,11 +3,63 @@
         <!--begin::Card title-->
         <div class="card-title">
             <!--begin::Search-->
-            <div class="d-flex align-items-center position-relative my-1">
-                <app-keenicon name="magnifier" class="fs-3 position-absolute ms-5"></app-keenicon>
-                <input type="text" [(ngModel)]="searchTerm" class="form-control form-control-sm w-250px ps-10"
-                    placeholder="Nhập mã và tên" (change)="changeSearTerm()">
-            </div>
+            <form [formGroup]="filterForm" class="row g-2 align-items-center">
+
+                <!-- Search -->
+                <div class="col-auto">
+                    <input type="text" class="form-control form-control-sm w-200px" placeholder="Mã / Tên chứng từ"
+                        formControlName="searchTerm">
+                </div>
+
+                <!-- Supplier -->
+                <div class="col-auto">
+                    <select class="form-select form-select-sm w-200px" formControlName="supplierId">
+                        <option value="">Tất cả nhà cung cấp</option>
+                        <option *ngFor="let s of suppliers$ | async" [value]="s.id">
+                            {{ s.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Warehouse -->
+                <div class="col-auto">
+                    <select class="form-select form-select-sm w-200px" formControlName="warehouseId">
+                        <option value="">Tất cả kho</option>
+                        <option *ngFor="let w of warehouses$ | async" [value]="w.id">
+                            {{ w.name }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- Status -->
+                <div class="col-auto">
+                    <select class="form-select form-select-sm w-150px" formControlName="status">
+                        <option *ngFor="let s of statuses" [value]="s.value">
+                            {{ s.label }}
+                        </option>
+                    </select>
+                </div>
+
+                <!-- From date -->
+                <div class="col-auto">
+                    <input type="text" class="form-control form-control-sm w-130px" placeholder="Từ ngày"
+                        formControlName="fromDate" (blur)="formatDate('fromDate')">
+                </div>
+
+                <!-- To date -->
+                <div class="col-auto">
+                    <input type="text" class="form-control form-control-sm w-130px" placeholder="Đến ngày"
+                        formControlName="toDate" (blur)="formatDate('toDate')">
+                </div>
+
+                <!-- Search button -->
+                <div class="col-auto">
+                    <button type="button" class="btn btn-sm btn-primary" (click)="filter()">
+                        Tìm kiếm
+                    </button>
+                </div>
+
+            </form>
             <!--end::Search-->
         </div>
         <!--begin::Card title-->

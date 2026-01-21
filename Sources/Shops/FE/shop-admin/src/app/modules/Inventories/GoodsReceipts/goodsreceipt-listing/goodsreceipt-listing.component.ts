@@ -8,14 +8,14 @@ import {
     ViewChild,
 } from '@angular/core';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import { NgbCollapseModule, NgbDropdownModule, NgbModal, NgbModalOptions, NgbNavModule, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { GoodsReceiptService, IGoodsReceiptModel } from '../../_services/goodsreceipt.service';
 import { CommonModule } from '@angular/common';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { CrudModule } from 'src/app/modules/crud/crud.module';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/_metronic/shared/shared.module';
 
 @Component({
@@ -58,35 +58,43 @@ export class GoodsReceiptListingComponent implements OnInit, AfterViewInit, OnDe
     modalConfig: NgbModalOptions = {
         modalDialogClass: 'modal-dialog modal-dialog-centered mw-650px',
     };
+    suppliers$!: Observable<{ id: string; name: string }[]>;
+    warehouses$!: Observable<{ id: string; name: string }[]>;
 
+    statuses = [
+        { value: null, label: 'Tất cả' },
+        { value: 0, label: 'Mới tạo' },
+        { value: 1, label: 'Đã ghi sổ' }
+    ];
+
+    filterForm: FormGroup;
     constructor(
         private apiService: GoodsReceiptService,
         private cdr: ChangeDetectorRef,
-        private modalService: NgbModal
+        private modalService: NgbModal,
+        private fb: FormBuilder
     ) { }
 
     ngAfterViewInit(): void { }
 
     changePage(page: number) {
         this.pageIndex = page;
-        this.filter(this.searchTerm);
+        this.filter();
     }
 
     changeSearTerm() {
-        this.filter(this.searchTerm);
+        this.filter();
     }
 
-    filter(searchTerm: string) {
+    filter() {
         this.apiService
             .filter({
-                searchTerm,
                 pageIndex: this.pageIndex,
                 pageSize: this.pageSize,
-                "supplierId": null,
-                "warehouseId": null,
-                "fromDate": "",
-                "toDate": "",
-                "status": null,
+                ...this.filterForm?.value,
+                warehouseId: this.filterForm?.value.warehouseId || null,
+                supplierId: this.filterForm?.value.supplierId || null,
+                status: this.filterForm?.value.status || null
             })
             .subscribe((val) => {
                 var a = val.value.items;
@@ -98,7 +106,28 @@ export class GoodsReceiptListingComponent implements OnInit, AfterViewInit, OnDe
     }
 
     ngOnInit(): void {
-        this.filter(this.searchTerm);
+        this.filterForm = this.fb.group({
+            searchTerm: [''],
+            supplierId: [null],
+            warehouseId: [null],
+            status: [null],
+            fromDate: [''],
+            toDate: ['']
+        });
+        this.filter();
+    }
+
+    formatDate(controlName: 'fromDate' | 'toDate') {
+        const value = this.filterForm.get(controlName)?.value;
+        if (!value) return;
+
+        // nếu user nhập yyyy-MM-dd (date picker)
+        if (/^\d{4}-\d{2}-\d{2}$/.test(value)) {
+            const [y, m, d] = value.split('-');
+            this.filterForm.patchValue({
+                [controlName]: `${d}/${m}/${y}`
+            });
+        }
     }
 
     delete(id: string) {
