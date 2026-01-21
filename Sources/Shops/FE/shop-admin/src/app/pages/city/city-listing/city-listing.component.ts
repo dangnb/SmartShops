@@ -2,18 +2,15 @@ import {
   AfterViewInit,
   ChangeDetectorRef,
   Component,
-  EventEmitter,
   OnDestroy,
   OnInit,
   ViewChild,
 } from '@angular/core';
-import { FormBuilder, FormGroup, NgForm } from '@angular/forms';
 import { SwalComponent } from '@sweetalert2/ngx-sweetalert2';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DataTablesResponse } from 'src/app/_fake/services/user-service';
+import { BehaviorSubject } from 'rxjs';
 import { SweetAlertOptions } from 'sweetalert2';
 import { RoleService } from 'src/app/_fake/services/role.service';
-import { CityService, ICityModel } from 'src/app/_services/city.service';
+import { CityService } from 'src/app/_services/city.service';
 import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
 import { CitySaveComponent } from '../citi-save/citi-save.component';
 

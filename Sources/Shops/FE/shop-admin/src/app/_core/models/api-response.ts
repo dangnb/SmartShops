@@ -5,6 +5,15 @@ export interface ApiResponse<T> {
     error: ErrorInfo;  // Thông tin lỗi
 }
 
+export interface PageResponse<T> {
+    items: T;  // Mảng dữ liệu trả về
+    pageIndex: number;
+    pageSize: number;
+    totalCount: number;  // Thông tin lỗi
+    hasNextPage: boolean;
+    hasPreviousPage: boolean;
+}
+
 export interface ErrorInfo {
     code: string;
     message: string;
